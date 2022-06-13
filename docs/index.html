@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Beeta DOCS</title>
+    <link rel="stylesheet" href="https://unpkg.com/docute@4/dist/docute.css">
+    <style>
+      .toc-wrapper {
+        margin-top: 25px;
+        padding: 0 20px;
+      }
+      .toc {
+        padding: 0.75rem;
+        font-size: 0.875rem;
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+      }
+      .toc a:hover {
+        text-decoration: underline;
+      }
+      .toc-level-1 {
+        margin-left: 0rem;
+      }
+      .toc-level-2 {
+        margin-left: 0.5rem;
+      }
+      .toc-level-3 {
+        margin-left: 1rem;
+      }
+      .toc-level-4 {
+        margin-left: 1.5rem;
+      }
+      .toc-level-5 {
+        margin-left: 2rem;
+      }
+      .toc-level-6 {
+        margin-left: 2.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main"></div>
+    <script src="https://unpkg.com/docute@4/dist/docute.js"></script>
+    <script>
+      const makeToc = function makeToc(content) {
+        let match
+        let res = []
+        let minLevel
+        let level
+        let regex = new RegExp('(#{2,6})[\x20\t]+([^\r\n]+)', 'g');
+        while((match = regex.exec(content)) != null) {
+          level = match[1].length - 1
+          if(minLevel == null) {
+            minLevel = level
+          } else if(minLevel > level) {
+            minLevel = level
+          }
+          res.push({level: level, content: match[2]})
+        }
+        if(minLevel > 1) {
+          let p = minLevel - 1
+          res = res.map(item => {
+            item.level -= p
+            return item
+          })
+        }
+        return res
+      }
+      const storage = {
+        toc: []
+      }
+      const TOC = ({ initOpts, evaluateOnly = false } = {}) => ({
+      name: 'TOC',
+      extend(api) {
+        api.registerComponent('sidebar:start', Vue.component('TOC', {
+          data() {
+            return {storage}
+          },
+          template: `
+            <template v-if="storage.toc.length">
+              <div class="toc-wrapper">
+                <div class="toc">
+                  <template v-for="(item, index) in storage.toc">
+                    <div :class="['toc-level-' + item.level]">
+                      <a :href="'#' + $store.state.route.path + '#' + item.content.toLowerCase()">{{ item.content }}</a>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </template>
+          `
+        }))
+        api.processMarkdown(text => {
+          storage.toc = makeToc(text)
+          return text
+        })
+      }
+    })
+    </script>
+    <script>
+      new Docute({
+        target: '#main',
+        imageZoom: true,
+        darkThemeToggler: true,
+        overrides: {
+          '/': {
+            language: 'English' // Used by the language dropdown menu in the sidebar
+          },
+          '/zh/': {
+            language: 'Chinese'
+            // // Override the default sidebar
+            // sidebar: [
+            //   {
+            //     children: [
+            //       { title: '指南', link: '/zh/guide' }
+            //     ]
+            //   }
+            // ]
+          }
+        },
+        plugins: [
+          TOC()
+        ]
+      })
+    </script>
+  </body>
+</html>
