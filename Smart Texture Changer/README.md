@@ -180,6 +180,6 @@ SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 ```
 
-| Single prim "a" | Touch to pop up menu | Select "A" | Select "RED" |
+| 单物件名为"a" | 点击物件弹出菜单 | 选贼"A" | 选择"RED" |
 |---|---|---|---|
 | ![](img/E1-1.png) | ![](img/E1-2.png) | ![](img/E1-3.png) | ![](img/E1-4.png) |
