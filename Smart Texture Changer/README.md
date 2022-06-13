@@ -163,7 +163,7 @@ SET GREEN|TEXTURE_BLANK|NULL_KEY|NULL_KEY
 ### 自定义菜单
 
 - 与 PART 显示在同一级菜单中，点击可发送本地消息。
-- 第三个参数可以"|"分隔
+- 第三个参数可以"\|"分隔
 
 ```lsl
 BUTTON MORE|100|arguments
