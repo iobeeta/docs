@@ -182,10 +182,10 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
 |||
 |---|---|
-| ![](img/E1-1.png) | ![](img/E1-2.png) |
+| ![img/E1-1.png](img/E1-1.png) | ![img/E1-2.png](img/E1-2.png) |
 | 1. 单物件名为"a", 点击 | 2. 选择"A" |
-| ![](img/E1-3.png) | ![](img/E1-4.png) |
-| 3. 选择"RED" | 4. A所有面都应用了RED贴图 |
+| ![img/E1-3.png](img/E1-3.png) | ![img/E1-4.png](img/E1-4.png) |
+| 3. 选择"RED" | 4. a所有面都应用了RED贴图 |
 
 ### 在Linkset中
 
@@ -207,7 +207,48 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
 |||
 |---|---|
-| ![](img/E2-1.png) | ![](img/E2-2.png) |
-| 1. Linkset包含"a"和"b", 脚本在主prim，点击 | 2. 选择"B" |
-| ![](img/E2-3.png) | ![](img/E2-4.png) |
-| 3. 选择"RED" | 4. B的第3个面应用了RED贴图 |
+| ![img/E2-1.png](img/E2-1.png) | ![img/E2-2.png](img/E2-2.png) |
+| 1. Linkset包含"a"和"b", 脚本在主prim, 点击 | 2. 选择"B" |
+| ![img/E2-3.png](img/E2-3.png) | ![img/E2-4.png](img/E2-4.png) |
+| 3. 选择"RED" | 4. b的第3个面应用了RED贴图 |
+
+### 多个同名子prim
+
+配置同上面的例子, 我们再创建一个盒子, 名字也是"b", 并把它连接。
+执行同样的操作
+
+|||
+|---|---|
+| ![img/E3-1.png](img/E3-1.png) | ![img/E3-2.png](img/E3-2.png) |
+| 1. Linkset包含"a"和两个"b" | 2. 同样的操作, 所有"b"的第3个面都被应用了RED |
+
+### 脚本在子prim中，且主prim有其它点击弹出菜单时
+
+配置同上, 依然是包含"a"和"b"两个成员的linkset, "a"为主prim, 让我们把"a"中的所有脚本, 放入子prim:"b"中
+
+|||
+|---|---|
+| ![img/E4-1.png](img/E4-1.png) | ![img/E4-2.png](img/E4-2.png) |
+| 1. 点击"a", 弹出菜单 | 2. 点击"b", 弹出两个菜单 |
+
+此时打开配置文件，更改配置
+加入 ```PASS_TOUCHS 2```
+
+```lsl
+PASS_TOUCHS 2
+
+PART A|a|ALL_SIDES
+SET Default|TEXTURE_PLYWOOD||
+SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
+SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
+
+PART B|b|3
+SET Default|TEXTURE_PLYWOOD||
+SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
+SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
+```
+
+||
+|---|
+| ![img/E4-3.png](img/E4-3.png) |
+| 此时, 点击"b", 只弹出属于"b"的菜单 |
