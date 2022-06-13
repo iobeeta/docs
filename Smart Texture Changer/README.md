@@ -183,9 +183,9 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 |||
 |---|---|
 | ![](img/E1-1.png) | ![](img/E1-2.png) |
-| 1. 单物件名为"a" | 2. 点击物件弹出菜单 |
+| 1. 单物件名为"a", 点击 | 2. 选择"A" |
 | ![](img/E1-3.png) | ![](img/E1-4.png) |
-| 3. 选择"A" | 4. 选择"RED" |
+| 3. 选择"RED" | 4. A所有面都应用了RED贴图 |
 
 ### 在Linkset中
 
@@ -208,6 +208,6 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 |||
 |---|---|
 | ![](img/E2-1.png) | ![](img/E2-2.png) |
-| 1. Linkset包含"a"和"b", 脚本在主prim | 2. 点击物件弹出菜单 |
+| 1. Linkset包含"a"和"b", 脚本在主prim，点击 | 2. 选择"B" |
 | ![](img/E2-3.png) | ![](img/E2-4.png) |
-| 3. 选择"A" | 4. 选择"RED" |
+| 3. 选择"RED" | 4. B的第3个面应用了RED贴图 |
