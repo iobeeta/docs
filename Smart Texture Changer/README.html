@@ -525,6 +525,45 @@ SET GREEN|<span class="hljs-number">2</span>f8ae0e4<span class="hljs-number">-22
 </tr>
 </tbody>
 </table>
+<h3 id="%E5%9C%A8linkset%E4%B8%AD">在Linkset中</h3>
+<p>脚本在主Prim，控制多个物件、多个面</p>
+<pre class="hljs"><code><div>PART A|a|<span class="hljs-literal">ALL_SIDES</span>
+SET Default|<span class="hljs-literal">TEXTURE_PLYWOOD</span>||
+SET RED|<span class="hljs-number">9</span>c198f45<span class="hljs-number">-3</span>f70<span class="hljs-number">-1</span>a50-f38c<span class="hljs-number">-8</span>ce19044b396||
+SET GREEN|<span class="hljs-number">2</span>f8ae0e4<span class="hljs-number">-22</span>be<span class="hljs-number">-20</span>c8-c0cc-c50bbfaf2871||
+
+PART B|b|<span class="hljs-number">3</span>
+SET Default|<span class="hljs-literal">TEXTURE_PLYWOOD</span>||
+SET RED|<span class="hljs-number">9</span>c198f45<span class="hljs-number">-3</span>f70<span class="hljs-number">-1</span>a50-f38c<span class="hljs-number">-8</span>ce19044b396||
+SET GREEN|<span class="hljs-number">2</span>f8ae0e4<span class="hljs-number">-22</span>be<span class="hljs-number">-20</span>c8-c0cc-c50bbfaf2871||
+</div></code></pre>
+<p><code>PART B|b|3</code> 控制名为&quot;b&quot;的物件中第3个面</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="img/E2-1.png" alt=""></td>
+<td><img src="img/E2-2.png" alt=""></td>
+</tr>
+<tr>
+<td>1. Linkset包含&quot;a&quot;和&quot;b&quot;, 脚本在主prim</td>
+<td>2. 点击物件弹出菜单</td>
+</tr>
+<tr>
+<td><img src="img/E2-3.png" alt=""></td>
+<td><img src="img/E2-4.png" alt=""></td>
+</tr>
+<tr>
+<td>3. 选择&quot;A&quot;</td>
+<td>4. 选择&quot;RED&quot;</td>
+</tr>
+</tbody>
+</table>
 
 </body>
 </html>

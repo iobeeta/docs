@@ -186,3 +186,28 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 | 1. 单物件名为"a" | 2. 点击物件弹出菜单 |
 | ![](img/E1-3.png) | ![](img/E1-4.png) |
 | 3. 选择"A" | 4. 选择"RED" |
+
+### 在Linkset中
+
+脚本在主Prim，控制多个物件、多个面
+
+```lsl
+PART A|a|ALL_SIDES
+SET Default|TEXTURE_PLYWOOD||
+SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
+SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
+
+PART B|b|3
+SET Default|TEXTURE_PLYWOOD||
+SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
+SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
+```
+
+```PART B|b|3``` 控制名为"b"的物件中第3个面
+
+|||
+|---|---|
+| ![](img/E2-1.png) | ![](img/E2-2.png) |
+| 1. Linkset包含"a"和"b", 脚本在主prim | 2. 点击物件弹出菜单 |
+| ![](img/E2-3.png) | ![](img/E2-4.png) |
+| 3. 选择"A" | 4. 选择"RED" |
