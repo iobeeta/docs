@@ -354,7 +354,6 @@ code {
 
 </style>
 
-<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
 </head>
 <body>
   <script>
@@ -508,20 +507,20 @@ SET GREEN|<span class="hljs-number">2</span>f8ae0e4<span class="hljs-number">-22
 </thead>
 <tbody>
 <tr>
-<td><img src="img/E1-1.png" alt=""></td>
-<td><img src="img/E1-2.png" alt=""></td>
+<td><img src="img/E1-1.png" alt="img/E1-1.png"></td>
+<td><img src="img/E1-2.png" alt="img/E1-2.png"></td>
 </tr>
 <tr>
 <td>1. 单物件名为&quot;a&quot;, 点击</td>
 <td>2. 选择&quot;A&quot;</td>
 </tr>
 <tr>
-<td><img src="img/E1-3.png" alt=""></td>
-<td><img src="img/E1-4.png" alt=""></td>
+<td><img src="img/E1-3.png" alt="img/E1-3.png"></td>
+<td><img src="img/E1-4.png" alt="img/E1-4.png"></td>
 </tr>
 <tr>
 <td>3. 选择&quot;RED&quot;</td>
-<td>4. A所有面都应用了RED贴图</td>
+<td>4. a所有面都应用了RED贴图</td>
 </tr>
 </tbody>
 </table>
@@ -547,20 +546,90 @@ SET GREEN|<span class="hljs-number">2</span>f8ae0e4<span class="hljs-number">-22
 </thead>
 <tbody>
 <tr>
-<td><img src="img/E2-1.png" alt=""></td>
-<td><img src="img/E2-2.png" alt=""></td>
+<td><img src="img/E2-1.png" alt="img/E2-1.png"></td>
+<td><img src="img/E2-2.png" alt="img/E2-2.png"></td>
 </tr>
 <tr>
-<td>1. Linkset包含&quot;a&quot;和&quot;b&quot;, 脚本在主prim，点击</td>
+<td>1. Linkset包含&quot;a&quot;和&quot;b&quot;, 脚本在主prim, 点击</td>
 <td>2. 选择&quot;B&quot;</td>
 </tr>
 <tr>
-<td><img src="img/E2-3.png" alt=""></td>
-<td><img src="img/E2-4.png" alt=""></td>
+<td><img src="img/E2-3.png" alt="img/E2-3.png"></td>
+<td><img src="img/E2-4.png" alt="img/E2-4.png"></td>
 </tr>
 <tr>
 <td>3. 选择&quot;RED&quot;</td>
-<td>4. B的第3个面应用了RED贴图</td>
+<td>4. b的第3个面应用了RED贴图</td>
+</tr>
+</tbody>
+</table>
+<h3 id="%E5%A4%9A%E4%B8%AA%E5%90%8C%E5%90%8D%E5%AD%90prim">多个同名子prim</h3>
+<p>配置同上面的例子, 我们再创建一个盒子, 名字也是&quot;b&quot;, 并把它连接。
+执行同样的操作</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="img/E3-1.png" alt="img/E3-1.png"></td>
+<td><img src="img/E3-2.png" alt="img/E3-2.png"></td>
+</tr>
+<tr>
+<td>1. Linkset包含&quot;a&quot;和两个&quot;b&quot;</td>
+<td>2. 同样的操作, 所有&quot;b&quot;的第3个面都被应用了RED</td>
+</tr>
+</tbody>
+</table>
+<h3 id="%E8%84%9A%E6%9C%AC%E5%9C%A8%E5%AD%90prim%E4%B8%AD%E4%B8%94%E4%B8%BBprim%E6%9C%89%E5%85%B6%E5%AE%83%E7%82%B9%E5%87%BB%E5%BC%B9%E5%87%BA%E8%8F%9C%E5%8D%95%E6%97%B6">脚本在子prim中，且主prim有其它点击弹出菜单时</h3>
+<p>配置同上, 依然是包含&quot;a&quot;和&quot;b&quot;两个成员的linkset, &quot;a&quot;为主prim, 让我们把&quot;a&quot;中的所有脚本, 放入子prim:&quot;b&quot;中</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="img/E4-1.png" alt="img/E4-1.png"></td>
+<td><img src="img/E4-2.png" alt="img/E4-2.png"></td>
+</tr>
+<tr>
+<td>1. 点击&quot;a&quot;, 弹出菜单</td>
+<td>2. 点击&quot;b&quot;, 弹出两个菜单</td>
+</tr>
+</tbody>
+</table>
+<p>此时打开配置文件，更改配置
+加入 <code>PASS_TOUCHS 2</code></p>
+<pre class="hljs"><code><div>PASS_TOUCHS <span class="hljs-number">2</span>
+
+PART A|a|<span class="hljs-literal">ALL_SIDES</span>
+SET Default|<span class="hljs-literal">TEXTURE_PLYWOOD</span>||
+SET RED|<span class="hljs-number">9</span>c198f45<span class="hljs-number">-3</span>f70<span class="hljs-number">-1</span>a50-f38c<span class="hljs-number">-8</span>ce19044b396||
+SET GREEN|<span class="hljs-number">2</span>f8ae0e4<span class="hljs-number">-22</span>be<span class="hljs-number">-20</span>c8-c0cc-c50bbfaf2871||
+
+PART B|b|<span class="hljs-number">3</span>
+SET Default|<span class="hljs-literal">TEXTURE_PLYWOOD</span>||
+SET RED|<span class="hljs-number">9</span>c198f45<span class="hljs-number">-3</span>f70<span class="hljs-number">-1</span>a50-f38c<span class="hljs-number">-8</span>ce19044b396||
+SET GREEN|<span class="hljs-number">2</span>f8ae0e4<span class="hljs-number">-22</span>be<span class="hljs-number">-20</span>c8-c0cc-c50bbfaf2871||
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="img/E4-3.png" alt="img/E4-3.png"></td>
+</tr>
+<tr>
+<td>此时, 点击&quot;b&quot;, 只弹出属于&quot;b&quot;的菜单</td>
 </tr>
 </tbody>
 </table>
