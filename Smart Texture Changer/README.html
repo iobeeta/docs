@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="smart-texture-changer">Smart Texture Changer</h1>
+<h2 id="%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF">配置信息</h2>
+<h3 id="%E6%97%A5%E5%BF%97%E8%BE%93%E5%87%BA%E7%BA%A7%E5%88%AB">日志输出级别</h3>
+<ul>
+<li>取值: 0(静默), 15(info), 31(debug), 63(trace/全部)</li>
+<li>默认: 0</li>
+</ul>
+<pre class="hljs"><code><div>LOG_LEVEL <span class="hljs-number">0</span>
+</div></code></pre>
+<h3 id="%E9%83%A8%E4%BB%B6%E8%8F%9C%E5%8D%95%E6%8F%90%E7%A4%BA%E6%96%87%E5%AD%97">部件菜单提示文字</h3>
+<ul>
+<li>默认: 空字符串</li>
+</ul>
+<pre class="hljs"><code><div>MENU_TEXT_PARTS PART
+</div></code></pre>
+<h3 id="%E8%B4%B4%E5%9B%BE%E6%96%B9%E6%A1%88%E8%8F%9C%E5%8D%95%E6%8F%90%E7%A4%BA%E6%96%87%E5%AD%97">贴图方案菜单提示文字</h3>
+<ul>
+<li>默认: 空字符串</li>
+</ul>
+<pre class="hljs"><code><div>MENU_TEXT_SETS SET
+</div></code></pre>
+<h3 id="%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87%E7%82%B9%E5%87%BB%E5%BC%B9%E5%87%BA%E8%8F%9C%E5%8D%95">是否可以通过点击弹出菜单</h3>
+<ul>
+<li>取值: 0(否), 1(是)</li>
+<li>默认: 1</li>
+</ul>
+<pre class="hljs"><code><div>TOUCH <span class="hljs-number">1</span>
+</div></code></pre>
+<h3 id="%E7%82%B9%E5%87%BB%E8%A1%8C%E4%B8%BA%E5%B1%9E%E6%80%A7">点击行为属性</h3>
+<p>当本脚本在子prim中, 有点击弹出菜单行为时会用到</p>
+<ul>
+<li>取值: 0, 1, 2</li>
+<li>默认: 0</li>
+<li>详见 <a href="https://wiki.secondlife.com/wiki/LlPassTouches">https://wiki.secondlife.com/wiki/LlPassTouches</a></li>
+</ul>
+<pre class="hljs"><code><div>PASS_TOUCHS <span class="hljs-number">0</span>
+</div></code></pre>
+<h3 id="%E5%8F%AA%E6%9C%89%E6%89%80%E6%9C%89%E8%80%85%E5%8F%AF%E4%BB%A5%E7%82%B9%E5%87%BB">只有所有者可以点击</h3>
+<ul>
+<li>取值: 0(否), 1(是)</li>
+<li>默认: 1</li>
+</ul>
+<pre class="hljs"><code><div>OWNER_ONLY <span class="hljs-number">1</span>
+</div></code></pre>
+<h3 id="%E6%9C%AC%E5%9C%B0%E9%A2%91%E9%81%93%E5%94%A4%E8%B5%B7%E5%BC%B9%E5%87%BA%E8%8F%9C%E5%8D%95">本地频道唤起弹出菜单</h3>
+<p>不为&quot;0&quot;时生效</p>
+<ul>
+<li>取值: −2147483648 ~ +2147483647</li>
+<li>默认: 0</li>
+</ul>
+<pre class="hljs"><code><div>CHANNEL_LOCAL_MENU <span class="hljs-number">0</span>
+</div></code></pre>
+<h3 id="%E6%9C%AC%E5%9C%B0%E9%A2%91%E9%81%93%E8%BF%94%E5%9B%9E%E4%B8%8A%E4%B8%80%E7%BA%A7%E8%8F%9C%E5%8D%95">本地频道返回上一级菜单</h3>
+<p>上一级菜单需要通过本地消息监听本频道，不为&quot;0&quot;时生效</p>
+<ul>
+<li>当本项目配置之后，它将作为 PART 菜单的选项显示在菜单中，显示为 &quot;[^] BACK&quot;</li>
+<li>取值: −2147483648 ~ +2147483647</li>
+<li>默认: 0</li>
+</ul>
+<pre class="hljs"><code><div>CHANNEL_LOCAL_MENU_BACK <span class="hljs-number">0</span>
+</div></code></pre>
+<h3 id="%E6%9C%AC%E5%9C%B0%E6%8E%A5%E6%94%B6%E4%BB%A5%E5%BA%94%E7%94%A8%E5%A5%97%E8%A3%85">本地接收以应用套装</h3>
+<p>用于接收 CHANNEL_LOCAL_BOARDCAST 的广播数据，不为&quot;0&quot;时生效</p>
+<ul>
+<li>注意！无论本体或多层使用，CHANNEL_LOCAL_SYNC 与 CHANNEL_LOCAL_BOARDCAST 不可形成闭环！切记！</li>
+<li>取值: −2147483648 ~ +2147483647</li>
+<li>默认: 0</li>
+</ul>
+<pre class="hljs"><code><div>CHANNEL_LOCAL_SYNC <span class="hljs-number">0</span>
+</div></code></pre>
+<h3 id="%E6%9C%AC%E5%9C%B0%E9%A2%91%E9%81%93%E5%B9%BF%E6%92%AD%E5%A5%97%E8%A3%85">本地频道广播套装</h3>
+<p>会被同值的CHANNEL_LOCAL_SYNC接收，不为&quot;0&quot;时生效</p>
+<ul>
+<li>注意！无论本体或多层使用，CHANNEL_LOCAL_SYNC 与 CHANNEL_LOCAL_BOARDCAST 不可形成闭环！切记！</li>
+<li>取值: −2147483648 ~ +2147483647</li>
+<li>默认: 0</li>
+</ul>
+<pre class="hljs"><code><div>CHANNEL_LOCAL_BOARDCAST <span class="hljs-number">0</span>
+</div></code></pre>
+<h3 id="%E5%A5%97%E8%A3%85%E9%80%89%E9%A1%B9%E5%90%8D%E7%A7%B0">套装选项名称</h3>
+<p>用于批量生效多个部件的某一种贴图方案。</p>
+<ul>
+<li>当本项目配置之后，它将作为 PART 菜单的选项显示在菜单中，并会自动生成或根据SETS关键词构建套装列表。</li>
+<li>留空则此选项无效</li>
+<li>默认：空字符串</li>
+</ul>
+<pre class="hljs"><code><div>MENU_OPTION_SETS [set name]
+</div></code></pre>
+<h3 id="%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E5%A5%97%E8%A3%85%E5%88%97%E8%A1%A8">自定义的套装列表</h3>
+<ul>
+<li>以MENU_OPTION_SETS为入口，进入后显示此列表</li>
+<li>如果未设置或为空字符串，将会自动生成列表，包括所有 PART 中的全部 SET 关键字。</li>
+<li>默认：空字符串</li>
+</ul>
+<pre class="hljs"><code><div>SETS RED|GREEN
+</div></code></pre>
+<h3 id="%E9%83%A8%E4%BB%B6">部件</h3>
+<p>同一个linkset中可以有多个同名物体，他们都会被匹配并替换</p>
+<ul>
+<li>第三个参数 face 可以使用常量 ALL_SIDES</li>
+</ul>
+<pre class="hljs"><code><div>PART OBJ_1|object name <span class="hljs-number">1</span>|<span class="hljs-literal">ALL_SIDES</span>
+</div></code></pre>
+<h3 id="%E8%B4%B4%E5%9B%BE%E6%96%B9%E6%A1%88">贴图方案</h3>
+<p>PART部件的子选项</p>
+<ul>
+<li>可使用SL常量包括 TEXTURE_BLANK, TEXTURE_DEFAULT, TEXTURE_TRANSPARENT, TEXTURE_PLYWOOD, NULL_KEY。当然您也可以直接使用他们对应的UUID</li>
+<li>详见：<a href="https://wiki.secondlife.com/wiki/Category:LSL_Constants">https://wiki.secondlife.com/wiki/Category:LSL_Constants</a></li>
+<li>*如果某个贴图的UUID留空，它将会被忽略（保持之前的贴图不变），如果想覆盖失效某个贴图，请使用 NULL_KEY。</li>
+<li>*贴图方案SET必须跟随在某一个部件PART之后，它们作为PART的下一级菜单展示。</li>
+</ul>
+<pre class="hljs"><code><div>SET RED|<span class="hljs-literal">TEXTURE_BLANK</span>|<span class="hljs-literal">NULL_KEY</span>|<span class="hljs-literal">NULL_KEY</span>
+SET GREEN|<span class="hljs-literal">TEXTURE_BLANK</span>||
+</div></code></pre>
+<h3 id="part">PART*</h3>
+<p>与 PART 都表示一个部件，不同的是PART*并不会显示在部件菜单中。套装对此部件有效。</p>
+<pre class="hljs"><code><div>PART* OBJ_2|object name <span class="hljs-number">2</span>|<span class="hljs-literal">ALL_SIDES</span>
+SET RED|<span class="hljs-literal">TEXTURE_BLANK</span>|<span class="hljs-literal">NULL_KEY</span>|<span class="hljs-literal">NULL_KEY</span>
+SET GREEN|<span class="hljs-literal">TEXTURE_BLANK</span>|<span class="hljs-literal">NULL_KEY</span>|<span class="hljs-literal">NULL_KEY</span>
+</div></code></pre>
+<h3 id="%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8F%9C%E5%8D%95">自定义菜单</h3>
+<ul>
+<li>与 PART 显示在同一级菜单中，点击可发送本地消息。</li>
+<li>第三个参数可以&quot;|&quot;分隔</li>
+</ul>
+<pre class="hljs"><code><div>BUTTON MORE|<span class="hljs-number">100</span>|arguments
+</div></code></pre>
+
+</body>
+</html>
