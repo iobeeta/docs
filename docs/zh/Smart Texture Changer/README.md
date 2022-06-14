@@ -182,9 +182,9 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
 |||
 |---|---|
-| ![/docs/Smart%20Texture%20Changer/img/E1-1.png](/docs/Smart%20Texture%20Changer/img/E1-1.png) | ![/docs/Smart%20Texture%20Changer/img/E1-2.png](/docs/Smart%20Texture%20Changer/img/E1-2.png) |
+| ![img/E1-1.png](img/E1-1.png) | ![img/E1-2.png](img/E1-2.png) |
 | 1. 单物件名为"a", 点击 | 2. 选择"A" |
-| ![/docs/Smart%20Texture%20Changer/img/E1-3.png](/docs/Smart%20Texture%20Changer/img/E1-3.png) | ![/docs/Smart%20Texture%20Changer/img/E1-4.png](/docs/Smart%20Texture%20Changer/img/E1-4.png) |
+| ![img/E1-3.png](img/E1-3.png) | ![img/E1-4.png](img/E1-4.png) |
 | 3. 选择"RED" | 4. a所有面都应用了RED贴图 |
 
 ### 在Linkset中
@@ -207,9 +207,9 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
 |||
 |---|---|
-| ![/docs/Smart%20Texture%20Changer/img/E2-1.png](/docs/Smart%20Texture%20Changer/img/E2-1.png) | ![/docs/Smart%20Texture%20Changer/img/E2-2.png](/docs/Smart%20Texture%20Changer/img/E2-2.png) |
+| ![img/E2-1.png](img/E2-1.png) | ![img/E2-2.png](img/E2-2.png) |
 | 1. Linkset包含"a"和"b", 脚本在主prim, 点击 | 2. 选择"B" |
-| ![/docs/Smart%20Texture%20Changer/img/E2-3.png](/docs/Smart%20Texture%20Changer/img/E2-3.png) | ![/docs/Smart%20Texture%20Changer/img/E2-4.png](/docs/Smart%20Texture%20Changer/img/E2-4.png) |
+| ![img/E2-3.png](img/E2-3.png) | ![img/E2-4.png](img/E2-4.png) |
 | 3. 选择"RED" | 4. b的第3个面应用了RED贴图 |
 
 ### 多个同名子prim
@@ -219,7 +219,7 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
 |||
 |---|---|
-| ![/docs/Smart%20Texture%20Changer/img/E3-1.png](/docs/Smart%20Texture%20Changer/img/E3-1.png) | ![/docs/Smart%20Texture%20Changer/img/E3-2.png](/docs/Smart%20Texture%20Changer/img/E3-2.png) |
+| ![img/E3-1.png](img/E3-1.png) | ![img/E3-2.png](img/E3-2.png) |
 | 1. Linkset包含"a"和两个"b" | 2. 同样的操作, 所有"b"的第3个面都被应用了RED |
 
 ### 脚本在子prim
@@ -230,7 +230,7 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
 |||
 |---|---|
-| ![/docs/Smart%20Texture%20Changer/img/E4-1.png](/docs/Smart%20Texture%20Changer/img/E4-1.png) | ![/docs/Smart%20Texture%20Changer/img/E4-2.png](/docs/Smart%20Texture%20Changer/img/E4-2.png) |
+| ![img/E4-1.png](img/E4-1.png) | ![img/E4-2.png](img/E4-2.png) |
 | 1. 点击"a", 弹出菜单 | 2. 点击"b", 弹出两个菜单 |
 
 此时打开配置文件，更改配置
@@ -252,7 +252,7 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
 |||
 |---|---|
-| ![/docs/Smart%20Texture%20Changer/img/E4-3.png](/docs/Smart%20Texture%20Changer/img/E4-3.png) ||
+| ![img/E4-3.png](img/E4-3.png) ||
 | 此时, 点击"b", 只弹出属于"b"的菜单 ||
 
 ### 套装
@@ -281,9 +281,9 @@ SET BLUE|2ddd156d-8107-6761-9b54-7165ec249704||
 
 |||
 |---|---|
-| ![/docs/Smart%20Texture%20Changer/img/E5-1.png](/docs/Smart%20Texture%20Changer/img/E5-1.png) | ![/docs/Smart%20Texture%20Changer/img/E5-2.png](/docs/Smart%20Texture%20Changer/img/E5-2.png) |
+| ![img/E5-1.png](img/E5-1.png) | ![img/E5-2.png](img/E5-2.png) |
 | 1. 点击"a", 弹出菜单 | 2. 点击"\[THEMES\]", 展示方案列表 |
-| ![/docs/Smart%20Texture%20Changer/img/E5-3.png](/docs/Smart%20Texture%20Changer/img/E5-3.png) | ![/docs/Smart%20Texture%20Changer/img/E5-4.png](/docs/Smart%20Texture%20Changer/img/E5-4.png) |
+| ![img/E5-3.png](img/E5-3.png) | ![img/E5-4.png](img/E5-4.png) |
 | 点击"RED" | 点击"GREEN" |
-| ![/docs/Smart%20Texture%20Changer/img/E5-5.png](/docs/Smart%20Texture%20Changer/img/E5-5.png) | ![/docs/Smart%20Texture%20Changer/img/E5-6.png](/docs/Smart%20Texture%20Changer/img/E5-6.png) |
+| ![img/E5-5.png](img/E5-5.png) | ![img/E5-6.png](img/E5-6.png) |
 | 点击"BLUE" | 点击"Default" |
