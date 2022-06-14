@@ -287,3 +287,29 @@ SET BLUE|2ddd156d-8107-6761-9b54-7165ec249704||
 | 点击"RED" | 点击"GREEN" |
 | ![img/E5-5.png](img/E5-5.png) | ![img/E5-6.png](img/E5-6.png) |
 | 点击"BLUE" | 点击"Default" |
+
+### 自定义套装列表
+
+配置```SETS```选项
+
+下面代码中，套装菜单只包括RED，BLUE两个选项，如果想使用Default与RED需要进入PART
+
+```lsl
+MENU_OPTION_SETS [THEMES]
+SETS RED|BLUE
+
+PART A|a|ALL_SIDES
+SET Default|TEXTURE_PLYWOOD||
+SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
+SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
+
+PART B|b|3
+SET Default|TEXTURE_PLYWOOD||
+SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
+SET BLUE|2ddd156d-8107-6761-9b54-7165ec249704||
+```
+
+|||
+|---|---|
+| ![img/E6-1.png](img/E5-1.png) | ![img/E6-2.png](img/E5-2.png) |
+| 1. 点击"a", 弹出菜单 | 2. 点击"\[THEMES\]", 展示方案列表 |
