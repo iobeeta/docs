@@ -311,5 +311,5 @@ SET BLUE|2ddd156d-8107-6761-9b54-7165ec249704||
 
 |||
 |---|---|
-| ![img/E6-1.png](img/E5-1.png) | ![img/E6-2.png](img/E5-2.png) |
+| ![img/E6-1.png](img/E6-1.png) | ![img/E6-2.png](img/E6-2.png) |
 | 1. 点击"a", 弹出菜单 | 2. 点击"\[THEMES\]", 展示方案列表 |
