@@ -5,99 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Beeta DOCS</title>
     <link rel="stylesheet" href="https://unpkg.com/docute@4/dist/docute.css">
-    <style>
-      .toc-wrapper {
-        margin-top: 25px;
-        padding: 0 20px;
-      }
-      .toc {
-        padding: 0.75rem;
-        font-size: 0.875rem;
-        border: 1px solid var(--border-color);
-        border-radius: 5px;
-      }
-      .toc a:hover {
-        text-decoration: underline;
-      }
-      .toc-level-1 {
-        margin-left: 0rem;
-      }
-      .toc-level-2 {
-        margin-left: 0.5rem;
-      }
-      .toc-level-3 {
-        margin-left: 1rem;
-      }
-      .toc-level-4 {
-        margin-left: 1.5rem;
-      }
-      .toc-level-5 {
-        margin-left: 2rem;
-      }
-      .toc-level-6 {
-        margin-left: 2.5rem;
-      }
-    </style>
+    <style>.toc-wrapper{margin-top:25px;padding:0 20px;}.toc{padding:0.75rem;font-size:0.875rem;border:1px solid var(--border-color);border-radius:5px;}.toc a:hover{text-decoration:underline;}.toc-level-1{margin-left:0rem;}.toc-level-2{margin-left:0.5rem;}.toc-level-3{margin-left:1rem;}.toc-level-4{margin-left:1.5rem;}.toc-level-5{margin-left:2rem;}.toc-level-6{margin-left:2.5rem;}</style>
   </head>
   <body>
     <div id="main"></div>
     <script src="https://unpkg.com/docute@4/dist/docute.js"></script>
-    <script>
-      const makeToc = function makeToc(content) {
-        let match
-        let res = []
-        let minLevel
-        let level
-        let regex = new RegExp('(#{2,6})[\x20\t]+([^\r\n]+)', 'g');
-        while((match = regex.exec(content)) != null) {
-          level = match[1].length - 1
-          if(minLevel == null) {
-            minLevel = level
-          } else if(minLevel > level) {
-            minLevel = level
-          }
-          res.push({level: level, content: match[2]})
-        }
-        if(minLevel > 1) {
-          let p = minLevel - 1
-          res = res.map(item => {
-            item.level -= p
-            return item
-          })
-        }
-        return res
-      }
-      const storage = {
-        toc: []
-      }
-      const TOC = ({ initOpts, evaluateOnly = false } = {}) => ({
-      name: 'TOC',
-      extend(api) {
-        api.registerComponent('sidebar:start', Vue.component('TOC', {
-          data() {
-            return {storage}
-          },
-          template: `
-            <template v-if="storage.toc.length">
-              <div class="toc-wrapper">
-                <div class="toc">
-                  <template v-for="(item, index) in storage.toc">
-                    <div :class="['toc-level-' + item.level]">
-                      <a :href="'#' + $store.state.route.path + '#' + item.content.toLowerCase()">{{ item.content }}</a>
-                    </div>
-                  </template>
-                </div>
-              </div>
-            </template>
-          `
-        }))
-        api.processMarkdown(text => {
-          storage.toc = makeToc(text)
-          return text
-        })
-      }
-    })
-    </script>
+    <script>eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('h i=w i(a){7 d 7 9=[]7 3 7 0 7 q=x y(\'(#{2,6})[\\z\\t]+([^\\r\\n]+)\',\'g\');A((d=q.B(a))!=s){0=d[1].u-1 e(3==s){3=0}C e(3>0){3=0}9.D({0:0,j:d[2]})}e(3>1){7 p=3-1 9=9.E(4=>{4.0-=p f 4})}f 9}h b={5:[]}h k=({F,G=H}={})=>({I:\'k\',J(l){l.K(\'L:M\',N.O(\'k\',{P(){f{b}},c:`<c v-e="b.5.u"><8 m="5-Q"><8 m="5"><c v-R="(4, S) T b.5"><8:m="[\'5-0-\' + 4.0]"><a:U="\'#\' + $V.W.X.Y + \'#\' + 4.j.Z()">{{4.j}}</a></8></c></8></8></c>`}))l.10(o=>{b.5=i(o)f o})}})',62,63,'level|||minLevel|item|toc||let|div|res||storage|template|match|if|return||const|makeToc|content|TOC|api|class||text||regex||null||length||function|new|RegExp|x20|while|exec|else|push|map|initOpts|evaluateOnly|false|name|extend|registerComponent|sidebar|start|Vue|component|data|wrapper|for|index|in|href|store|state|route|path|toLowerCase|processMarkdown'.split('|'),0,{}))</script>
     <script>
       new Docute({
         target: '#main',
