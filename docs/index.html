@@ -14,7 +14,7 @@
       d.push({level:f,content:c[2]})}
       if(e>1){(function(){var p=e-1;d=d.map(function(a){a.level-=p;return a})})()}
       return d};var storage={toc:[]};var TOC=function TOC(){var c=arguments.length<=0||arguments[0]===undefined?{}:arguments[0];var d=c.initOpts;var e=c.evaluateOnly;var f=e===undefined?false:e;return{name:'TOC',extend:function extend(b){b.registerComponent('sidebar:start',Vue.component('TOC',{data:function data(){return{storage:storage}},template:'<template v-if="storage.toc.length"><div class="toc-wrapper"><div class="toc"><template v-for="(item, index) in storage.toc"><div :class="[\'toc-level-\' + item.level]"><a :href="\'#\' + $store.state.route.path + \'#\' + item.content.toLowerCase()">{{ item.content }}</a></div></template></div></div></template>'}));b.processMarkdown(function(a){storage.toc=makeToc(a);return a})}}};</script>
-    <script>'use strict';var imgURL={name:'imgURL',extend:function extend(api){api.processMarkdown(function(text){var prodName=api.router.app.$route.path.split(/\//);prodName=prodName.filter(function(item){return item!=='';});var path=encodeURI('/'+prodName[prodName.length-1]+'/');text=text.replaceAll(/\!\[([^\]]*)\]\(([^\)]*)\)/g,'\!['+path+'$1]('+path+'$2)');return text;});}};</script>
+    <script>'use strict';var imgURL={name:'imgURL',extend:function extend(api){api.processMarkdown(function(text){var prodName=api.router.app.$route.path.split(/\//);prodName=prodName.filter(function(item){return item!=='';});var path=encodeURI('/prod/'+prodName[prodName.length-1]+'/');text=text.replaceAll(/\!\[([^\]]*)\]\(([^\)]*)\)/g,'\!['+path+'$1]('+path+'$2)');return text;});}};</script>
     <script>
       new Docute({
         target: '#main',
