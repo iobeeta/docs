@@ -182,9 +182,9 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
 |||
 |---|---|
-| ![](/docs/Smart%20Texture%20Changer/img/E1-1.png) | ![](/docs/Smart%20Texture%20Changer/img/E1-2.png) |
+| ![/docs/Smart%20Texture%20Changer/img/E1-1.png](/docs/Smart%20Texture%20Changer/img/E1-1.png) | ![/docs/Smart%20Texture%20Changer/img/E1-2.png](/docs/Smart%20Texture%20Changer/img/E1-2.png) |
 | 1. 单物件名为"a", 点击 | 2. 选择"A" |
-| ![](/docs/Smart%20Texture%20Changer/img/E1-3.png) | ![](/docs/Smart%20Texture%20Changer/img/E1-4.png) |
+| ![/docs/Smart%20Texture%20Changer/img/E1-3.png](/docs/Smart%20Texture%20Changer/img/E1-3.png) | ![/docs/Smart%20Texture%20Changer/img/E1-4.png](/docs/Smart%20Texture%20Changer/img/E1-4.png) |
 | 3. 选择"RED" | 4. a所有面都应用了RED贴图 |
 
 ### 在Linkset中
@@ -207,9 +207,9 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
 |||
 |---|---|
-| ![](/docs/Smart%20Texture%20Changer/img/E2-1.png) | ![](/docs/Smart%20Texture%20Changer/img/E2-2.png) |
+| ![/docs/Smart%20Texture%20Changer/img/E2-1.png](/docs/Smart%20Texture%20Changer/img/E2-1.png) | ![/docs/Smart%20Texture%20Changer/img/E2-2.png](/docs/Smart%20Texture%20Changer/img/E2-2.png) |
 | 1. Linkset包含"a"和"b", 脚本在主prim, 点击 | 2. 选择"B" |
-| ![](/docs/Smart%20Texture%20Changer/img/E2-3.png) | ![](/docs/Smart%20Texture%20Changer/img/E2-4.png) |
+| ![/docs/Smart%20Texture%20Changer/img/E2-3.png](/docs/Smart%20Texture%20Changer/img/E2-3.png) | ![/docs/Smart%20Texture%20Changer/img/E2-4.png](/docs/Smart%20Texture%20Changer/img/E2-4.png) |
 | 3. 选择"RED" | 4. b的第3个面应用了RED贴图 |
 
 ### 多个同名子prim
@@ -219,7 +219,7 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
 |||
 |---|---|
-| ![](/docs/Smart%20Texture%20Changer/img/E3-1.png) | ![](/docs/Smart%20Texture%20Changer/img/E3-2.png) |
+| ![/docs/Smart%20Texture%20Changer/img/E3-1.png](/docs/Smart%20Texture%20Changer/img/E3-1.png) | ![/docs/Smart%20Texture%20Changer/img/E3-2.png](/docs/Smart%20Texture%20Changer/img/E3-2.png) |
 | 1. Linkset包含"a"和两个"b" | 2. 同样的操作, 所有"b"的第3个面都被应用了RED |
 
 ### 脚本在子prim
@@ -230,7 +230,7 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
 |||
 |---|---|
-| ![](/docs/Smart%20Texture%20Changer/img/E4-1.png) | ![](/docs/Smart%20Texture%20Changer/img/E4-2.png) |
+| ![/docs/Smart%20Texture%20Changer/img/E4-1.png](/docs/Smart%20Texture%20Changer/img/E4-1.png) | ![/docs/Smart%20Texture%20Changer/img/E4-2.png](/docs/Smart%20Texture%20Changer/img/E4-2.png) |
 | 1. 点击"a", 弹出菜单 | 2. 点击"b", 弹出两个菜单 |
 
 此时打开配置文件，更改配置
@@ -252,5 +252,38 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
 |||
 |---|---|
-| ![](/docs/Smart%20Texture%20Changer/img/E4-3.png) ||
+| ![/docs/Smart%20Texture%20Changer/img/E4-3.png](/docs/Smart%20Texture%20Changer/img/E4-3.png) ||
 | 此时, 点击"b", 只弹出属于"b"的菜单 ||
+
+### 套装
+
+设置```MENU_OPTION_SETS```以开启套装
+
+下面代码中 PART A 包括 Default, RED, GREEN, PART B 包括 Default, RED, BLUE, 套装中将自动生成贴图方案包括: Default, RED, GREEN, BLUE, 点击它们将会对自己所关联的PART生效。
+
+- Default, RED 对名为 a 的全部面和名为 b 的第3个面有效
+- GREEN 只对 a 的全部面有效
+- BLUE 只对 b 第3个面有效
+
+```lsl
+MENU_OPTION_SETS [THEMES]
+
+PART A|a|ALL_SIDES
+SET Default|TEXTURE_PLYWOOD||
+SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
+SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
+
+PART B|b|3
+SET Default|TEXTURE_PLYWOOD||
+SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
+SET BLUE|2ddd156d-8107-6761-9b54-7165ec249704||
+```
+
+|||
+|---|---|
+| ![/docs/Smart%20Texture%20Changer/img/E5-1.png](/docs/Smart%20Texture%20Changer/img/E5-1.png) | ![/docs/Smart%20Texture%20Changer/img/E5-2.png](/docs/Smart%20Texture%20Changer/img/E5-2.png) |
+| 1. 点击"a", 弹出菜单 | 2. 点击"\[THEMES\]", 展示方案列表 |
+| ![/docs/Smart%20Texture%20Changer/img/E5-3.png](/docs/Smart%20Texture%20Changer/img/E5-3.png) | ![/docs/Smart%20Texture%20Changer/img/E5-4.png](/docs/Smart%20Texture%20Changer/img/E5-4.png) |
+| 点击"RED" | 点击"GREEN" |
+| ![/docs/Smart%20Texture%20Changer/img/E5-5.png](/docs/Smart%20Texture%20Changer/img/E5-5.png) | ![/docs/Smart%20Texture%20Changer/img/E5-6.png](/docs/Smart%20Texture%20Changer/img/E5-6.png) |
+| 点击"BLUE" | 点击"Default" |
