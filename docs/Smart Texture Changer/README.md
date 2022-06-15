@@ -4,7 +4,19 @@
 
 ### Introduction
 
+This is a texture replacement based on the dialog menu. It can manage multiple faces of multiple prims in the same linkset. Whether it's furniture, cars, airplanes, clothes, toys...
+
+Efficient and convenient, make complex things simple through one unified planning
+
 ### Quick Start
+
+**Follow this, step by step**
+
+1. Prepare your object, it can be a prim, mesh or a linkset of them.
+2. Name them separately, the parts with the same texture can have the same name.
+3. Plan your texture groups, according to color, style, subject, theme, etc., according to your ideas. write them to the config file.
+4. Place script and configuration file into an object, either root prim or subprim.
+5. Touch to get started.
 
 ## Example
 
