@@ -242,8 +242,8 @@ Only the owner can touch
 
 - type: integer
 - value:
-  - 0: 否
-  - 1: 是
+  - 0: no
+  - 1: yes
 - default: 1
 
 ```lsl
