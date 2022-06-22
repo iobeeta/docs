@@ -206,6 +206,20 @@ PASS_TOUCHS 0
 OWNER_ONLY 1
 ```
 
+### REMEMBER_MENU_STATS
+
+记忆菜单状态，下一次菜单弹出时将展示之前关闭时的状态。
+
+- 类型: integer
+- 取值:
+  - 0: 否
+  - 1: 是
+- 默认: 0
+
+```lsl
+REMEMBER_MENU_STATS 0
+```
+
 ### 本地频道唤起弹出菜单
 
 不为"0"时生效

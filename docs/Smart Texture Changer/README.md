@@ -250,6 +250,20 @@ Only the owner can touch
 OWNER_ONLY 1
 ```
 
+### REMEMBER_MENU_STATS
+
+Memorize the status of the menus that have been accessed. The next touch will open the last menu.
+
+- type: integer
+- value:
+  - 0: no
+  - 1: yes
+- default: 0
+
+```lsl
+REMEMBER_MENU_STATS 0
+```
+
 ### CHANNEL_LOCAL_MENU
 
 Number in the link message to pop up the menu.
