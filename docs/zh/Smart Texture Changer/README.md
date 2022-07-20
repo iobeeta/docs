@@ -2,7 +2,15 @@
 
 ## 简介
 
-## 用这里开始
+## 快速开始
+
+**按照这个，一步一步**
+
+1. 准备好你的对象，它可以是prim、mesh或它们的linkset。
+2. 分别命名，相同纹理的部分可以有相同的名称。
+3. 根据您的想法，根据颜色、样式、主题、主题等规划您的纹理组。 将它们写入配置文件。
+4. 将脚本和配置文件放入对象中，可以是根 prim 或 子prim。
+5. 点击它开始使用。
 
 ## 示例
 
@@ -151,55 +159,83 @@ SET BLUE|2ddd156d-8107-6761-9b54-7165ec249704||
 
 ## 配置信息
 
-### 日志输出级别
+### LOG_LEVEL
 
-- 取值: 0(静默), 15(info), 31(debug), 63(trace/全部)
+日志输出级别
+
+- 类型: integer
+- 取值:
+  - 0: 静默
+  - 15: 消息
+  - 31: 调试
+  - 63: 追踪/所有
 - 默认: 0
 
 ```lsl
 LOG_LEVEL 0
 ```
 
-### 部件菜单提示文字
+### MENU_TEXT_PARTS
 
+部件菜单提示文字
+
+- 类型: string
 - 默认: 空字符串
 
 ```lsl
-MENU_TEXT_PARTS PART
+MENU_TEXT_PARTS 部件:
 ```
 
-### 贴图方案菜单提示文字
+### MENU_TEXT_SETS
 
+贴图方案菜单提示文字
+
+- 类型: string
 - 默认: 空字符串
 
 ```lsl
-MENU_TEXT_SETS SET
+MENU_TEXT_SETS 配色:
 ```
 
-### 是否可以通过点击弹出菜单
+### TOUCH
 
-- 取值: 0(否), 1(是)
+是否可以通过点击弹出菜单
+
+- 类型: integer
+- 取值:
+  - 0: 否
+  - 1: 是
 - 默认: 1
 
 ```lsl
 TOUCH 1
 ```
 
-### 点击行为属性
+### PASS_TOUCHS
 
-当本脚本在子prim中, 有点击弹出菜单行为时会用到
+设置 prim 的 pass-touches 属性。 单击 子prim 时会弹出多个菜单，这很有用。
 
-- 取值: 0, 1, 2
-- 默认: 0
-- 详见 [https://wiki.secondlife.com/wiki/LlPassTouches](https://wiki.secondlife.com/wiki/LlPassTouches)
+请参考: [https://wiki.secondlife.com/wiki/LlPassTouches](https://wiki.secondlife.com/wiki/LlPassTouches)
+
+- 类型: integer
+- 取值
+  - 0: 如果 prim 中没有处理事件的脚本，则传递给根prim。
+  - 1: 触摸总是传递给根prim。
+  - 2: 触摸永远不会传递给根prim。
+- 默认值: 0
 
 ```lsl
 PASS_TOUCHS 0
 ```
 
-### 只有所有者可以点击
+### OWNER_ONLY
 
-- 取值: 0(否), 1(是)
+只有所有者可以点击
+
+- 类型: integer
+- 取值:
+  - 0: 否
+  - 1: 是
 - 默认: 1
 
 ```lsl
@@ -220,97 +256,111 @@ OWNER_ONLY 1
 REMEMBER_MENU_STATS 0
 ```
 
-### 本地频道唤起弹出菜单
+### CHANNEL_LOCAL_MENU
 
-不为"0"时生效
+本地频道唤起弹出菜单，不为"0"时生效
 
-- 取值: −2147483648 ~ +2147483647
+- 类型: integer
+- 取值:
+  - 0: 无效
+  - 不为 0: 有效
 - 默认: 0
 
 ```lsl
 CHANNEL_LOCAL_MENU 0
 ```
 
-### 本地频道返回上一级菜单
+### CHANNEL_LOCAL_MENU_BACK
 
-上一级菜单需要通过本地消息监听本频道，不为"0"时生效
+本地频道返回上一级菜单，上一级菜单需要通过本地消息监听本频道，不为"0"时生效。
+当本项目配置之后，它将作为 PART 菜单的选项显示在菜单中，显示为 "[^] BACK"。
 
-- 当本项目配置之后，它将作为 PART 菜单的选项显示在菜单中，显示为 "[^] BACK"
-- 取值: −2147483648 ~ +2147483647
+- 类型: integer
+- 取值:
+  - 0: 无效
+  - 不为 0: 有效
 - 默认: 0
 
 ```lsl
 CHANNEL_LOCAL_MENU_BACK 0
 ```
 
-### 本地接收以应用套装
+### CHANNEL_LOCAL_SYNC
 
-用于接收 CHANNEL_LOCAL_BOARDCAST 的广播数据，不为"0"时生效
+本地接收以应用套装，用于接收 CHANNEL_LOCAL_BOARDCAST 的广播数据，不为"0"时生效。
 
-- 注意！无论本体或多层使用，CHANNEL_LOCAL_SYNC 与 CHANNEL_LOCAL_BOARDCAST 不可形成闭环！切记！
-- 取值: −2147483648 ~ +2147483647
+**注意！无论本体或多层使用，CHANNEL_LOCAL_SYNC 与 CHANNEL_LOCAL_BOARDCAST 不可形成闭环！切记！**
+
+- 类型: integer
+- 取值:
+  - 0: 无效
+  - 不为 0: 有效
 - 默认: 0
 
 ```lsl
 CHANNEL_LOCAL_SYNC 0
 ```
 
-### 本地频道广播套装
+### CHANNEL_LOCAL_BOARDCAST
 
-会被同值的CHANNEL_LOCAL_SYNC接收，不为"0"时生效
+本地频道广播套装，会被同值的 CHANNEL_LOCAL_SYNC 接收，不为"0"时生效
 
-- 注意！无论本体或多层使用，CHANNEL_LOCAL_SYNC 与 CHANNEL_LOCAL_BOARDCAST 不可形成闭环！切记！
-- 取值: −2147483648 ~ +2147483647
+**注意！无论本体或多层使用，CHANNEL_LOCAL_SYNC 与 CHANNEL_LOCAL_BOARDCAST 不可形成闭环！切记！**
+
+- 类型: integer
+- 取值:
+  - 0: 无效
+  - 不为 0: 有效
 - 默认: 0
 
 ```lsl
 CHANNEL_LOCAL_BOARDCAST 0
 ```
 
-### 套装选项名称
+### MENU_OPTION_SETS
 
-用于批量生效多个部件的某一种贴图方案。
+套装选项名称，用于批量生效多个部件的某一种贴图方案。
 
-- 当本项目配置之后，它将作为 PART 菜单的选项显示在菜单中，并会自动生成或根据SETS关键词构建套装列表。
-- 留空则此选项无效
+当本项目配置之后，它将作为 PART 菜单的选项显示在菜单中，并会自动生成或根据SETS关键词构建套装列表。
+
+- 类型: string
 - 默认：空字符串
 
 ```lsl
 MENU_OPTION_SETS [set name]
 ```
 
-### 自定义的套装列表
+### SETS
 
-- 以MENU_OPTION_SETS为入口，进入后显示此列表
-- 如果未设置或为空字符串，将会自动生成列表，包括所有 PART 中的全部 SET 关键字。
-- 默认：空字符串
+自定义的套装列表
+
+以MENU_OPTION_SETS为入口，进入后显示此列表。
+
+如果未设置或为空字符串，将会自动生成列表，包括所有 PART 中的全部 SET 关键字。
+
+- 类型: string
+- 默认: 空字符串
 
 ```lsl
 SETS RED|GREEN
 ```
 
-### 部件
+### PART
 
-同一个linkset中可以有多个同名物体，他们都会被匹配并替换
+部件，同一个linkset中可以有多个同名物体，他们都会被匹配并替换
 
-- 第三个参数 face 可以使用常量 ALL_SIDES
+- 参数 1:
+  - 类型: string
+  - 取值: 部件名称（菜单展示名）
+- 参数 2:
+  - 类型: string
+  - 取值: 物体实际名称
+- 参数 3:
+  - 类型: integer
+  - 取值: 0 ~ 7 和 -1(ALL_SIDES)
 
 ```lsl
 PART OBJ_1|object name 1|ALL_SIDES
-```
-
-### 贴图方案
-
-PART部件的子选项
-
-- 可使用SL常量包括 TEXTURE_BLANK, TEXTURE_DEFAULT, TEXTURE_TRANSPARENT, TEXTURE_PLYWOOD, NULL_KEY。当然您也可以直接使用他们对应的UUID
-- 详见：[https://wiki.secondlife.com/wiki/Category:LSL_Constants](https://wiki.secondlife.com/wiki/Category:LSL_Constants)
-- *如果某个贴图的UUID留空，它将会被忽略（保持之前的贴图不变），如果想覆盖失效某个贴图，请使用 NULL_KEY。
-- *贴图方案SET必须跟随在某一个部件PART之后，它们作为PART的下一级菜单展示。
-
-```lsl
-SET RED|TEXTURE_BLANK|NULL_KEY|NULL_KEY
-SET GREEN|TEXTURE_BLANK||
 ```
 
 ### PART*
@@ -323,11 +373,56 @@ SET RED|TEXTURE_BLANK|NULL_KEY|NULL_KEY
 SET GREEN|TEXTURE_BLANK|NULL_KEY|NULL_KEY
 ```
 
-### 自定义菜单
+### SET
 
-- 与 PART 显示在同一级菜单中，点击可发送本地消息。
-- 第三个参数可以"\|"分隔
+配色/贴图方案
+
+可使用SL常量包括 TEXTURE_BLANK, TEXTURE_DEFAULT, TEXTURE_TRANSPARENT, TEXTURE_PLYWOOD, NULL_KEY。
+
+当然您也可以直接使用他们对应的UUID
+
+详见：[https://wiki.secondlife.com/wiki/Category:LSL_Constants](https://wiki.secondlife.com/wiki/Category:LSL_Constants)
+
+SET是PART部件菜单的子选项，贴图方案SET必须跟随在某一个部件PART之后，它们作为PART的下一级菜单展示。
+
+- 参数 1:
+  - 类型: string
+  - 取值: 方案名称
+- 参数 2:
+  - 类型: string
+  - 取值: UUID / NULL_KEY / 空字符串
+- 参数 3:
+  - 类型: string
+  - 取值: UUID / NULL_KEY / 空字符串
+- 参数 3:
+  - 类型: string
+  - 取值: UUID / NULL_KEY / 空字符串
+
+***如果某个贴图的UUID留空，它将会被忽略（保持之前的贴图不变），如果想覆盖失效某个贴图，请使用 NULL_KEY。**
 
 ```lsl
-BUTTON MORE|100|arguments
+SET RED|TEXTURE_BLANK|NULL_KEY|NULL_KEY
+SET GREEN|TEXTURE_BLANK||
+```
+
+### BUTTON
+
+自定义菜单
+
+与 PART 显示在同一级菜单中，点击可发送本地消息。
+
+第三个参数可以"\|"分隔
+
+- 参数 1:
+  - 类型: string
+  - 取值: 按钮名称
+- 参数 2:
+  - 类型: integer
+  - 取值: except 0
+- 参数 3 and more: not required
+  - 类型: string
+
+```lsl
+BUTTON MORE|100|arg1|arg2|arg3|...
+BUTTON MORE|100|
 ```
