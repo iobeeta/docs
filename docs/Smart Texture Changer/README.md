@@ -10,7 +10,7 @@ Efficient and convenient, make complex things simple through one unified plannin
 
 ### Quick Start
 
-**Follow this, step by step**
+### Follow this, step by step
 
 1. Prepare your object, it can be a prim, mesh or a linkset of them.
 2. Name them separately, the parts with the same texture can have the same name.
@@ -409,7 +409,7 @@ SET must follow PART, it cannot exist in isolation.
   - type: string
   - value: UUID / NULL_KEY / Empty string
 
-**NULL_KEY will be set to initial (invalidate), Empty string will ignore this part (the original will remain unchanged)**
+*NULL_KEY will be set to initial (invalidate), Empty string will ignore this part (the original will remain unchanged)
 
 ```lsl
 SET RED|TEXTURE_BLANK|NULL_KEY|NULL_KEY
