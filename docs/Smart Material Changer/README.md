@@ -378,7 +378,7 @@ It can represent one or more prims, they use the same texture.
   - value: 0 ~ 7 and -1(ALL_SIDES)
 
 ```lsl
-PART OBJ_1|object name 1|ALL_SIDES
+PART OBJ_1|object name 1|0|ALL_SIDES
 ```
 
 ### PART*
@@ -386,7 +386,7 @@ PART OBJ_1|object name 1|ALL_SIDES
 Same as PART, but it doesn't show in the menu.
 
 ```lsl
-PART* OBJ_2|object name 2|ALL_SIDES
+PART* OBJ_2|object name 2|0|ALL_SIDES
 SET RED|TEXTURE_BLANK|NULL_KEY|NULL_KEY
 SET GREEN|TEXTURE_BLANK|NULL_KEY|NULL_KEY
 ```

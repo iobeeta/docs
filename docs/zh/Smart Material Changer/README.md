@@ -367,7 +367,7 @@ SETS RED|GREEN
   - 取值: 0 ~ 7 和 -1(ALL_SIDES)
 
 ```lsl
-PART OBJ_1|object name 1|ALL_SIDES
+PART OBJ_1|object name 1|0|ALL_SIDES
 ```
 
 ### PART*
@@ -375,7 +375,7 @@ PART OBJ_1|object name 1|ALL_SIDES
 与 PART 都表示一个部件，不同的是PART*并不会显示在部件菜单中。套装对此部件有效。
 
 ```lsl
-PART* OBJ_2|object name 2|ALL_SIDES
+PART* OBJ_2|object name 2|0|ALL_SIDES
 SET RED|TEXTURE_BLANK|NULL_KEY|NULL_KEY
 SET GREEN|TEXTURE_BLANK|NULL_KEY|NULL_KEY
 ```
