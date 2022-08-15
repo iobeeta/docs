@@ -5,42 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Beeta DOCS</title>
     <link rel="stylesheet" href="https://unpkg.com/docute@4/dist/docute.css">
-    <style>.toc-wrapper{margin-top:25px;padding:0 20px;}.toc{padding:0.75rem;font-size:0.875rem;border:1px solid var(--border-color);border-radius:5px;}.toc a:hover{text-decoration:underline;}.toc-level-1{margin-left:0rem;}.toc-level-2{margin-left:0.5rem;}.toc-level-3{margin-left:1rem;}.toc-level-4{margin-left:1.5rem;}.toc-level-5{margin-left:2rem;}.toc-level-6{margin-left:2.5rem;}</style>
   </head>
   <body>
     <div id="main"></div>
     <script src="https://unpkg.com/docute@4/dist/docute.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-    <script>'use strict';var makeToc=function makeToc(content){var dom=jQuery('<div>'+content+'</div>');var res=[];var minLevel=void 0;var level=void 0;dom.find('h1,h2,h3,h4,h5,h6').each(function(num,item){var dom=jQuery(item);level=parseInt(item.nodeName.substring(1));if(minLevel==null){minLevel=level;}else if(minLevel>level){minLevel=level;}
-res.push({level:level,href:dom.attr('id'),content:dom.text().trim()});});if(minLevel>1){(function(){var p=minLevel-1;res=res.map(function(item){item.level-=p;return item;});})();}
-return res;};var storage={toc:[]};var TOC=function TOC(){var _ref=arguments.length<=0||arguments[0]===undefined?{}:arguments[0];var initOpts=_ref.initOpts;var _ref$evaluateOnly=_ref.evaluateOnly;var evaluateOnly=_ref$evaluateOnly===undefined?false:_ref$evaluateOnly;return{name:'TOC',extend:function extend(api){api.registerComponent('sidebar:start',Vue.component('TOC',{data:function data(){return{storage:storage};},template:'\n              <template v-if="storage.toc.length">\n                <div class="toc-wrapper">\n                  <div class="toc">\n                    <template v-for="(item, index) in storage.toc">\n                      <div :class="[\'toc-level-\' + item.level]">\n                        <a :href="\'#\' + $store.state.route.path + \'#\' + item.href">{{ item.content }}</a>\n                      </div>\n                    </template>\n                  </div>\n                </div>\n              </template>\n            '}));api.processHTML(function(html){storage.toc=makeToc(html);return html;});}};};</script>
-    <script>'use strict';var imgURL={name:'imgURL',extend:function extend(api){api.processMarkdown(function(text){var prodName=api.router.app.$route.path.split(/\//);prodName=prodName.filter(function(item){return item!=='';});var path=encodeURI('/prod/'+prodName[prodName.length-1]+'/');text=text.replaceAll(/\!\[([^\]]*)\]\(([^\)]*)\)/g,'\!['+path+'$1]('+path+'$2)');return text;});}};</script>
-    <script>
-      new Docute({
-        target: '#main',
-        imageZoom: true,
-        darkThemeToggler: true,
-        overrides: {
-          '/': {
-            language: 'English' // Used by the language dropdown menu in the sidebar
-          },
-          '/zh/': {
-            language: '中文'
-            // // Override the default sidebar
-            // sidebar: [
-            //   {
-            //     children: [
-            //       { title: '指南', link: '/zh/guide' }
-            //     ]
-            //   }
-            // ]
-          }
-        },
-        plugins: [
-          imgURL,
-          TOC()
-        ]
-      })
-    </script>
+    <script src="/assets/app.js"></script>
   </body>
 </html>

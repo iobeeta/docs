@@ -1,0 +1,39 @@
+.toc-wrapper {
+    margin-top: 25px;
+    padding: 0 20px;
+}
+
+.toc {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+}
+
+.toc a:hover {
+    text-decoration: underline;
+}
+
+.toc-level-1 {
+    margin-left: 0rem;
+}
+
+.toc-level-2 {
+    margin-left: 0.5rem;
+}
+
+.toc-level-3 {
+    margin-left: 1rem;
+}
+
+.toc-level-4 {
+    margin-left: 1.5rem;
+}
+
+.toc-level-5 {
+    margin-left: 2rem;
+}
+
+.toc-level-6 {
+    margin-left: 2.5rem;
+}

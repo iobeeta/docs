@@ -1,0 +1,7 @@
+:root {
+    --sidebar-width: 360px;
+}
+
+.Wrap {
+    max-width: 1600px;
+}
