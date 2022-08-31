@@ -1,5 +1,7 @@
 # Smart Texture Changer
 
+version: 1.6
+
 ## Guide
 
 ### Introduction
@@ -8,9 +10,7 @@ This is a texture replacement based on the dialog menu. It can manage multiple f
 
 Efficient and convenient, make complex things simple through one unified planning
 
-### Quick Start
-
-### Follow this, step by step
+### Quick Start. Follow this, step by step
 
 1. Prepare your object, it can be a prim, mesh or a linkset of them.
 2. Name them separately, the parts with the same texture can have the same name.
@@ -166,6 +166,20 @@ SET BLUE|2ddd156d-8107-6761-9b54-7165ec249704||
 | 1. Touch "a" | 2. Select "\[THEMES\]", you will get the list |
 
 ## Configure
+
+### LOADING_TEXT
+
+Floating text to show loading progress
+
+- type: integer
+- value:
+  - 0: disable
+  - 1: enable
+- default: 0
+
+```lsl
+LOADING_TEXT 0
+```
 
 ### LOG_LEVEL
 
@@ -365,13 +379,14 @@ It can represent one or more prims, they use the same texture.
   - value: The name of PART
 - param 2:
   - type: string
-  - value: The name of prim/subprims
+  - value: The name of prim/subprims. <br>* Available keywords: LINK_THIS, LINK_ROOT, LINK_SET, LINK_ALL_CHILDREN, LINK_ALL_OTHERS, it will take effect when the next parameter is set to "3"
 - param 3:
   - type: integer
   - value:
     - 0: Exact match
     - 1: Match as prefix
     - 2: Match as suffix
+    - 3: Use LSL constants(If possible, use as string when a constant is missed, like 0)
   - default: 0
 - param 4:
   - type: integer
@@ -412,23 +427,23 @@ SET must follow PART, it cannot exist in isolation.
 - param 3, normal:
   - type: string
   - value: UUID / NULL_KEY / Empty string
-- param 3, specular:
+- param 4, specular:
   - type: string
   - value: UUID / NULL_KEY / Empty string
-- param 4, color:
+- param 5, color:
   - type: vector
   - value: Vector string of color, likes: <1.0, 0.5, 0.0>
-- param 5, alpha:
+- param 6, alpha:
   - type: float
   - value: 0.0 ~ 1.0, 0.0(hidden) <=> 1.0(show)
-- param 6, glow:
+- param 7, glow:
   - type: float
   - value: 0.0 ~ 1.0, 0.0(no) <=> 1.0(bright)
-- param 7, fullbright:
+- param 8, fullbright:
   - type: string
   - value: 0/1 or FALSE/TRUE
 
-*NULL_KEY will be set to initial (invalidate), Empty string will ignore this part (the original will remain unchanged)
+***NULL_KEY will be set to initial (invalidate), Empty string will ignore this part (the original will remain unchanged)**
 
 ```lsl
 SET RED|TEXTURE_BLANK|NULL_KEY|NULL_KEY|<1.0, 0.0, 0.0>|1.0|0.0|TRUE
@@ -450,8 +465,9 @@ The third parameter can be separated by "\|".
 - param 2:
   - type: integer
   - value: except 0
-- param 3 and more: not required
+- param 3: (not required)
   - type: string
+- and more...
 
 ```lsl
 BUTTON MORE|100|arg1|arg2|arg3|...

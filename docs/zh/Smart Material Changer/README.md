@@ -1,10 +1,16 @@
 # Smart Texture Changer
 
-## 简介
+版本：1.6
 
-## 快速开始
+## 用户导引
 
-### 按照这个，一步一步
+### 简介
+
+这是基于对话框菜单的纹理替换。它可以管理同一个链接集中多个prims的多个面。 无论是家具、汽车、飞机、衣服、玩具……
+
+高效便捷，一个统一的规划让复杂的事情变得简单
+
+### 快速开始。按照这个，一步一步
 
 1. 准备好你的对象，它可以是prim、mesh或它们的linkset。
 2. 分别命名，相同纹理的部分可以有相同的名称。
@@ -102,7 +108,9 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
 设置```MENU_OPTION_SETS```以开启套装
 
-下面代码中 PART A 包括 Default, RED, GREEN, PART B 包括 Default, RED, BLUE, 套装中将自动生成贴图方案包括: Default, RED, GREEN, BLUE, 点击它们将会对自己所关联的PART生效。
+下面代码中 PART A 包括 Default, RED, GREEN, PART B 包括 Default, RED, BLUE, 套装中将自动生成贴图方案包括: Default, RED, GREEN, BLUE
+
+点击它们将会对自己所关联的PART生效。
 
 - Default, RED 对名为 a 的全部面和名为 b 的第3个面有效
 - GREEN 只对 a 的全部面有效
@@ -158,6 +166,20 @@ SET BLUE|2ddd156d-8107-6761-9b54-7165ec249704||
 | 1. 点击"a", 弹出菜单 | 2. 点击"\[THEMES\]", 展示方案列表 |
 
 ## 配置信息
+
+### LOADING_TEXT
+
+加载进度浮动文本展示
+
+- 类型: integer
+- 取值:
+  - 0: 关闭
+  - 1: 开启
+- 默认: 0
+
+```lsl
+LOADING_TEXT 0
+```
 
 ### LOG_LEVEL
 
@@ -354,13 +376,14 @@ SETS RED|GREEN
   - 取值: 部件名称（菜单展示名）
 - 参数 2:
   - 类型: string
-  - 取值: 物体实际名称
+  - 取值: 物体实际名称。<br>* 可使用关键字：LINK_THIS、LINK_ROOT、LINK_SET、LINK_ALL_CHILDREN、LINK_ALL_OTHERS，设置下一个参数为"3"时可生效
 - 参数 3:
   - 类型: integer
   - 取值:
     - 0: 完整匹配物体名称
     - 1: 当做前缀来匹配物体名称
     - 2: 当做后缀来匹配物体名称
+    - 3: 系统常量（如果可以，未命中按字符串处理，同 0）
   - 默认: 0
 - 参数 3:
   - 类型: integer
@@ -401,19 +424,19 @@ SET是PART部件菜单的子选项，贴图方案SET必须跟随在某一个部�
 - 参数 3, normal:
   - 类型: string
   - 取值: UUID / NULL_KEY / 空字符串
-- 参数 3, specular:
+- 参数 4, specular:
   - 类型: string
   - 取值: UUID / NULL_KEY / 空字符串
-- 参数 4, 颜色:
+- 参数 5, 颜色:
   - 类型: vector
   - 取值: 颜色格式的字符串, 如: <1.0, 0.5, 0.0>
-- 参数 5, 透明度:
+- 参数 6, 透明度:
   - 类型: float
   - 取值: 0.0 ~ 1.0, 0.0(淡) <=> 1.0(浓)
-- 参数 6, 发光:
+- 参数 7, 发光:
   - 类型: float
   - 取值: 0.0 ~ 1.0, 0.0(无) <=> 1.0(亮)
-- 参数 7, 全亮模式:
+- 参数 8, 全亮模式:
   - 类型: string
   - 取值: 0/1 或者 FALSE/TRUE
 
@@ -438,9 +461,10 @@ SET BLUE|TEXTURE_BLANK|||<0.0, 0.0, 1.0>||0.05
   - 取值: 按钮名称
 - 参数 2:
   - 类型: integer
-  - 取值: except 0
-- 参数 3 and more: not required
+  - 取值: 除了 0
+- 参数 3: (非必需)
   - 类型: string
+- 更多...
 
 ```lsl
 BUTTON MORE|100|arg1|arg2|arg3|...
