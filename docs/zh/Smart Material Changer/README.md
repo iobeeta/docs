@@ -376,7 +376,8 @@ SETS RED|GREEN
   - 取值: 部件名称（菜单展示名）
 - 参数 2:
   - 类型: string
-  - 取值: 物体实际名称。<br>* 可使用关键字：LINK_THIS、LINK_ROOT、LINK_SET、LINK_ALL_CHILDREN、LINK_ALL_OTHERS，设置下一个参数为"3"时可生效
+  - 取值: 物体实际名称。
+    - 可使用关键字：LINK_THIS、LINK_ROOT、LINK_SET、LINK_ALL_CHILDREN、LINK_ALL_OTHERS，设置下一个参数为"3"时可生效
 - 参数 3:
   - 类型: integer
   - 取值:
@@ -407,7 +408,7 @@ SET GREEN|TEXTURE_BLANK|NULL_KEY|NULL_KEY
 
 配色/贴图方案
 
-可使用SL常量包括 TEXTURE_BLANK, TEXTURE_DEFAULT, TEXTURE_TRANSPARENT, TEXTURE_PLYWOOD, NULL_KEY。
+贴图可使用SL常量包括 TEXTURE_BLANK, TEXTURE_DEFAULT, TEXTURE_TRANSPARENT, TEXTURE_PLYWOOD, NULL_KEY。
 
 当然您也可以直接使用他们对应的UUID
 
@@ -418,13 +419,13 @@ SET是PART部件菜单的子选项，贴图方案SET必须跟随在某一个部�
 - 参数 1, 名称:
   - 类型: string
   - 取值: 方案名称
-- 参数 2, diffuse:
+- 参数 2, diffuse 材质贴图:
   - 类型: string
   - 取值: UUID / NULL_KEY / 空字符串
-- 参数 3, normal:
+- 参数 3, normal 法线贴图:
   - 类型: string
   - 取值: UUID / NULL_KEY / 空字符串
-- 参数 4, specular:
+- 参数 4, specular 光泽贴图:
   - 类型: string
   - 取值: UUID / NULL_KEY / 空字符串
 - 参数 5, 颜色:

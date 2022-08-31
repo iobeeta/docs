@@ -379,7 +379,8 @@ It can represent one or more prims, they use the same texture.
   - value: The name of PART
 - param 2:
   - type: string
-  - value: The name of prim/subprims. <br>* Available keywords: LINK_THIS, LINK_ROOT, LINK_SET, LINK_ALL_CHILDREN, LINK_ALL_OTHERS, it will take effect when the next parameter is set to "3"
+  - value: The name of prim/subprims.
+    - Available keywords: LINK_THIS, LINK_ROOT, LINK_SET, LINK_ALL_CHILDREN, LINK_ALL_OTHERS, it will take effect when the next parameter is set to "3"
 - param 3:
   - type: integer
   - value:
@@ -410,7 +411,7 @@ SET GREEN|TEXTURE_BLANK|NULL_KEY|NULL_KEY
 
 It represents a theme or style.
 
-Support constant input: TEXTURE_BLANK, TEXTURE_DEFAULT, TEXTURE_TRANSPARENT, TEXTURE_PLYWOOD, NULL_KEY.
+Constants available in diffuse/normal/specular: TEXTURE_BLANK, TEXTURE_DEFAULT, TEXTURE_TRANSPARENT, TEXTURE_PLYWOOD, NULL_KEY.
 
 Of course, you can also use their corresponding UUID directly.
 
