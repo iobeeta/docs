@@ -93,7 +93,9 @@ llMessageLinked(LINK_SET, 802840, "CONFIRM", "");
 
 To: `LINK_SET`
 
-```TRANSFORM_STARTED|{direction}```
+```lsl
+TRANSFORM_STARTED|{direction}
+```
 
 direction:
 - 1: open, positive movement
@@ -103,7 +105,9 @@ direction:
 
 To: `LINK_SET`
 
-```TRANSFORM_FINISHED|{direction}```
+```lsl
+TRANSFORM_FINISHED|{direction}
+```
 
 direction:
 - 1: open, positive movement
