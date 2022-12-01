@@ -51,7 +51,7 @@ If you want to rebase, there are several ways.
 
 ### Control submit
 
-**802840**
+Num: **802840**
 
 #### Open
 
@@ -87,7 +87,7 @@ llMessageLinked(LINK_SET, 802840, "CONFIRM", "");
 
 ### Event broadcast
 
-**802841**
+Num: **802841**
 
 #### Transform started
 
@@ -98,6 +98,7 @@ TRANSFORM_STARTED|{direction}
 ```
 
 direction:
+
 - 1: open, positive movement
 - -1: close, reverse movement
 
@@ -110,5 +111,6 @@ TRANSFORM_FINISHED|{direction}
 ```
 
 direction:
+
 - 1: open, positive movement
 - -1: close, reverse movement
