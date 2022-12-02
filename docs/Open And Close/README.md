@@ -1,4 +1,4 @@
-# OAC Devkit
+# Open And Close (OAC Devkit)
 
 Open And Close Development Kit
 
