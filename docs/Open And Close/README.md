@@ -2,9 +2,15 @@
 
 OAC System
 
+## Features
+
+- Smooth transition
+- Flexible configuration and combination
+- During the transformation process, the direction can be changed at any time
+
 ## Configuration
 
-One notecard represents one configuration field
+One notecard represents one configuration field, drag notecard to inventory, edit its name.
 
 Format: .OAC {key} {value}
 
@@ -22,9 +28,27 @@ Format: .OAC {key} {value}
 
 The transformation will refer to the local directional vector.
 
+Example:
+
+```
+.OAC DISTANCE <1.0, 0.0, 0.0>
+.OAC ORIGIN 0
+```
+
+![img/local.png](img/local.png)
+
 #### 1: root
 
 The transformation will refer to the root prim directional vector.
+
+Example:
+
+```
+.OAC DISTANCE <1.0, 0.0, 0.0>
+.OAC ORIGIN 1
+```
+
+![img/root.png](img/root.png)
 
 It only works for child prims in linkset. When the object is the root prim or it is a standalone prim, **root=region**
 
@@ -32,24 +56,22 @@ It only works for child prims in linkset. When the object is the root prim or it
 
 The transformation will refer to the region directional vector.
 
+Example:
+
+```
+.OAC DISTANCE <1.0, 0.0, 0.0>
+.OAC ORIGIN 2
+```
+
+![img/region.png](img/region.png)
+
 ### About TIMING_FUNC
 
 ![img/TIMING_FUNC.png](img/TIMING_FUNC.png)
 
-## BASE mechanism
+## Linkset message
 
-The base position and rotation of the prim will be recorded in the description, which is used to prevent deviations during the change process.
-
-If you want to rebase, there are several ways.
-
-- Edit any .OAC config notecard, will rebase if changed
-- Use any method to change the inventory, such as creating a new script, deleting something.
-- Use the confirmer script.
-- *Passive: If there is a link or unlink behavior, a rebase will be performed before the transformation starts.
-
-## linkset message
-
-### Control submit
+### Control or Submit
 
 Num: **802840**
 
@@ -75,14 +97,6 @@ Switch the current direction of movement
 
 ```lsl
 llMessageLinked(LINK_SET, 802840, "TOGGLE", "");
-```
-
-#### Confirm
-
-Rebase start position and rotation
-
-```lsl
-llMessageLinked(LINK_SET, 802840, "CONFIRM", "");
 ```
 
 ### Event broadcast
