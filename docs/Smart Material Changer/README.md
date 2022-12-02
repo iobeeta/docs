@@ -1,6 +1,6 @@
 # Smart Texture Changer
 
-version: 1.6
+version: 1.14
 
 ## Guide
 
@@ -23,7 +23,7 @@ Efficient and convenient, make complex things simple through one unified plannin
 ### Single object
 
 ```lsl
-PART A|a|ALL_SIDES
+PART A|a|0|ALL_SIDES
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
@@ -41,18 +41,18 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 Script in root prim, manage multiple faces of multiple prims.
 
 ```lsl
-PART A|a|ALL_SIDES
+PART A|a|0|ALL_SIDES
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
-PART B|b|3
+PART B|b|0|3
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 ```
 
-```PART B|b|3``` Controls the 3rd face of the prim named "b"
+```PART B|b|0|3``` Controls the 3rd face of the prim named "b"
 
 |||
 |---|---|
@@ -81,17 +81,18 @@ A linkset containing "a" and "b", "a" is the root prim, let's put all the script
 | ![img/E4-1.png](img/E4-1.png) | ![img/E4-2.png](img/E4-2.png) |
 | 1. Touch "a" | 2. Touch "b", pop up two menus |
 
-At this point if you use PASS_TOUCHS.
+At this moment, open config file
+ADD this ```PASS_TOUCHS 2```
 
 ```lsl
 PASS_TOUCHS 2
 
-PART A|a|ALL_SIDES
+PART A|a|0|ALL_SIDES
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
-PART B|b|3
+PART B|b|0|3
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
@@ -117,12 +118,12 @@ Select one of them will take effect on the PART they are associated with.
 ```lsl
 MENU_OPTION_SETS [THEMES]
 
-PART A|a|ALL_SIDES
+PART A|a|0|ALL_SIDES
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
-PART B|b|3
+PART B|b|0|3
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET BLUE|2ddd156d-8107-6761-9b54-7165ec249704||
@@ -149,12 +150,12 @@ If you want to use Default and RED, you need to enter PART.
 MENU_OPTION_SETS [THEMES]
 SETS RED|BLUE
 
-PART A|a|ALL_SIDES
+PART A|a|0|ALL_SIDES
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
-PART B|b|3
+PART B|b|0|3
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET BLUE|2ddd156d-8107-6761-9b54-7165ec249704||
@@ -188,9 +189,8 @@ log output level
 - type: integer
 - value:
   - 0: slient
-  - 15: info
-  - 31: debug
-  - 63: trace/all
+  - 1: info
+  - 2: debug
 - default: 0
 
 ```lsl
@@ -354,6 +354,18 @@ When this configuration is enabled, it will be available as an option in the PAR
 ```lsl
 MENU_OPTION_SETS [set name]
 ```
+
+### SETS_ON_TOP
+
+Whether to use the package list menu as the top-level menu, you must set MENU_OPTION_SETS to take effect.
+
+When this project is enabled, the package list menu will be used instead of the top menu, and the BUTTON custom menu configured in the top menu will not be displayed.
+
+- type: integer
+- value:
+  - 0: no
+  - 1: yes
+- default: 0
 
 ### SETS
 

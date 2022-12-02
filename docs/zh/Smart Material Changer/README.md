@@ -1,6 +1,6 @@
 # Smart Texture Changer
 
-版本：1.6
+版本: 1.14
 
 ## 用户导引
 
@@ -23,7 +23,7 @@
 ### 简单的例子
 
 ```lsl
-PART A|a|ALL_SIDES
+PART A|a|0|ALL_SIDES
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
@@ -41,18 +41,18 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 脚本在主Prim，控制多个物件、多个面
 
 ```lsl
-PART A|a|ALL_SIDES
+PART A|a|0|ALL_SIDES
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
-PART B|b|3
+PART B|b|0|3
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 ```
 
-```PART B|b|3``` 控制名为"b"的物件中第3个面
+```PART B|b|0|3``` 控制名为"b"的物件中第3个面
 
 |||
 |---|---|
@@ -88,12 +88,12 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 ```lsl
 PASS_TOUCHS 2
 
-PART A|a|ALL_SIDES
+PART A|a|0|ALL_SIDES
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
-PART B|b|3
+PART B|b|0|3
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
@@ -119,12 +119,12 @@ SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 ```lsl
 MENU_OPTION_SETS [THEMES]
 
-PART A|a|ALL_SIDES
+PART A|a|0|ALL_SIDES
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
-PART B|b|3
+PART B|b|0|3
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET BLUE|2ddd156d-8107-6761-9b54-7165ec249704||
@@ -149,12 +149,12 @@ SET BLUE|2ddd156d-8107-6761-9b54-7165ec249704||
 MENU_OPTION_SETS [THEMES]
 SETS RED|BLUE
 
-PART A|a|ALL_SIDES
+PART A|a|0|ALL_SIDES
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET GREEN|2f8ae0e4-22be-20c8-c0cc-c50bbfaf2871||
 
-PART B|b|3
+PART B|b|0|3
 SET Default|TEXTURE_PLYWOOD||
 SET RED|9c198f45-3f70-1a50-f38c-8ce19044b396||
 SET BLUE|2ddd156d-8107-6761-9b54-7165ec249704||
@@ -188,9 +188,8 @@ LOADING_TEXT 0
 - 类型: integer
 - 取值:
   - 0: 静默
-  - 15: 消息
-  - 31: 调试
-  - 63: 追踪/所有
+  - 1: 显示用户级别提示
+  - 2: Debug调试
 - 默认: 0
 
 ```lsl
@@ -295,6 +294,7 @@ CHANNEL_LOCAL_MENU 0
 ### CHANNEL_LOCAL_MENU_BACK
 
 本地频道返回上一级菜单，上一级菜单需要通过本地消息监听本频道，不为"0"时生效。
+
 当本项目配置之后，它将作为 PART 菜单的选项显示在菜单中，显示为 "[^] BACK"。
 
 - 类型: integer
@@ -346,11 +346,23 @@ CHANNEL_LOCAL_BOARDCAST 0
 当本项目配置之后，它将作为 PART 菜单的选项显示在菜单中，并会自动生成或根据SETS关键词构建套装列表。
 
 - 类型: string
-- 默认：空字符串
+- 默认: 空字符串
 
 ```lsl
 MENU_OPTION_SETS [set name]
 ```
+
+### SETS_ON_TOP
+
+是否将套装列表菜单作为顶层菜单，必须设置 MENU_OPTION_SETS 本项才会生效。
+
+当本项目开启之后，将使用套装列表菜单代替顶层菜单，另外，顶部菜单中配置的 BUTTON 自定义菜单将无法显示。
+
+- 类型: integer
+- 取值:
+  - 0: 否
+  - 1: 是
+- 默认: 0
 
 ### SETS
 
@@ -377,7 +389,7 @@ SETS RED|GREEN
 - 参数 2:
   - 类型: string
   - 取值: 物体实际名称。
-    - 可使用关键字：LINK_THIS、LINK_ROOT、LINK_SET、LINK_ALL_CHILDREN、LINK_ALL_OTHERS，设置下一个参数为"3"时可生效
+    - 可使用关键字: LINK_THIS、LINK_ROOT、LINK_SET、LINK_ALL_CHILDREN、LINK_ALL_OTHERS，设置下一个参数为"3"时可生效
 - 参数 3:
   - 类型: integer
   - 取值:
@@ -412,7 +424,7 @@ SET GREEN|TEXTURE_BLANK|NULL_KEY|NULL_KEY
 
 当然您也可以直接使用他们对应的UUID
 
-详见：[https://wiki.secondlife.com/wiki/Category:LSL_Constants](https://wiki.secondlife.com/wiki/Category:LSL_Constants)
+详见: [https://wiki.secondlife.com/wiki/Category:LSL_Constants](https://wiki.secondlife.com/wiki/Category:LSL_Constants)
 
 SET是PART部件菜单的子选项，贴图方案SET必须跟随在某一个部件PART之后，它们作为PART的下一级菜单展示。
 
