@@ -1,6 +1,6 @@
-# Open and close
+# OAC Devkit
 
-OAC System
+Open And Close Development Kit
 
 ## Features
 
