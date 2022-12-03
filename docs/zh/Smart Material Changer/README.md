@@ -1,4 +1,4 @@
-# Smart Texture Changer
+# Smart Material Changer
 
 版本: 1.14
 

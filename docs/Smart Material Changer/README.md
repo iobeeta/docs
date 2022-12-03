@@ -1,4 +1,4 @@
-# Smart Texture Changer
+# Smart Material Changer
 
 version: 1.14
 
