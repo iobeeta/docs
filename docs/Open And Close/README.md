@@ -2,11 +2,31 @@
 
 Open And Close Development Kit
 
+Version: 2.1
+
 ## Features
 
 - Smooth transition
 - Flexible configuration and combination
-- During the transformation process, the direction can be changed at any time
+- During the transformation process, the direction can be changed at any time.
+
+
+### Quick Start. Follow this, step by step
+
+1. Prepare your object.
+2. According to your needs, select the configuration file which starts with ".OAC", change their parameters and drag them into the inventory.
+3. Drag the main script named OAC.BLOCK into the inventory.
+4. At present, we have provided you with two scripts for triggering, and you can develop scripts according to your own needs according to the following documents.
+5. Touch to toggle.
+
+
+## Scripts
+
+| name | description |
+|---|---|
+| OAC.BLOCK | **(required)** Main script |
+| OAC.TouchToggle | Make the prim touchable, touch to trigger toggle, it will only trigger the current prim(LINK_THIS). |
+| OAC.TouchToggleSync | Make the prim touchable, touch to trigger toggle, it will trigger all prims in the linkset(LINK_SET). |
 
 ## Configuration
 
