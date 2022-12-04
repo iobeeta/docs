@@ -367,6 +367,10 @@ When this project is enabled, the package list menu will be used instead of the 
   - 1: yes
 - default: 0
 
+```lsl
+SETS_ON_TOP 0
+```
+
 ### SETS
 
 Custom set list

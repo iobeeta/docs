@@ -364,6 +364,10 @@ MENU_OPTION_SETS [set name]
   - 1: 是
 - 默认: 0
 
+```lsl
+SETS_ON_TOP 0
+```
+
 ### SETS
 
 自定义的套装列表
