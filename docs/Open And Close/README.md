@@ -4,6 +4,8 @@ Open And Close Development Kit
 
 Version: 2.1
 
+[PDF Document](README.pdf)
+
 ## Features
 
 - Smooth transformation, easing vision.
