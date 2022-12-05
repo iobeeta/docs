@@ -4,7 +4,7 @@ Open And Close Development Kit
 
 Version: 2.1
 
-[PDF Document](README.pdf)
+[PDF Document](/prod/Open%20And%20Close/OpenREADME.pdf)
 
 ## Features
 
