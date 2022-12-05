@@ -4,7 +4,7 @@ Open And Close Development Kit
 
 Version: 2.1
 
-[PDF Document](https://iobeeta.github.io/prod/Open%20And%20Close/OpenREADME.pdf)
+[PDF Document](https://iobeeta.github.io/prod/Open%20And%20Close/OAC%20Devkit.pdf)
 
 ## Features
 
