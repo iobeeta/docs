@@ -16,9 +16,9 @@ Version: 2.2
 
 1. Prepare your object.
 2. According to your needs, select the configuration file which starts with ".OAC", change their parameters and drag them into the inventory.
-3. Drag the main script named OAC.BLOCK into the inventory.
-4. At present, we have provided you with two scripts for triggering, and you can develop scripts according to your own needs according to the following documents.
-5. Touch to toggle.
+3. Drag the main script named ```OAC.KERNEL``` into the inventory.
+4. Select the trigger script you need, drag and drop it into the object. Some trigger scripts have been preset for you in "Extra". Of course, you can customize them according to your needs.
+5. Done.
 
 ### Make a single sliding door
 
@@ -38,9 +38,17 @@ Version: 2.2
 
 | name | description |
 |---|---|
-| OAC.BLOCK | **(required)** Main script |
-| OAC.TouchToggle | Make the prim touchable, touch to trigger toggle, it will only trigger the current prim(LINK_THIS). |
-| OAC.TouchToggleSync | Make the prim touchable, touch to trigger toggle, it will trigger all prims in the linkset(LINK_SET). |
+| OAC.KERNEL | **(required)** Main script |
+
+**Extra**
+
+| name | description |
+|---|---|
+| TouchToggle | Make the prim touchable, touch to trigger toggle, it will only trigger the current prim(LINK_THIS). |
+| TouchToggleSync | Make the prim touchable, touch to trigger toggle, it will trigger all prims in the linkset(LINK_SET). |
+| AutoClose 30s | Automatically close after 30 seconds when it is opened. |
+| AutoToggle after end 20s | When the transformation is end, wait for 20 seconds to switch the state, looping. |
+| AgentSensorToggle | Open when someone is nearby, close when no one is around. |
 
 ## Configuration
 
