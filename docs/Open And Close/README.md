@@ -34,6 +34,7 @@ Version: 2.2
 ![img/single-door-show.gif](img/single-door-show.gif)
 
 **For more detailed examples, please test and edit after rez them in "Example"**
+
 ## Scripts
 
 | name | description |
@@ -62,8 +63,8 @@ Format: .OAC {key} {value}
 | DISTANCE | vector | Any | <0.0,0.0,0.0> | Transform distance | 1.7 |
 | ROTATION | vector | Any | <0.0,0.0,0.0> | Transform rotation, The meaning of this vector is <ROLL, PITCH, YAW>. <br/>* The rotation is always relative to the prim's local directional vector. | 1.8 |
 | SCALE | float | > 0.0 | 1.0 | Transform scale, if less than or equal to 0.0, it is regarded as unchanged, equivalent to 1.0 | 2.1 |
-| ORIGIN | integer | 0:local<br/>1:root<br/>2:region | 0 | see special note below | 2.0 |
-| TIMING_FUNC | integer | 0:linear<br/>1:ease-in-out<br/>2:ease-in<br/>3:ease-out | 0 | see special note below | 2.0 |
+| ORIGIN | integer | 0/1/2 | 0 | see special note below | 2.0 |
+| TIMING_FUNC | integer | 0/1/2/3 | 0 | see special note below | 2.0 |
 
 ### About ORIGIN
 
@@ -110,7 +111,7 @@ Example:
 
 ### About TIMING_FUNC
 
-|||||
+| 0: linear | 1: ease-in-out | 2: ease-in | 3: ease-out |
 |:-:|:-:|:-:|:-:|
 | ![img/timing-func-0.png](img/timing-func-0.png) | ![img/timing-func-1.png](img/timing-func-1.png) | ![img/timing-func-2.png](img/timing-func-2.png) | ![img/timing-func-3.png](img/timing-func-3.png) |
 | `.OAC TIMING_FUNC 0` | `.OAC TIMING_FUNC 1` | `.OAC TIMING_FUNC 2` | `.OAC TIMING_FUNC 3` |
