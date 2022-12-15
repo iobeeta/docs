@@ -110,7 +110,10 @@ Example:
 
 ### About TIMING_FUNC
 
-![img/TIMING_FUNC.png](img/TIMING_FUNC.png)
+|||||
+|:-:|:-:|:-:|:-:|
+| ![img/timing-func-0.png](img/timing-func-0.png) | ![img/timing-func-1.png](img/timing-func-1.png) | ![img/timing-func-2.png](img/timing-func-2.png) | ![img/timing-func-3.png](img/timing-func-3.png) |
+| `.OAC TIMING_FUNC 0` | `.OAC TIMING_FUNC 1` | `.OAC TIMING_FUNC 2` | `.OAC TIMING_FUNC 3` |
 
 ## Linkset message
 
