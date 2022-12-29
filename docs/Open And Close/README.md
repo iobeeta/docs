@@ -68,7 +68,7 @@ Format: .OAC {key} {value}
 
 ### About ORIGIN
 
-#### 0: local
+#### local (0)
 
 The transformation will refer to the local directional vector.
 
@@ -81,7 +81,7 @@ Example:
 
 ![img/local.png](img/local.png)
 
-#### 1: root
+#### root (1)
 
 The transformation will refer to the root prim directional vector.
 
@@ -96,7 +96,7 @@ Example:
 
 It only works for child prims in linkset. When the object is the root prim or it is a standalone prim, **root=region**
 
-#### 2: region
+#### region (2)
 
 The transformation will refer to the region directional vector.
 
