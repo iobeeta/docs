@@ -74,7 +74,7 @@ The transformation will refer to the local directional vector.
 
 Example:
 
-```
+```text
 .OAC DISTANCE <1.0, 0.0, 0.0>
 .OAC ORIGIN 0
 ```
@@ -87,7 +87,7 @@ The transformation will refer to the root prim directional vector.
 
 Example:
 
-```
+```text
 .OAC DISTANCE <1.0, 0.0, 0.0>
 .OAC ORIGIN 1
 ```
@@ -102,7 +102,7 @@ The transformation will refer to the region directional vector.
 
 Example:
 
-```
+```text
 .OAC DISTANCE <1.0, 0.0, 0.0>
 .OAC ORIGIN 2
 ```
