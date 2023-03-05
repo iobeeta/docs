@@ -74,7 +74,7 @@ Version: 2.2
 
 例子:
 
-```
+```text
 .OAC DISTANCE <1.0, 0.0, 0.0>
 .OAC ORIGIN 0
 ```
@@ -87,7 +87,7 @@ Version: 2.2
 
 例子:
 
-```
+```text
 .OAC DISTANCE <1.0, 0.0, 0.0>
 .OAC ORIGIN 1
 ```
@@ -102,7 +102,7 @@ Version: 2.2
 
 例子:
 
-```
+```text
 .OAC DISTANCE <1.0, 0.0, 0.0>
 .OAC ORIGIN 2
 ```
