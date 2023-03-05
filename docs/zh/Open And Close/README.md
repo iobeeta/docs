@@ -146,7 +146,7 @@ Switch the current direction of movement
 llMessageLinked(LINK_SET, 802840, "TOGGLE", "");
 ```
 
-### 本地时间广播
+### 本地事件广播
 
 Num: **802841**
 
