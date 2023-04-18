@@ -1,4 +1,4 @@
-# NCMusicPlayer
+# NCMusicPlayer.KERNEL
 
 基于 notecard 的音乐播放器
 

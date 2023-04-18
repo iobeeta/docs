@@ -1,4 +1,4 @@
-# NCMusicPlayer
+# NCMusicPlayer.KERNEL
 
 Notecard based music player
 
