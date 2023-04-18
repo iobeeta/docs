@@ -118,7 +118,7 @@ Example:
 
 ## Linkset message
 
-### Control or Submit
+### Link Message to Send
 
 Num: **802840**
 
@@ -146,7 +146,7 @@ Switch the current direction of movement
 llMessageLinked(LINK_SET, 802840, "TOGGLE", "");
 ```
 
-### Event broadcast
+### Link Message to Receive
 
 Num: **802841**
 
