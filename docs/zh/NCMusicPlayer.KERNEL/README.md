@@ -44,6 +44,8 @@
 
 ## 本地消息
 
+![img/single-door-1.png](img/NCMusicPlayer.KERNEL.png)
+
 ### 本地上行提交
 
 **860000 播放**
