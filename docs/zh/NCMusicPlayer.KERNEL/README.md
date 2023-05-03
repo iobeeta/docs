@@ -82,6 +82,8 @@ llMessageLinked(LINK_SET, 860200, "Notecard name", "");
 
 如果在提交时给予第四个参数并赋值 ```1```，将会在加载完成后自动开始播放。
 
+*这里做了优化！如果设置了自动播放，会在短暂的加载后立即开始，并不会由于过多的片段而等待很长时间。*
+
 ```lsl
 llMessageLinked(LINK_SET, 860200, "Notecard name", "1");
 

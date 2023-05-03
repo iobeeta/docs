@@ -82,12 +82,14 @@ llMessageLinked(LINK_SET, 860200, "Notecard name", "");
 
 If you give the fourth parameter and assign the value ```1``` when submitting, it will automatically start playing after loading is complete.
 
+*Here it is optimized! If it is set to start playing automatically, it will start playing before all the sound clips are loaded. It doesn't take long to wait due to too many clips.*
+
 ```lsl
 llMessageLinked(LINK_SET, 860200, "Notecard name", "1");
 
 // similar to
 llMessageLinked(LINK_SET, 860200, "Notecard name", "");
-llSleep(1.0); // 注意！这里必须添加一个预估的加载时间
+llSleep(1.0); // Notice! An estimated load time must be added here.
 llMessageLinked(LINK_SET, 860000, "","");
 
 // fully equivalent form
