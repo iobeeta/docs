@@ -2,7 +2,7 @@
 
 Open And Close Development Kit
 
-Version: 2.2
+Version: 3.0
 
 [PDF Document](https://iobeeta.github.io/prod/Open%20And%20Close/OAC%20Devkit.pdf)
 
@@ -49,6 +49,10 @@ Version: 2.2
 | TouchToggleSync | Make the prim touchable, touch to trigger toggle, it will trigger all prims in the linkset(LINK_SET). |
 | AutoClose 30s | Automatically close after 30 seconds when it is opened. |
 | AutoToggle after end 20s | When the transformation is end, wait for 20 seconds to switch the state, looping. |
+| SoundTrigger | Play sound during operation. This script is preset as an electric door, which can be changed arbitrarily. |
+| TouchToggleQueue | (≥ 3.0) Make the prim touchable, touch to trigger toggle in queue mode, it will only trigger the current prim(LINK_THIS). |
+| TouchToggleSuncQueue | (≥ 3.0)Make the prim touchable, touch to trigger toggle in queue mode, it will trigger all prims in the linkset(LINK_SET). |
+
 | AgentSensorToggle | Open when someone is nearby, close when no one is around. |
 
 ## Configuration
@@ -62,9 +66,10 @@ Format: .OAC {key} {value}
 | DURATION | float | Any | 0.0 | If less than 0.1, it is treated as 0.0,<br/>0.0 means no transformation process | 1.7 |
 | DISTANCE | vector | Any | <0.0,0.0,0.0> | Transform distance | 1.7 |
 | ROTATION | vector | Any | <0.0,0.0,0.0> | Transform rotation, The meaning of this vector is <ROLL, PITCH, YAW>. <br/>* The rotation is always relative to the prim's local directional vector. | 1.8 |
-| SCALE | float | > 0.0 | 1.0 | Transform scale, if less than or equal to 0.0, it is regarded as unchanged, equivalent to 1.0 | 2.1 |
+| SCALE | vector | Greater than <0.0,0.0,0.0> | <1.0,1.0,1.0> | Scale, scale change, no negative value, if equal to ZERO_VECTOR (<0.0,0.0,0.0>), it is considered invalid | 3.0 |
 | ORIGIN | integer | 0/1/2 | 0 | see special note below | 2.0 |
 | TIMING_FUNC | integer | 0/1/2/3 | 0 | see special note below | 2.0 |
+| QUEUE | string | | | Queue mode, see below | 3.0 |
 
 ### About ORIGIN
 
@@ -115,6 +120,36 @@ Example:
 |:-:|:-:|:-:|:-:|
 | ![img/timing-func-0.png](img/timing-func-0.png) | ![img/timing-func-1.png](img/timing-func-1.png) | ![img/timing-func-2.png](img/timing-func-2.png) | ![img/timing-func-3.png](img/timing-func-3.png) |
 | `.OAC TIMING_FUNC 0` | `.OAC TIMING_FUNC 1` | `.OAC TIMING_FUNC 2` | `.OAC TIMING_FUNC 3` |
+
+### Queue Mode
+
+The Queue mode is added in version 3.0, which can continuously perform multiple change processes (forward and reverse), and continues the feature of switching directions at any point in time.
+
+```text
+.OAC QUEUE {Number}/{DURATION}/{RETION}/{TIMING_FUNC}/{DISTANCE}/{ROTATION}/{SCALE}
+```
+
+Yes, it writes the previously supported parameters in one line and assigns them to QUEUE, and then you can add multiple QUEUEs.
+
+{Number} represents the order of QUEUE. In the content of PRIM, files are arranged in ascending order of file names, so as long as the sequence is correct, the number can be specified freely, whether it is 1234... or ABCD....
+
+If you need to wait between two QUEUEs, you can join a QUEUE with only a duration, like this:
+
+```text
+.OAC QUEUE 1/5.0///<10.0,0.0,0.0>//
+.OAC QUEUE 2/2.0/////
+.OAC QUEUE 3/5.0///<0.0,10.0,0.0>//
+```
+
+#### Call
+
+在指令后面增加 “|1”
+
+```lsl
+llMessageLinked(LINK_SET, 802840, "OPEN|1", "");
+llMessageLinked(LINK_SET, 802840, "CLOSE|1", "");
+llMessageLinked(LINK_SET, 802840, "TOGGLE|1", "");
+```
 
 ## Linkset message
 

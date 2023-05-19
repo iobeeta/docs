@@ -2,9 +2,9 @@
 
 开和关开发包文档
 
-Version: 2.2
+Version: 3.0
 
-[PDF Document](https://iobeeta.github.io/prod/zh/Open%20And%20Close/OAC%20Devkit.pdf)
+[PDF Document](https://iobeeta.github.io/prod/zh/Open%20And%20Close/OAC%20Devkit%20(zh-CN).pdf)
 
 ## 功能
 
@@ -46,10 +46,14 @@ Version: 2.2
 | 名称 | 描述 |
 |---|---|
 | TouchToggle | 使 prim 可点击，触发并切换往复运动，它只会触发当前 prim(LINK_THIS)。|
-| TouchToggleSync | 使 prim 可点击，触发并切换往复运动，它会触发(LINK_SET)中所有prim，它通常用在根prim。|
+| TouchToggleSync | 使 prim 可点击，触发并切换往复运动，它会触发(LINK_SET)中所有prim，通常用在根prim。|
 | AutoClose 30s | 打开30秒后自动关闭。|
 | AutoToggle after end 20s | 转换结束后，等待20秒切换状态，循环。|
+| AgentSensorOpen | 附近有人时打开。 |
 | AgentSensorToggle | 附近有人时打开，无人时关闭。 |
+| SoundTrigger | 运行过程中播放声音，此脚本预设为电动门，可任意更换。 |
+| TouchToggleQueue | (≥ 3.0) 使 prim 可点击，触发Queue模式的运动，它只会触发当前 prim(LINK_THIS)。|
+| TouchToggleSuncQueue | (≥ 3.0) 使 prim 可点击，触发Queue模式的运动，它会触发(LINK_SET)中所有prim，通常用在根prim。 |
 
 ## 配置
 
@@ -59,12 +63,13 @@ Version: 2.2
 
 | 关键字 | 类型 | 取值 | 默认 | 描述 | 版本 |
 |---|---|---|---|---|---|
-| DURATION | float | 任何 | 0.0 | 如果小于0.1，则视为0.0，<br/>0.0表示没有运动过程，瞬间完成 | 1.7 |
-| DISTANCE | vector | 任何 | <0.0,0.0,0.0> | 运动时长 | 1.7 |
-| ROTATION | vector | 任何 | <0.0,0.0,0.0> | 旋转变化，这个向量的含义是<ROLL, PITCH, YAW>。 <br/>* 旋转总是相对于prim的局部(local)方向向量。 | 1.8 |
-| SCALE | float | > 0.0 | 1.0 | 缩放变化，如果小于等于0.0，则视为不变，相当于1.0 | 2.1 |
+| DURATION | float | 任何 | 0.0 | 时长，如果小于0.1，则视为0.0，<br/>0.0表示没有运动过程，瞬间完成 | 1.7 |
+| DISTANCE | vector | 任何 | <0.0,0.0,0.0> | 距离，移动变化 | 1.7 |
+| ROTATION | vector | 任何 | <0.0,0.0,0.0> | 旋转，旋转变化，这个向量的含义是<ROLL, PITCH, YAW>。 <br/>* 旋转总是相对于prim的局部(local)方向向量。 | 1.8 |
+| SCALE | vector | 大于 <0.0,0.0,0.0> | <1.0,1.0,1.0> | 缩放，缩放变化，不可出现负值，如果等于ZERO_VECTOR（<0.0,0.0,0.0>），则视为无效的 | 3.0 |
 | ORIGIN | integer | 0/1/2 | 0 | 参照物，见下方特别说明 | 2.0 |
 | TIMING_FUNC | integer | 0/1/2/3 | 0 | 过渡效果，见下方特别说明 | 2.0 |
+| QUEUE | string | | | Queue模式，相见下文 | 3.0 |
 
 ### 关于 参照物 ORIGIN
 
@@ -94,7 +99,7 @@ Version: 2.2
 
 ![img/root.png](img/root.png)
 
-它仅适用于链接集中的子基元。 当对象是根 prim 或者它是一个独立的 prim 时，视为全局。
+它仅适用于链接集中的子 prim。 当对象是根 prim 或者它是一个独立的 prim 时，视为全局。
 
 #### 全局(world) (2)
 
@@ -115,6 +120,36 @@ Version: 2.2
 |:-:|:-:|:-:|:-:|
 | ![img/timing-func-0.png](img/timing-func-0.png) | ![img/timing-func-1.png](img/timing-func-1.png) | ![img/timing-func-2.png](img/timing-func-2.png) | ![img/timing-func-3.png](img/timing-func-3.png) |
 | `.OAC TIMING_FUNC 0` | `.OAC TIMING_FUNC 1` | `.OAC TIMING_FUNC 2` | `.OAC TIMING_FUNC 3` |
+
+### Queue 模式
+
+在 3.0 版本中新增Queue模式，它可以连续演绎多个变化过程（正向、反向），并且延续了任意时间点随时切换方向的特性。
+
+```text
+.OAC QUEUE {编号}/{时长}/{参照}/{时间函数}/{距离}/{旋转}/{缩放}
+```
+
+是的，它将以前所支持的参数写在一行，并赋予给QUEUE，然后，您可以添加多个QUEUE。
+
+{编号}代表了QUEUE顺序，在PRIM的内容里，文件是按照文件名升序顺序排列的，所以只要能保证顺序的正确，编号可以随意指定，无论是 1234... 或者 ABCD...。
+
+如果两个QUEUE中需要等待，可以加入一个只带有时长的QUEUE，像下面这样：
+
+```text
+.OAC QUEUE 1/5.0///<10.0,0.0,0.0>//
+.OAC QUEUE 2/2.0/////
+.OAC QUEUE 3/5.0///<0.0,10.0,0.0>//
+```
+
+#### 调用
+
+在指令后面增加 “|1”
+
+```lsl
+llMessageLinked(LINK_SET, 802840, "OPEN|1", "");
+llMessageLinked(LINK_SET, 802840, "CLOSE|1", "");
+llMessageLinked(LINK_SET, 802840, "TOGGLE|1", "");
+```
 
 ## 本地消息接口
 
