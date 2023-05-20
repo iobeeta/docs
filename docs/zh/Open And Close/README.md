@@ -54,6 +54,7 @@ Version: 3.0
 | SoundTrigger | 运行过程中播放声音，此脚本预设为电动门，可任意更换。 |
 | TouchToggleQueue | (≥ 3.0) 使 prim 可点击，触发Queue模式的运动，它只会触发当前 prim(LINK_THIS)。|
 | TouchToggleSuncQueue | (≥ 3.0) 使 prim 可点击，触发Queue模式的运动，它会触发(LINK_SET)中所有prim，通常用在根prim。 |
+| AutoCloseQueue 30s | (≥ 3.0) 打开30秒后自动关闭，Queue模式专用。 |
 
 ## 配置
 

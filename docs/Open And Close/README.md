@@ -51,7 +51,8 @@ Version: 3.0
 | AutoToggle after end 20s | When the transformation is end, wait for 20 seconds to switch the state, looping. |
 | SoundTrigger | Play sound during operation. This script is preset as an electric door, which can be changed arbitrarily. |
 | TouchToggleQueue | (≥ 3.0) Make the prim touchable, touch to trigger toggle in queue mode, it will only trigger the current prim(LINK_THIS). |
-| TouchToggleSuncQueue | (≥ 3.0)Make the prim touchable, touch to trigger toggle in queue mode, it will trigger all prims in the linkset(LINK_SET). |
+| TouchToggleSuncQueue | (≥ 3.0) Make the prim touchable, touch to trigger toggle in queue mode, it will trigger all prims in the linkset(LINK_SET). |
+| AutoCloseQueue 30s | (≥ 3.0) Automatically close after 30 seconds when it is opened in queue mode. |
 
 | AgentSensorToggle | Open when someone is nearby, close when no one is around. |
 
@@ -143,7 +144,7 @@ If you need to wait between two QUEUEs, you can join a QUEUE with only a duratio
 
 #### Call
 
-在指令后面增加 “|1”
+Add "|1" after the original command
 
 ```lsl
 llMessageLinked(LINK_SET, 802840, "OPEN|1", "");

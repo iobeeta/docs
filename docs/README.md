@@ -2,7 +2,7 @@
 
 [Smart Material Changer](Smart%20Material%20Changer/)
 
-[Open And Close](Open%20And%20Close/)
+[Open And Close (OAC Devkit)](Open%20And%20Close/)
 
 [NCMusicPlayer.KERNEL](NCMusicPlayer.KERNEL/)
 
