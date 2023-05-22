@@ -49,12 +49,12 @@ Version: 3.0
 | TouchToggleSync | Make the prim touchable, touch to trigger toggle, it will trigger all prims in the linkset(LINK_SET). |
 | AutoClose 30s | Automatically close after 30 seconds when it is opened. |
 | AutoToggle after end 20s | When the transformation is end, wait for 20 seconds to switch the state, looping. |
+| AgentSensorOpen | Open when someone is nearby. |
+| AgentSensorToggle | Open when someone is nearby, close when no one is around. |
 | SoundTrigger | Play sound during operation. This script is preset as an electric door, which can be changed arbitrarily. |
 | TouchToggleQueue | (≥ 3.0) Make the prim touchable, touch to trigger toggle in queue mode, it will only trigger the current prim(LINK_THIS). |
-| TouchToggleSuncQueue | (≥ 3.0) Make the prim touchable, touch to trigger toggle in queue mode, it will trigger all prims in the linkset(LINK_SET). |
+| TouchToggleSyncQueue | (≥ 3.0) Make the prim touchable, touch to trigger toggle in queue mode, it will trigger all prims in the linkset(LINK_SET). |
 | AutoCloseQueue 30s | (≥ 3.0) Automatically close after 30 seconds when it is opened in queue mode. |
-
-| AgentSensorToggle | Open when someone is nearby, close when no one is around. |
 
 ## Configuration
 
@@ -122,6 +122,16 @@ Example:
 | ![img/timing-func-0.png](img/timing-func-0.png) | ![img/timing-func-1.png](img/timing-func-1.png) | ![img/timing-func-2.png](img/timing-func-2.png) | ![img/timing-func-3.png](img/timing-func-3.png) |
 | `.OAC TIMING_FUNC 0` | `.OAC TIMING_FUNC 1` | `.OAC TIMING_FUNC 2` | `.OAC TIMING_FUNC 3` |
 
+** since 3.2 **
+
+Two special values, forward movement and negative movement are symmetrical.
+
+For example, if the forward direction is ease-in, then the reverse direction will automatically switch to ease-out.
+
+| 102: ease-in (auto reverse) | 103: ease-out (auto reverse) |
+|:-:|:-:|
+| `.OAC TIMING_FUNC 102` | `.OAC TIMING_FUNC 103` |
+
 ### Queue Mode
 
 The Queue mode is added in version 3.0, which can continuously perform multiple change processes (forward and reverse), and continues the feature of switching directions at any point in time.
@@ -182,6 +192,16 @@ Switch the current direction of movement
 llMessageLinked(LINK_SET, 802840, "TOGGLE", "");
 ```
 
+#### Submit global scale
+
+Acting on DISTANCE, the moving distance magnification of the sub-PRIM in the zoomed state.
+
+Default: 1.0，If the given value <0, the default value is used.
+
+```lsl
+llMessageLinked(LINK_SET, 802840, "SCALE|{1.0}", "");
+```
+
 ### Link Message to Receive
 
 Num: **802841**
@@ -205,6 +225,19 @@ To: `LINK_SET`
 
 ```lsl
 TRANSFORM_FINISHED|{direction}
+```
+
+direction:
+
+- 1: open, positive movement
+- -1: close, reverse movement
+
+#### Transform processing (Queue mode)
+
+To: `LINK_SET`
+
+```lsl
+TRANSFORM_PROCESS|{direction}|{queue index}
 ```
 
 direction:

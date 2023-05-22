@@ -53,7 +53,7 @@ Version: 3.0
 | AgentSensorToggle | 附近有人时打开，无人时关闭。 |
 | SoundTrigger | 运行过程中播放声音，此脚本预设为电动门，可任意更换。 |
 | TouchToggleQueue | (≥ 3.0) 使 prim 可点击，触发Queue模式的运动，它只会触发当前 prim(LINK_THIS)。|
-| TouchToggleSuncQueue | (≥ 3.0) 使 prim 可点击，触发Queue模式的运动，它会触发(LINK_SET)中所有prim，通常用在根prim。 |
+| TouchToggleSyncQueue | (≥ 3.0) 使 prim 可点击，触发Queue模式的运动，它会触发(LINK_SET)中所有prim，通常用在根prim。 |
 | AutoCloseQueue 30s | (≥ 3.0) 打开30秒后自动关闭，Queue模式专用。 |
 
 ## 配置
@@ -122,6 +122,16 @@ Version: 3.0
 | ![img/timing-func-0.png](img/timing-func-0.png) | ![img/timing-func-1.png](img/timing-func-1.png) | ![img/timing-func-2.png](img/timing-func-2.png) | ![img/timing-func-3.png](img/timing-func-3.png) |
 | `.OAC TIMING_FUNC 0` | `.OAC TIMING_FUNC 1` | `.OAC TIMING_FUNC 2` | `.OAC TIMING_FUNC 3` |
 
+** since 3.2 **
+
+两个特殊值，正向移动与反向移动是对称的。
+
+比如正向是 ease-in，那么反向自动切换为 ease-out。
+
+| 102: ease-in 缓入(反向自动翻转) | 103: ease-out 缓入(反向自动翻转) |
+|:-:|:-:|
+| `.OAC TIMING_FUNC 102` | `.OAC TIMING_FUNC 103` |
+
 ### Queue 模式
 
 在 3.0 版本中新增Queue模式，它可以连续演绎多个变化过程（正向、反向），并且延续了任意时间点随时切换方向的特性。
@@ -160,7 +170,7 @@ Num: **802840**
 
 #### 开/正向变换
 
-positive movement
+正向移动/变换
 
 ```lsl
 llMessageLinked(LINK_SET, 802840, "OPEN", "");
@@ -168,7 +178,7 @@ llMessageLinked(LINK_SET, 802840, "OPEN", "");
 
 #### 关/反向变换
 
-reverse movement
+反向移动/变换
 
 ```lsl
 llMessageLinked(LINK_SET, 802840, "CLOSE", "");
@@ -176,10 +186,20 @@ llMessageLinked(LINK_SET, 802840, "CLOSE", "");
 
 #### 正反向切换
 
-Switch the current direction of movement
+切换当前移动/变换方向
 
 ```lsl
 llMessageLinked(LINK_SET, 802840, "TOGGLE", "");
+```
+
+#### 设置全局缩放
+
+作用于 DISTANCE，子PRIM在有缩放状态下的移动距离倍率。
+
+默认: 1.0，如果给予的值 <0，则使用默认。
+
+```lsl
+llMessageLinked(LINK_SET, 802840, "SCALE|{1.0}", "");
 ```
 
 ### 本地事件广播
@@ -205,6 +225,19 @@ TRANSFORM_STARTED|{方向}
 
 ```lsl
 TRANSFORM_FINISHED|{方向}
+```
+
+方向:
+
+- 1: open, positive movement
+- -1: close, reverse movement
+
+#### 变换中 (Queue 模式)
+
+发送至: `LINK_SET`
+
+```lsl
+TRANSFORM_PROCESS|{方向}|{队列编号}
 ```
 
 方向:
