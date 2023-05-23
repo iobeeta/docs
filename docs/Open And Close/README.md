@@ -1,10 +1,10 @@
-# Open And Close (OAC Devkit)
+# OAC Devkit
 
 Open And Close Development Kit
 
-Version: 3.0
+Version: 3.2
 
-[PDF Document](https://iobeeta.github.io/prod/Open%20And%20Close/OAC%20Devkit.pdf)
+[PDF Document](https://iobeeta.github.io/prod/OAC%20Devkit/OAC%20Devkit.pdf)
 
 ## Features
 
@@ -199,7 +199,7 @@ Acting on DISTANCE, the moving distance magnification of the sub-PRIM in the zoo
 Default: 1.0，If the given value <0, the default value is used.
 
 ```lsl
-llMessageLinked(LINK_SET, 802840, "SCALE|{1.0}", "");
+llMessageLinked(LINK_SET, 802840, "SCALE|1.0", "");
 ```
 
 ### Link Message to Receive

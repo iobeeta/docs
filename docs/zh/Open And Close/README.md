@@ -1,10 +1,10 @@
-# Open And Close (OAC Devkit)
+# OAC Devkit
 
 开和关开发包文档
 
-Version: 3.0
+Version: 3.2
 
-[PDF Document](https://iobeeta.github.io/prod/zh/Open%20And%20Close/OAC%20Devkit%20(zh-CN).pdf)
+[PDF Document](https://iobeeta.github.io/prod/zh/OAC%20Devkit/OAC%20Devkit%20(zh-CN).pdf)
 
 ## 功能
 
@@ -122,7 +122,7 @@ Version: 3.0
 | ![img/timing-func-0.png](img/timing-func-0.png) | ![img/timing-func-1.png](img/timing-func-1.png) | ![img/timing-func-2.png](img/timing-func-2.png) | ![img/timing-func-3.png](img/timing-func-3.png) |
 | `.OAC TIMING_FUNC 0` | `.OAC TIMING_FUNC 1` | `.OAC TIMING_FUNC 2` | `.OAC TIMING_FUNC 3` |
 
-** since 3.2 **
+**since 3.2**
 
 两个特殊值，正向移动与反向移动是对称的。
 
@@ -199,7 +199,7 @@ llMessageLinked(LINK_SET, 802840, "TOGGLE", "");
 默认: 1.0，如果给予的值 <0，则使用默认。
 
 ```lsl
-llMessageLinked(LINK_SET, 802840, "SCALE|{1.0}", "");
+llMessageLinked(LINK_SET, 802840, "SCALE|1.0", "");
 ```
 
 ### 本地事件广播
