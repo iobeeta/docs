@@ -1,6 +1,6 @@
 # Smart Material Changer PRO
 
-版本: 1.1
+版本: 1.7
 
 ## 简介
 
@@ -92,12 +92,11 @@ Emmmm, 就算是HUD也可以是菜单形式，比如，点击HUD弹出菜单... 
 |---|---|---|---|---|
 | LOCAL | integer | -2147483648 ~ 2147483647 (0 无效) | 0 | 本地通信频道，多用于菜单形式 |
 | REMOTE | integer | -10000 ~ 10000 | 0 | 远程通信频道偏移量（注意: 这是私有频道偏移量，并不是确切的频道），一般用于HUD。 |
-| CACHE | integer | 0 / 1 | 0 | 资源缓冲(UUID)，如果配置中使用的图片出现大量重用的情况，建议开启，可以节省大量内存。 |
+| CACHE | integer | 0/1 | 0 | 资源缓冲(UUID)，如果配置中使用的图片出现大量重用的情况，建议开启，可以节省大量内存。 |
+| RANGE | integer | 0/1/2/3 | 0 | 控制距离，0:10m, 1:20m, 2:100m, 3:all region |
 | LINES | list |  |  | 详细书写规则会在下文中介绍 |
 
 #### LINES
-
-为了规范书写，方便识别，所以使用了变量替代字符串的方式，下面将详细介绍
 
 **PART**
 
@@ -108,17 +107,30 @@ Emmmm, 就算是HUD也可以是菜单形式，比如，点击HUD弹出菜单... 
 
 ```lsl
 list LINES = [
-  PART, "名称", {匹配类型}, "PRIM名称或规则", {面}
+  PART, "{名称}", {匹配类型}, "{匹配文本}", {面}
 ];
 ```
 
-| 参数 | 描述 | 说明 |
+| 参数 | 类型 | 取值 | 说明 |
+|---|---|---|---|
+| 名称 | string | 任意 | 一组LINES的配置中，不可重复，这是用来换材质的依据之一，在本地菜单模式中也会作为选项来使用 |
+| 匹配类型 | integer | 见下表 | 用于描述匹配的类型 |
+| 匹配文本 | string/integer | 用于匹配的名称或者描述，与参数2配合进行定义 |
+| 面 | string/integer | 目标PRIM的哪个(些)面，PRIM的面编号(0~7)。<br>可以传递字符串比如“0267”，将会匹配多个面，不必按顺序，但不可重复。<br>也可以写 ALL_SIDES(-1)，此时不可再写其它面，因为ALL_SIDES代表所有面。|
+
+**匹配类型**
+
+| 常量 | 对应值 | 说明 |
 |---|---|---|
-| PART | 表示这一行是个部位/目标的定义 |
-| 1 | PART 的名称 | 一组LINES的配置中，不可重复，这是用来换材质的依据之一，在本地菜单模式中也会作为选项来使用 |
-| 2 | 匹配类型 | FULL：全量匹配<br>PREFIX：以此文本为开始的<br>SUFFIX：以此文本为结束的<br>SMART：智能/正则匹配（未实装，暂时不可用）<br>CONST：常量匹配，包括LINK_THIS、LINK_ROOT、LINK_SET、LINK_ALL_CHILDREN、LINK_ALL_OTHERS |
-| 3 | 匹配文本 | PRIM的名称，与参数2配合进行定义 |
-| 4 | 面 | 目标PRIM的哪个(些)面，PRIM的面编号(0~7)。<br>可以传递字符串比如“0267”，将会匹配多个面，不必按顺序，但不可重复。<br>也可以写 ALL_SIDES(-1)，此时不可再写连其它面，因为ALL_SIDES代表所有面。|
+| FULL | 0 | 全文匹配PRIM名称 |
+| PREFIX | 1 | 匹配PRIM名称的前缀 |
+| SUFFIX | 2 | 匹配PRIM名称的后缀 |
+| SMART | 3 | 智能匹配PRIM名称(暂时不可用) |
+| CONST | 4 | 匹配文本以SL中常量的方式，匹配文本可以是: LINK_SET, LINK_ALL_CHILDREN, LINK_ALL_OTHERS, LINK_ROOT, LINK_THIS |
+| DFULL | 10 | 全文匹配PRIM描述 |
+| DPREFIX | 11 | 匹配PRIM描述的前缀 |
+| DSUFFIX | 12 | 匹配PRIM描述的后缀 |
+| DSMART | 13 | 智能匹配PRIM描述(暂时不可用) |
 
 **例子**
 
@@ -130,7 +142,7 @@ list LINES = [
 ];
 ```
 
-2. 匹配名称 "**前缀是 Rect**" 的PRIM的 **全部面**
+2. 匹配 "**名称前缀是 Rect**" 的PRIM的 **所有** 面
 
 ```lsl
 list LINES = [
@@ -138,7 +150,7 @@ list LINES = [
 ];
 ```
 
-3. 匹配名称 "**末尾是 3**" 的PRIM的第 **0** 面
+3. 匹配 "**名称末尾是 3**" 的PRIM的第 **0** 面
 
 ```lsl
 list LINES = [
@@ -146,11 +158,19 @@ list LINES = [
 ];
 ```
 
-4. 匹配 **除了脚本所在PRIM之外的其他PRIM** 的第 **1、2、5** 面
+4. 匹配 "**除了脚本所在PRIM之外的其他PRIM**" 的第 **1、2、5** 面
 
 ```lsl
 list LINES = [
   PART, "All others", CONST, LINK_ALL_OTHERS, "125"
+];
+```
+
+5. 匹配 "**备注前缀为 top**" 的第 **所有** 面
+
+```lsl
+list LINES = [
+  PART, "TOP", DSUFFIX, "top", ALL_SIDES
 ];
 ```
 
@@ -175,19 +195,19 @@ list LINES = [
 
 | 属性 | 对应值 | 对应属性 | 描述 | 参数数量 | 值 | 说明 |
 |---|---|---|---|---|---|---|
-| D | 1 | [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXTURE) | 漫反射贴图 | 1 | "{UUID}" | 仅换图，其它属性继承 |
-| DP | 2 | [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXTURE) | 漫反射(详细) | 4 | "{UUID}", {重复}, {位置}, {旋转} | 设置漫反射相关的所有属性 |
-| N | 3 | [PRIM_NORMAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_NORMAL) | 硬表面贴图 | 1 | "{UUID}" | 仅换图，其它属性继承 |
-| NP | 4 | [PRIM_NORMAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_NORMAL) | 硬表面(详细) | 4 | "{UUID}", {重复}, {位置}, {旋转} | 设置硬表面相关的所有属性 |
-| S | 5 | [PRIM_SPECULAR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_SPECULAR) | 光泽贴图 | 1 | "{UUID}" | 仅换图，其它属性继承 |
-| SP | 6 | [PRIM_SPECULAR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_SPECULAR) | 光泽(详细) | 7 | "{UUID}", {重复}, {位置}, {旋转}, {反光颜色}, {反光度}, {环境光强度} | 设置光泽相关的所有属性 |
-| G | 7 | [PRIM_GLOW](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLOW) | 发光 | 1 | {强度} | 灯泡一样的光 |
-| F | 8 | [PRIM_FULLBRIGHT](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_FULLBRIGHT) | 全亮模式 | 1 | {TRUE/FALSE} | 开启或者关闭 |
-| B | 9 | [PRIM_BUMP_SHINY](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_BUMP_SHINY) | 硬表面和反光 | 2 | {强度}, {模式} | 系统自带的那个 |
-| T | 10 | [PRIM_TEXGEN](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXGEN) | 贴图模式 | 1 | {模式} | 默认/平面 |
-| M | 11 | [PRIM_ALPHA_MODE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_ALPHA_MODE) | 透明模式 | 2 | {模式}, {遮罩屏蔽} | 不管用不用 alpha masking，第二个参数都不能少 |
-| C | 12 | [PRIM_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_COLOR) | 颜色 | 1 | {颜色} | color 与 alpha 可以分开设置
-| A | 13 | [PRIM_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_COLOR) | 透明度 | 1 | {透明度} | color 与 alpha 可以分开设置
+| D | 0 | [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXTURE) | 漫反射贴图 | 1 | "{UUID}" | 仅换图，其它属性继承 |
+| DP | 1 | [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXTURE) | 漫反射(详细) | 4 | "{UUID}", {重复}, {位置}, {旋转} | 设置漫反射相关的所有属性 |
+| N | 2 | [PRIM_NORMAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_NORMAL) | 硬表面贴图 | 1 | "{UUID}" | 仅换图，其它属性继承 |
+| NP | 3 | [PRIM_NORMAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_NORMAL) | 硬表面(详细) | 4 | "{UUID}", {重复}, {位置}, {旋转} | 设置硬表面相关的所有属性 |
+| S | 4 | [PRIM_SPECULAR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_SPECULAR) | 光泽贴图 | 1 | "{UUID}" | 仅换图，其它属性继承 |
+| SP | 5 | [PRIM_SPECULAR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_SPECULAR) | 光泽(详细) | 7 | "{UUID}", {重复}, {位置}, {旋转}, {反光颜色}, {反光度}, {环境光强度} | 设置光泽相关的所有属性 |
+| C | 6 | [PRIM_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_COLOR) | 颜色 | 1 | {颜色} | color 与 alpha 可以分开设置
+| A | 7 | [PRIM_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_COLOR) | 透明度 | 1 | {透明度} | color 与 alpha 可以分开设置
+| G | 8 | [PRIM_GLOW](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLOW) | 发光 | 1 | {强度} | 灯泡一样的光 |
+| F | 9 | [PRIM_FULLBRIGHT](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_FULLBRIGHT) | 全亮模式 | 1 | {TRUE/FALSE} | 开启或者关闭 |
+| B | 10 | [PRIM_BUMP_SHINY](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_BUMP_SHINY) | 硬表面和反光 | 2 | {强度}, {模式} | 系统自带的那个 |
+| T | 11 | [PRIM_TEXGEN](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXGEN) | 贴图模式 | 1 | {模式} | 默认/平面 |
+| M | 12 | [PRIM_ALPHA_MODE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_ALPHA_MODE) | 透明模式 | 2 | {模式}, {遮罩屏蔽} | 不管用不用 alpha masking，第二个参数都不能少 |
 
 **如果值给予空字符串，表示不替换（继承当前的值）**
 
@@ -228,3 +248,77 @@ list LINES = [
 | REMOTE | integer | -10000 ~ 10000 | 0 | 远程通信频道偏移量（注意: 这是私有频道偏移量，并不是确切的频道），一般用于HUD。 |
 | DEBOUNCE | float | ≥ 0.0 | 0.0 | 防抖时长，在这个时间内的变化均会累计，直到没有更换材质的操作并在本时长后开始生效，避免频繁切换带来的效率瓶颈。 |
 | CACHE | integer | 0 / 1 | 0 | 选择器缓存，用缓存换取更高效的匹配速度，注意：开启本选项后，不可以对物体进行link与unlink操作，否则会出现错误。 |
+
+
+## 核心 KERNEL 本地接口
+
+### 提交
+
+**-643323390**
+
+对预定义部位应用一个预定义样式，并支持自定义覆盖
+
+```lsl
+llMessageLinked(LINK_SET, -643323390, "{PART}�{SET}[�{DATA...}]", "");
+```
+
+- DATA 写法如 SET 中的属性，可选，作为覆盖规则，配置中定义的 SET 属性将全部失效，使用 DATA。
+- PART 与 SET 必须在配置中定义过，SET 必须属于 PART，本条提交才会生效。
+
+举例
+
+```lsl
+// 最常用的(使用预定义配置 LINES)
+llMessageLinked(LINK_SET, -643323390, "TOP�BLACK", "");
+// 带有自定义属性的
+llMessageLinked(LINK_SET, -643323390, "TOP�BLACK�6�<1.0, 0.0, 0.0>�9�TRUE�4�ee509dfd-0974-6fb5-3eea-2504fa13ef4c", "");
+// 方便的写法
+llMessageLinked(LINK_SET, -643323392, llDumpList2String(["TOP", "BLACK", 6, <1.0, 0.0, 0.0>, 9, TRUE, 4, "ee509dfd-0974-6fb5-3eea-2504fa13ef4c"], "�"), "");
+// 建议使用常量，可写为
+llMessageLinked(LINK_SET, -643323392, llDumpList2String(["TOP", "BLACK", C, <1.0, 0.0, 0.0>, F, TRUE, S, "ee509dfd-0974-6fb5-3eea-2504fa13ef4c"], "�"), "");
+```
+
+**-643323392**
+
+对预定义部位应用一套自定义样式
+
+```lsl
+llMessageLinked(LINK_SET, -643323392, "{PART}�{DATA...}", "");
+```
+
+- DATA 的写法如 SET 中的属性，对 PART 应用特别指定并应用属性，无需指定 SET。
+- PART 必须在配置中定义过，本条提交才会生效
+
+举例
+
+```lsl
+llMessageLinked(LINK_SET, -643323392, "TOP�6�<1.0, 0.0, 0.0>�9�TRUE�4�ee509dfd-0974-6fb5-3eea-2504fa13ef4c", "");
+// 方便的写法
+llMessageLinked(LINK_SET, -643323392, llDumpList2String(["TOP", 6, <1.0, 0.0, 0.0>, 9, TRUE, 4, "ee509dfd-0974-6fb5-3eea-2504fa13ef4c"], "�"), "");
+// 建议使用常量，可写为
+llMessageLinked(LINK_SET, -643323392, llDumpList2String(["TOP", C, <1.0, 0.0, 0.0>, F, TRUE, S, "ee509dfd-0974-6fb5-3eea-2504fa13ef4c"], "�"), "");
+```
+
+**-643323393**
+
+对自定义的部位应用一套自定义样式
+
+```lsl
+llMessageLinked(LINK_SET, -643323393, "{DATA...}", "");
+```
+
+- DATA 的写法必须包含完整的 PART + SET 内容。
+- 无需依照配置，这是一条完全独立的 选择 + 属性 规则。
+
+举例
+
+```lsl
+llMessageLinked(LINK_SET, -643323393, "2�top�0123�6�<1.0, 0.0, 0.0>�9�TRUE�4�ee509dfd-0974-6fb5-3eea-2504fa13ef4c", "");
+// 方便的写法
+llMessageLinked(LINK_SET, -643323393, llDumpList2String([2, "top", "0123", 6, <1.0, 0.0, 0.0>, 9, TRUE, 4, "ee509dfd-0974-6fb5-3eea-2504fa13ef4c"], "�"), "");
+// 建议使用常量，可写为
+llMessageLinked(LINK_SET, -643323393, llDumpList2String([SUFFIX, "top", "0123", C, <1.0, 0.0, 0.0>, F, TRUE, S, "ee509dfd-0974-6fb5-3eea-2504fa13ef4c"], "�"), "");
+```
+
+### 广播
+
