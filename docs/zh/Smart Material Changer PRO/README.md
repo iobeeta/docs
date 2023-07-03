@@ -1,6 +1,6 @@
 # Smart Material Changer PRO
 
-版本: 1.7
+版本: 1.8
 
 ## 简介
 
@@ -52,6 +52,8 @@ Ps: 没有使用Notecard作为配置的载体，是因为丫加载实在是太�
   - SMC.MENU
 - 重命名linkset中的prim
 - 撰写配置信息在 .SMC 和 .SMC.Client
+- (建议) **.SMC.Client**保存或者放入物体之后就可以删掉
+- (建议) 公频输入 **/finalise**，固化KERNEL的配置，此时可以删除 .SMC
 - 点击物体开始使用
 
 ### HUD形式的应用
@@ -70,9 +72,9 @@ Ps: 没有使用Notecard作为配置的载体，是因为丫加载实在是太�
 - 放入脚本
   - SMC.Client
   - .SMC.Client
-- 撰写配置在 **.SMC.Client**，这个文件保存或者放入物体之后就可以删掉了
+- (建议) 撰写配置在 **.SMC.Client**，这个文件保存或者放入物体之后就可以删掉了
 - 重命名linkset中的prim
-- (建议) 公频输入 **/finalise**，固化KERNEL的，此时可以删除 .SMC
+- (建议) 公频输入 **/finalise**，固化KERNEL的配置，此时可以删除 .SMC
 - 开始使用
 
 Emmmm, 就算是HUD也可以是菜单形式，比如，点击HUD弹出菜单... :p
@@ -256,14 +258,14 @@ list LINES = [
 
 **-643323390**
 
-对预定义部位应用一个预定义样式，并支持自定义覆盖
+对预定义部位应用一个预定义属性，并支持自定义追加与覆盖
 
 ```lsl
 llMessageLinked(LINK_SET, -643323390, "{PART}�{SET}[�{DATA...}]", "");
 ```
 
-- DATA 写法如 SET 中的属性，可选，作为覆盖规则，配置中定义的 SET 属性将全部失效，使用 DATA。
-- PART 与 SET 必须在配置中定义过，SET 必须属于 PART，本条提交才会生效。
+- PART 与 SET 必须在配置中定义过，另外 SET 必须属于 PART，本条提交才会生效。
+- DATA 部分为追加或覆盖属性，写法如 SET 中的属性，可选参数。
 
 举例
 
@@ -280,14 +282,14 @@ llMessageLinked(LINK_SET, -643323392, llDumpList2String(["TOP", "BLACK", C, <1.0
 
 **-643323392**
 
-对预定义部位应用一套自定义样式
+对预定义部位应用一套自定义属性
 
 ```lsl
 llMessageLinked(LINK_SET, -643323392, "{PART}�{DATA...}", "");
 ```
 
-- DATA 的写法如 SET 中的属性，对 PART 应用特别指定并应用属性，无需指定 SET。
-- PART 必须在配置中定义过，本条提交才会生效
+- PART 必须在配置中定义过，本条提交才会生效。
+- DATA 的写法如 SET 中的属性，对 PART 应用自定义属性，与上面的区别是无需指定 SET（不验证 SET 的合法性）。
 
 举例
 
@@ -301,7 +303,7 @@ llMessageLinked(LINK_SET, -643323392, llDumpList2String(["TOP", C, <1.0, 0.0, 0.
 
 **-643323393**
 
-对自定义的部位应用一套自定义样式
+对自定义的部位应用一套自定义属性
 
 ```lsl
 llMessageLinked(LINK_SET, -643323393, "{DATA...}", "");
