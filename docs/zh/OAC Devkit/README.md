@@ -1,8 +1,6 @@
 # OAC Devkit
 
-开和关开发包文档
-
-Version: 3.2
+Version: 3.3
 
 [PDF Document](https://iobeeta.github.io/prod/zh/OAC%20Devkit/OAC%20Devkit%20(zh-CN).pdf)
 
@@ -52,9 +50,6 @@ Version: 3.2
 | AgentSensorOpen | 附近有人时打开。 |
 | AgentSensorToggle | 附近有人时打开，无人时关闭。 |
 | SoundTrigger | 运行过程中播放声音，此脚本预设为电动门，可任意更换。 |
-| TouchToggleQueue | (≥ 3.0) 使 prim 可点击，触发Queue模式的运动，它只会触发当前 prim(LINK_THIS)。|
-| TouchToggleSyncQueue | (≥ 3.0) 使 prim 可点击，触发Queue模式的运动，它会触发(LINK_SET)中所有prim，通常用在根prim。 |
-| AutoCloseQueue 30s | (≥ 3.0) 打开30秒后自动关闭，Queue模式专用。 |
 
 ## 配置
 
@@ -64,13 +59,14 @@ Version: 3.2
 
 | 关键字 | 类型 | 取值 | 默认 | 描述 | 版本 |
 |---|---|---|---|---|---|
+| BROADCAST2 | integer | 大于 -5 且不为 0 | -4 | 广播发送范围，-4:`LINK_THIS`, -3:`LINK_ALL_CHILDREN`, -2:`LINK_ALL_OTHERS`, -1:`LINK_SET`, 1:`LINK_ROOT`, 和其它 | 3.3 |
 | DURATION | float | 任何 | 0.0 | 时长，如果小于0.1，则视为0.0，<br/>0.0表示没有运动过程，瞬间完成 | 1.7 |
 | DISTANCE | vector | 任何 | <0.0,0.0,0.0> | 距离，移动变化 | 1.7 |
 | ROTATION | vector | 任何 | <0.0,0.0,0.0> | 旋转，旋转变化，这个向量的含义是<ROLL, PITCH, YAW>。 <br/>* 旋转总是相对于prim的局部(local)方向向量。 | 1.8 |
 | SCALE | vector | 大于 <0.0,0.0,0.0> | <1.0,1.0,1.0> | 缩放，缩放变化，不可出现负值，如果等于ZERO_VECTOR（<0.0,0.0,0.0>），则视为无效的 | 3.0 |
 | ORIGIN | integer | 0/1/2 | 0 | 参照物，见下方特别说明 | 2.0 |
 | TIMING_FUNC | integer | 0/1/2/3 | 0 | 过渡效果，见下方特别说明 | 2.0 |
-| QUEUE | string | | | Queue模式，相见下文 | 3.0 |
+| QUEUE | string | | | Queue模式，详见下文 | 3.0 |
 
 ### 关于 参照物 ORIGIN
 
@@ -152,16 +148,6 @@ Version: 3.2
 .OAC QUEUE 3/5.0///<0.0,10.0,0.0>//
 ```
 
-#### 调用
-
-在指令后面增加 “|1”
-
-```lsl
-llMessageLinked(LINK_SET, 802840, "OPEN|1", "");
-llMessageLinked(LINK_SET, 802840, "CLOSE|1", "");
-llMessageLinked(LINK_SET, 802840, "TOGGLE|1", "");
-```
-
 ## 本地消息接口
 
 ### 本地控制与数据提交
@@ -173,7 +159,7 @@ Num: **802840**
 正向移动/变换
 
 ```lsl
-llMessageLinked(LINK_SET, 802840, "OPEN", "");
+llMessageLinked(..., 802840, "OPEN", "");
 ```
 
 #### 关/反向变换
@@ -181,7 +167,7 @@ llMessageLinked(LINK_SET, 802840, "OPEN", "");
 反向移动/变换
 
 ```lsl
-llMessageLinked(LINK_SET, 802840, "CLOSE", "");
+llMessageLinked(..., 802840, "CLOSE", "");
 ```
 
 #### 正反向切换
@@ -189,7 +175,7 @@ llMessageLinked(LINK_SET, 802840, "CLOSE", "");
 切换当前移动/变换方向
 
 ```lsl
-llMessageLinked(LINK_SET, 802840, "TOGGLE", "");
+llMessageLinked(..., 802840, "TOGGLE", "");
 ```
 
 #### 设置全局缩放
@@ -199,7 +185,7 @@ llMessageLinked(LINK_SET, 802840, "TOGGLE", "");
 默认: 1.0，如果给予的值 <0，则使用默认。
 
 ```lsl
-llMessageLinked(LINK_SET, 802840, "SCALE|1.0", "");
+llMessageLinked(..., 802840, "SCALE|1.0", "");
 ```
 
 ### 本地事件广播
@@ -208,7 +194,7 @@ Num: **802841**
 
 #### 变换开始
 
-发送至: `LINK_SET`
+发送至: `BROADCAST2`指定，默认 -4:`LINK_THIS`
 
 ```lsl
 TRANSFORM_STARTED|{方向}
@@ -216,12 +202,12 @@ TRANSFORM_STARTED|{方向}
 
 方向:
 
-- 1: 开，正向变换
-- -1: 关，逆向变换
+- 1: 开，正向变换(QUEUE)
+- -1: 关，逆向变换(QUEUE)
 
 #### 变换结束
 
-发送至: `LINK_SET`
+发送至: `BROADCAST2`指定，默认 -4:`LINK_THIS`
 
 ```lsl
 TRANSFORM_FINISHED|{方向}
@@ -229,18 +215,23 @@ TRANSFORM_FINISHED|{方向}
 
 方向:
 
-- 1: open, positive movement
-- -1: close, reverse movement
+- 1: 开，正向变换(QUEUE)
+- -1: 关，逆向变换(QUEUE)
 
 #### 变换中 (Queue 模式)
 
-发送至: `LINK_SET`
+发送至: `BROADCAST2`指定，默认 -4:`LINK_THIS`
 
 ```lsl
-TRANSFORM_PROCESS|{方向}|{队列编号}
+TRANSFORM_PROCESS|{方向}|{队列编号}|{有效性}
 ```
 
 方向:
 
-- 1: open, positive movement
-- -1: close, reverse movement
+- 1: 开，正向变换(QUEUE)
+- -1: 关，逆向变换(QUEUE)
+
+有效性:
+
+- 0: 如果 DISTANCE、ROTATION、SCALE 均无变化
+- 1: 如果 DISTANCE、ROTATION、SCALE 任意一项有变化

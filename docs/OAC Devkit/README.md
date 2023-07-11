@@ -1,8 +1,6 @@
 # OAC Devkit
 
-Open And Close Development Kit
-
-Version: 3.2
+Version: 3.3
 
 [PDF Document](https://iobeeta.github.io/prod/OAC%20Devkit/OAC%20Devkit.pdf)
 
@@ -52,9 +50,6 @@ Version: 3.2
 | AgentSensorOpen | Open when someone is nearby. |
 | AgentSensorToggle | Open when someone is nearby, close when no one is around. |
 | SoundTrigger | Play sound during operation. This script is preset as an electric door, which can be changed arbitrarily. |
-| TouchToggleQueue | (≥ 3.0) Make the prim touchable, touch to trigger toggle in queue mode, it will only trigger the current prim(LINK_THIS). |
-| TouchToggleSyncQueue | (≥ 3.0) Make the prim touchable, touch to trigger toggle in queue mode, it will trigger all prims in the linkset(LINK_SET). |
-| AutoCloseQueue 30s | (≥ 3.0) Automatically close after 30 seconds when it is opened in queue mode. |
 
 ## Configuration
 
@@ -64,6 +59,7 @@ Format: .OAC {key} {value}
 
 | key | type | value | default | description | version |
 |---|---|---|---|---|---|
+| BROADCAST2 | integer | > -5 && != 0 | -4 | Broadcast sending range, -4:`LINK_THIS`, -3:`LINK_ALL_CHILDREN`, -2:`LINK_ALL_OTHERS`, -1:`LINK_SET`, 1:`LINK_ROOT`, and others | 3.3 |
 | DURATION | float | Any | 0.0 | If less than 0.1, it is treated as 0.0,<br/>0.0 means no transformation process | 1.7 |
 | DISTANCE | vector | Any | <0.0,0.0,0.0> | Transform distance | 1.7 |
 | ROTATION | vector | Any | <0.0,0.0,0.0> | Transform rotation, The meaning of this vector is <ROLL, PITCH, YAW>. <br/>* The rotation is always relative to the prim's local directional vector. | 1.8 |
@@ -152,16 +148,6 @@ If you need to wait between two QUEUEs, you can join a QUEUE with only a duratio
 .OAC QUEUE 3/5.0///<0.0,10.0,0.0>//
 ```
 
-#### Call
-
-Add "|1" after the original command
-
-```lsl
-llMessageLinked(LINK_SET, 802840, "OPEN|1", "");
-llMessageLinked(LINK_SET, 802840, "CLOSE|1", "");
-llMessageLinked(LINK_SET, 802840, "TOGGLE|1", "");
-```
-
 ## Linkset message
 
 ### Link Message to Send
@@ -173,7 +159,7 @@ Num: **802840**
 positive movement
 
 ```lsl
-llMessageLinked(LINK_SET, 802840, "OPEN", "");
+llMessageLinked(..., 802840, "OPEN", "");
 ```
 
 #### Close
@@ -181,7 +167,7 @@ llMessageLinked(LINK_SET, 802840, "OPEN", "");
 reverse movement
 
 ```lsl
-llMessageLinked(LINK_SET, 802840, "CLOSE", "");
+llMessageLinked(..., 802840, "CLOSE", "");
 ```
 
 #### Toggle
@@ -189,7 +175,7 @@ llMessageLinked(LINK_SET, 802840, "CLOSE", "");
 Switch the current direction of movement
 
 ```lsl
-llMessageLinked(LINK_SET, 802840, "TOGGLE", "");
+llMessageLinked(..., 802840, "TOGGLE", "");
 ```
 
 #### Submit global scale
@@ -199,7 +185,7 @@ Acting on DISTANCE, the moving distance magnification of the sub-PRIM in the zoo
 Default: 1.0，If the given value <0, the default value is used.
 
 ```lsl
-llMessageLinked(LINK_SET, 802840, "SCALE|1.0", "");
+llMessageLinked(..., 802840, "SCALE|1.0", "");
 ```
 
 ### Link Message to Receive
@@ -208,7 +194,7 @@ Num: **802841**
 
 #### Transform started
 
-To: `LINK_SET`
+To: `BROADCAST2` specified, default is -4:`LINK_THIS`
 
 ```lsl
 TRANSFORM_STARTED|{direction}
@@ -221,7 +207,7 @@ direction:
 
 #### Transform finished
 
-To: `LINK_SET`
+To: `BROADCAST2` specified, default is -4:`LINK_THIS`
 
 ```lsl
 TRANSFORM_FINISHED|{direction}
@@ -234,13 +220,18 @@ direction:
 
 #### Transform processing (Queue mode)
 
-To: `LINK_SET`
+To: `BROADCAST2` specified, default is -4:`LINK_THIS`
 
 ```lsl
-TRANSFORM_PROCESS|{direction}|{queue index}
+TRANSFORM_PROCESS|{direction}|{queue index}|{effective}
 ```
 
 direction:
 
 - 1: open, positive movement
 - -1: close, reverse movement
+
+effective:
+
+- 0: if no change in DISTANCE, ROTATION, SCALE
+- 1: If any of DISTANCE, ROTATION, SCALE changes
