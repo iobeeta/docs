@@ -267,7 +267,7 @@ list LINES = [
 
 **举例**
 
-**更换贴图，全部硬表面，透明度，发光**
+更换贴图，全部硬表面，透明度，发光
 
 ```lsl
 list LINES = [
@@ -276,7 +276,7 @@ list LINES = [
 ]
 ```
 
-**更换颜色，全亮模式，清空光泽贴图**
+更换颜色，全亮模式，清空光泽贴图
 
 ```lsl
 list LINES = [
@@ -285,7 +285,7 @@ list LINES = [
 ]
 ```
 
-**更换漫反射的位置和旋转，同时，不改变现有的贴图和重复**
+更换漫反射的位置和旋转，同时，不改变现有的贴图和重复
 
 ```lsl
 list LINES = [
@@ -309,16 +309,16 @@ list LINES = [
 |---|---|---|---|---|
 | TOUCH | integer | 0 / 1 | 0 | 是否可通过点击触发弹出菜单 |
 | OWNER_ONLY | integer | 0 / 1 | 0 | 点击着是否必须为所有者 |
-| MENU_POPUP_CHANNEL_LOCAL | integer | -2147483648 ~ 2147483647 (0 无效) | 0.0 | 触发菜单弹出的本地 num |
+| MENU_POPUP_CHANNEL_LOCAL | integer | -2147483648 ~ 2147483647 (0 无效) | 0 | 触发菜单弹出的本地 num |
 | MENU_BACK_TRIGGER_CHANNEL_LOCAL | integer | -2147483648 ~ 2147483647 (0 无效) | 0 | 返回上一层菜单的回调 |
 | SETS | integer | 0 / 1 | 0 | 套装选项，在 PART 列表中增加一项"\[SETS\]"，进入套装列表菜单 |
 | SETS_ON_TOP | integer | 0 / 1 | 0 | 顶级菜单 PART列表 被替换为 套装列表 |
 | PARTS | integer | 0 / 1 | 0 | 如果 SETS_ON_TOP 开启，在 套装 菜单中增加一项 "\[PART\]"，依然允许通过部位来进行更换 |
 | SETS_LIST | integer | 0 / 1 | 0 | 见下文样例 |
 
-**SETS_LIST**
+#### SETS_LIST
 
-格式
+**格式**
 
 ```lsl
 list SETS_LIST = [
@@ -337,7 +337,7 @@ list SETS_LIST = [
 ];
 ```
 
-举例
+**举例**
 
 ```lsl
 list SETS_LIST = [
