@@ -318,6 +318,27 @@ list LINES = [
 
 **SETS_LIST**
 
+格式
+
+```lsl
+list SETS_LIST = [
+  "{套装名称}", "{PART}.{SET}",
+  ...
+];
+
+list SETS_LIST = [
+  "{套装名称}", ".{SET}",
+  ...
+];
+
+list SETS_LIST = [
+  "{套装名称}", ".{SET_A},.{SET_B},{PART1}.{SET_C},...",
+  ...
+];
+```
+
+举例
+
 ```lsl
 list SETS_LIST = [
   "BLACK", ".BLACK"
