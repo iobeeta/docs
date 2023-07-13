@@ -58,7 +58,7 @@ Ps: 没有使用Notecard作为配置的载体，是因为丫加载实在是太�
 
 ### HUD形式的应用
 
-通过HUD与目标物体通信进行材质更换
+通过HUD与目标物体通信进行材质更换，多数用于远端控制
 
 - 准备一个物体，作为HUD
 - 放入脚本
@@ -76,6 +76,8 @@ Ps: 没有使用Notecard作为配置的载体，是因为丫加载实在是太�
 - 重命名linkset中的prim
 - (建议) 公频输入 **/finalise**，固化KERNEL的配置，此时可以删除 .SMC
 - 开始使用
+
+远端控制关键在于 .SMC 与 .SMC.Client 中 REMOTE 指定为相同来配对.
 
 Emmmm, 就算是HUD也可以是菜单形式，比如，点击HUD弹出菜单... :p
 
@@ -322,5 +324,32 @@ llMessageLinked(LINK_SET, -643323393, llDumpList2String([2, "top", "0123", 6, <1
 llMessageLinked(LINK_SET, -643323393, llDumpList2String([SUFFIX, "top", "0123", C, <1.0, 0.0, 0.0>, F, TRUE, S, "ee509dfd-0974-6fb5-3eea-2504fa13ef4c"], "�"), "");
 ```
 
-### 广播
+### 请求(带回调)
 
+**-643323410**
+
+请求 PART 列表
+
+```lsl
+llMessageLinked(LINK_SET, -643323410, "", id);
+```
+
+KERNEL 回调: **-643323411**
+
+```lsl
+  llMessageLinked({SENDER}, -643323411, "{PART1}�{PART2}�....", id);
+```
+
+**-643323420**
+
+请求 SET 列表
+
+```lsl
+llMessageLinked(LINK_SET, -643323420, "{SET}", id);
+```
+
+KERNEL 回调: **-643323411**
+
+```lsl
+  llMessageLinked({SENDER}, -643323421, "{SET1}�{SET2}�....", id);
+```
