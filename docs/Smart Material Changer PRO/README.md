@@ -132,11 +132,41 @@ Ps: 没有使用 Notecard 作为配置的载体，是因为丫加载实在是太
 
 **.SMC 与 .SMC.Client 中的 "REMOTE" 必须相同**
 
-## 示例
+## 场景示例
 
-### 简单的例子
+**一件衣服，有独立的HUD**
 
-### 在Linkset中
+- SMC.KERNEL 放在HUD里。
+  - 可使用 SMC.HUD.TRIGGER，如果您有脚本基础，可以自行编写，更加灵活。
+- SMC.Client 放在衣服里。
+- SMC.KERNEL 与 SMC.Client 定义相同的 REMOTE。
+
+**一件衣服，点击领口弹出菜单**
+
+- SMC.KERNEL、SMC.Client、SMC.Menu 放在衣服里。
+  - 放在 ROOT 或者 领口 都可以，取决于您想点击哪里弹出菜单。
+- SMC.KERNEL 与 SMC.Client 定义相同的 LOCAL。
+
+**一栋房子，上面有个触控板，并且触控板与房子是一体的，点触控板弹出菜单**
+
+- SMC.KERNEL、SMC.Client 放在房子的任意 PRIM，定义相同的 LOCAL。
+- SMC.Menu 放在触控板并开启 TOUCH。
+
+**一栋房子，上面有个触控板，并且触控板与房子是分体的，点触控板弹出菜单**
+
+- SMC.Client 放在房子的任意 PRIM。
+- SMC.KERNEL、SMC.Menu 放在触控板并开启 TOUCH。
+- SMC.KERNEL 与 SMC.Client 定义相同的 REMOTE。
+
+**一栋房子，上面有2个触控板，触控板有与房子一体的，还有个分体的，点击弹出菜单。您兜里还有一个，能当HUD用**
+
+- SMC.Client、SMC.KERNEL、SMC.Menu 放在房子的任意 PRIM，SMC.Menu 开启 TOUCH
+- SMC.KERNEL、SMC.Menu 放在分体的触控板，SMC.Menu 开启 TOUCH
+- SMC.KERNEL、SMC.Menu 放在您兜里的触控板HUD。
+- 房子里的 SMC.Client、SMC.KERNEL 定义相同的 LOCAL。
+- 分体的和您兜里的 SMC.KERNEL 定义与房子里 SMC.Client 相同的 REMOTE。
+
+注意！ SMC.HUD.TRIGGER 只能用于包含独立PRIM按钮的HUD，它依赖于不同的名称或者备注。如果只有一个PRIM，是不行的，它无法对面甚至面的触摸位置(ST/UV)进行识别。如果需要，您可以自行撰写。
 
 
 ## 配置
