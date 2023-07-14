@@ -9,6 +9,8 @@
 - 容易扩展且没有硬性束缚。
 - 智能的匹配规则
 
+Ps: 没有使用 Notecard 作为配置的载体，是因为丫加载实在是太慢了，太他妈的慢了，实在是太他妈的慢了。
+
 ## 脚本列表
 
 ### 发送端（内核）
@@ -30,63 +32,142 @@
 | 脚本 | 说明 |
 |---|---|
 | SMC.HUD.TRIGGER | HUD专用，将Linkset中，Prim的描述以 PART.SET 的格式来发起材质替换 |
-| SMC.MENU | 通过点击弹出菜单，选择PART与SET，实现材质的替换 |
+| SMC.Menu | 通过点击弹出菜单，选择PART与SET，实现材质的替换 |
+| .SMC.Menu | 用于SMC.Menu的配置 |
 
-- **SMC.KERNEL 与 SMC.Client 可以放在同一个linkset，甚至同一个prim中**
-- **同一个linkset中的不同prim中可以分别放置多个 SMC.Client，他们可以负责各自的部位**
+## 示意图
 
-Ps: 没有使用Notecard作为配置的载体，是因为丫加载实在是太慢了，太他妈的慢了，实在是太他妈的慢了。
+### 脚本关系
+
+![script relationship](img/script-relationship.png)
+
+### 远端
+
+![remote control](img/remote-control.png)
+
+### 本地
+
+![local control](img/local-control.png)
+
+### 远端/本地 与 多重部署分区控制
+
+- **同一个linkset中的不同prim中可以分别放置多个 SMC.Client，他们可以负责各自的部位，被一个或者多个 SMC.KERNEL 控制**
+- **同一个linkset中的不同prim中可以分别放置多组 SMC.KERNEL + SMC.Client，通过本地的方式分别控制多组规则**
+
+![remote/local control and multiple](img/remote-local-control-&-multiple.png)
+
+### 远端/本地 与 多重部署分区交叉控制
+
+- **SMC.KERNEL 与 SMC.Client 之间，使用 REMOTE、LOCAL 进行配对，可以一对多、多对一、多对多**
+- **多个 KERNEL 的控制范围允许出现交集，比如分别控制贴图与颜色**
+
+![remote/local control and multiple cross control](img/remote-local-multiple-cross-control.png)
 
 ## 用户导引
 
-### 菜单形式的应用
+比较常用的应用
 
-通过点击物体、linkmessage、gesture来唤起菜单，进行材质替换。
+### 菜单形式
 
-- 准备好您的物体
+通过点击物体本体、linkmessage、gesture来唤起菜单，选择进行材质替换。
+
+- 准备一个需要更换材质的目标物体，可以是perm、mesh、linkset
 - 放入脚本
   - SMC.KERNEL
-  - .SMC
+    - .SMC
   - SMC.Client
-  - .SMC.Client
-  - SMC.MENU
-- 重命名linkset中的prim
-- 撰写配置信息在 .SMC 和 .SMC.Client
-- (建议) **.SMC.Client**保存或者放入物体之后就可以删掉
-- (建议) 公频输入 **/finalise**，固化KERNEL的配置，此时可以删除 .SMC
+    - .SMC.Client
+  - SMC.Menu
+    - .SMC.Menu
+- 撰写配置信息在 .SMC、.SMC.Client、.SMC.Menu
+- 更改PRIM名称或备注
+- (建议) **.SMC.Client**、**.SMC.Menu** 保存或者放入物体生效之后就可以删掉。
+- (建议) 公频输入 **/finalise**，固化KERNEL的配置，此时可以删除 **.SMC**
 - 点击物体开始使用
+
+**.SMC 与 .SMC.Client 中的 "LOCAL" 必须相同**
 
 ### HUD形式的应用
 
-通过HUD与目标物体通信进行材质更换，多数用于远端控制
+通过HUD与目标物体通信进行材质更换，远端控制。
 
 - 准备一个物体，作为HUD
 - 放入脚本
   - SMC.KERNEL
-  - .SMC
+    - .SMC
+  - (可选) **SMC.HUD.TRIGGER**，比较简单的HUD按钮点击触发器
+    - 在HUD的按钮的备注中写入定义好的PART和SET，中间用 "." 分隔，比如 **PartA.Style1**。SET 必须设置，PART 可以省略，如果不给予 PART 如：**.Style1**，将会替换包含SET为 **Style1** 的所有 PART。
+    - 您可以行开发HUD的触发脚本以实现更加丰富的操作，比如滑块、拾色器等。
 - 撰写配置在 **.SMC**
-- (可选) 在HUD中放入脚本 **SMC.HUD.TRIGGER**
-  - 在HUD的按钮的备注中写入定义好的PART和SET，中间用 "." 分隔，比如 **PartA.Style1**。SET 必须设置，PART 可以省略，如果不给予 PART 如：**.Style1**，将会替换包含SET为 **Style1** 的所有 PART
-  - 如果不使用这个脚本，则需要使用linkmessage发送指令，见下文
+- (建议) 公频输入 **/finalise**，固化KERNEL的配置，此时可以删除 **.SMC**
 - 准备另一个需要更换材质的目标物体，可以是perm、mesh、linkset
 - 放入脚本
   - SMC.Client
-  - .SMC.Client
+    - .SMC.Client
 - (建议) 撰写配置在 **.SMC.Client**，这个文件保存或者放入物体之后就可以删掉了
 - 重命名linkset中的prim
-- (建议) 公频输入 **/finalise**，固化KERNEL的配置，此时可以删除 .SMC
 - 开始使用
 
-远端控制关键在于 .SMC 与 .SMC.Client 中 REMOTE 指定为相同来配对.
+**.SMC 与 .SMC.Client 中的 "REMOTE" 必须相同**
 
-Emmmm, 就算是HUD也可以是菜单形式，比如，点击HUD弹出菜单... :p
+### 远端的菜单形式
 
-## 示例
+也属于远端控制的一种，只是换成了菜单而不是去操作HUD。
 
-### 简单的例子
+- 准备好可触发菜单的物体
+- 放入脚本
+  - SMC.KERNEL
+    - .SMC
+  - SMC.Menu
+    - .SMC.Menu
+- 撰写配置信息在 .SMC、.SMC.Menu
+- (建议) **.SMC.Menu** 保存或者放入物体生效之后就可以删掉。
+- (建议) 公频输入 **/finalise**，固化KERNEL的配置，此时可以删除 **.SMC**
+- 准备另一个需要更换材质的目标物体，可以是perm、mesh、linkset
+- 放入脚本
+  - SMC.Client
+    - .SMC.Client
+- (建议) 撰写配置在 **.SMC.Client**，这个文件保存或者放入物体之后就可以删掉了
+- 重命名linkset中的prim
+- 开始使用
 
-### 在Linkset中
+**.SMC 与 .SMC.Client 中的 "REMOTE" 必须相同**
 
+## 场景示例
+
+**一件衣服，有独立的HUD**
+
+- SMC.KERNEL 放在HUD里。
+  - 可使用 SMC.HUD.TRIGGER，如果您有脚本基础，可以自行编写，更加灵活。
+- SMC.Client 放在衣服里。
+- SMC.KERNEL 与 SMC.Client 定义相同的 REMOTE。
+
+**一件衣服，点击领口弹出菜单**
+
+- SMC.KERNEL、SMC.Client、SMC.Menu 放在衣服里。
+  - 放在 ROOT 或者 领口 都可以，取决于您想点击哪里弹出菜单。
+- SMC.KERNEL 与 SMC.Client 定义相同的 LOCAL。
+
+**一栋房子，上面有个触控板，并且触控板与房子是一体的，点触控板弹出菜单**
+
+- SMC.KERNEL、SMC.Client 放在房子的任意 PRIM，定义相同的 LOCAL。
+- SMC.Menu 放在触控板并开启 TOUCH。
+
+**一栋房子，上面有个触控板，并且触控板与房子是分体的，点触控板弹出菜单**
+
+- SMC.Client 放在房子的任意 PRIM。
+- SMC.KERNEL、SMC.Menu 放在触控板并开启 TOUCH。
+- SMC.KERNEL 与 SMC.Client 定义相同的 REMOTE。
+
+**一栋房子，上面有2个触控板，触控板有与房子一体的，还有个分体的，点击弹出菜单。您兜里还有一个，能当HUD用**
+
+- SMC.Client、SMC.KERNEL、SMC.Menu 放在房子的任意 PRIM，SMC.Menu 开启 TOUCH
+- SMC.KERNEL、SMC.Menu 放在分体的触控板，SMC.Menu 开启 TOUCH
+- SMC.KERNEL、SMC.Menu 放在您兜里的触控板HUD。
+- 房子里的 SMC.Client、SMC.KERNEL 定义相同的 LOCAL。
+- 分体的和您兜里的 SMC.KERNEL 定义与房子里 SMC.Client 相同的 REMOTE。
+
+注意！ SMC.HUD.TRIGGER 只能用于包含独立PRIM按钮的HUD，它依赖于不同的名称或者备注。如果只有一个PRIM，是不行的，它无法对面甚至面的触摸位置(ST/UV)进行识别。如果需要，您可以自行撰写。
 
 ## 配置
 
@@ -217,7 +298,7 @@ list LINES = [
 
 **举例**
 
-**更换贴图，全部硬表面，透明度，发光**
+更换贴图，全部硬表面，透明度，发光
 
 ```lsl
 list LINES = [
@@ -226,7 +307,7 @@ list LINES = [
 ]
 ```
 
-**更换颜色，全亮模式，清空光泽贴图**
+更换颜色，全亮模式，清空光泽贴图
 
 ```lsl
 list LINES = [
@@ -235,7 +316,7 @@ list LINES = [
 ]
 ```
 
-**更换漫反射的位置和旋转，同时，不改变现有的贴图和重复**
+更换漫反射的位置和旋转，同时，不改变现有的贴图和重复
 
 ```lsl
 list LINES = [
@@ -253,6 +334,65 @@ list LINES = [
 | DEBOUNCE | float | ≥ 0.0 | 0.0 | 防抖时长，在这个时间内的变化均会累计，直到没有更换材质的操作并在本时长后开始生效，避免频繁切换带来的效率瓶颈。 |
 | CACHE | integer | 0 / 1 | 0 | 选择器缓存，用缓存换取更高效的匹配速度，注意：开启本选项后，不可以对物体进行link与unlink操作，否则会出现错误。 |
 
+### .SMC.Menu
+
+| 配置项 | 类型 | 取值 | 默认 | 说明 |
+|---|---|---|---|---|
+| TOUCH | integer | 0 / 1 | 0 | 是否可通过点击触发弹出菜单 |
+| OWNER_ONLY | integer | 0 / 1 | 0 | 点击着是否必须为所有者 |
+| MENU_POPUP_CHANNEL_LOCAL | integer | -2147483648 ~ 2147483647 (0 无效) | 0 | 触发菜单弹出的本地 num |
+| MENU_BACK_TRIGGER_CHANNEL_LOCAL | integer | -2147483648 ~ 2147483647 (0 无效) | 0 | 返回上一层菜单的回调 |
+| SETS | integer | 0 / 1 | 0 | 套装选项，在 PART 列表中增加一项"\[SETS\]"，进入套装列表菜单 |
+| SETS_ON_TOP | integer | 0 / 1 | 0 | 顶级菜单 PART列表 被替换为 套装列表 |
+| PARTS | integer | 0 / 1 | 0 | 如果 SETS_ON_TOP 开启，在 套装 菜单中增加一项 "\[PART\]"，依然允许通过部位来进行更换 |
+| SETS_LIST | integer | 0 / 1 | 0 | 见下文样例 |
+
+#### SETS_LIST
+
+**格式**
+
+```lsl
+list SETS_LIST = [
+  "{套装名称}", "{PART}.{SET}",
+  ...
+];
+
+list SETS_LIST = [
+  "{套装名称}", ".{SET}",
+  ...
+];
+
+list SETS_LIST = [
+  "{套装名称}", ".{SET_A},.{SET_B},{PART1}.{SET_C},...",
+  ...
+];
+```
+
+**举例**
+
+```lsl
+list SETS_LIST = [
+  "BLACK", ".BLACK"
+];
+```
+
+```lsl
+list SETS_LIST = [
+  "BLACK&RED", ".BLACK,.RED"
+];
+```
+
+```lsl
+list SETS_LIST = [
+  "BLACK&TOP_RED", ".BLACK,TOP.RED"
+];
+```
+
+```lsl
+list SETS_LIST = [
+  "BTM_B&T_R", "BOTTOM.BLACK,TOP.RED"
+];
+```
 
 ## 核心 KERNEL 本地接口
 
@@ -277,9 +417,27 @@ llMessageLinked(LINK_SET, -643323390, "TOP�BLACK", "");
 // 带有自定义属性的
 llMessageLinked(LINK_SET, -643323390, "TOP�BLACK�6�<1.0, 0.0, 0.0>�9�TRUE�4�ee509dfd-0974-6fb5-3eea-2504fa13ef4c", "");
 // 方便的写法
-llMessageLinked(LINK_SET, -643323392, llDumpList2String(["TOP", "BLACK", 6, <1.0, 0.0, 0.0>, 9, TRUE, 4, "ee509dfd-0974-6fb5-3eea-2504fa13ef4c"], "�"), "");
+llMessageLinked(LINK_SET, -643323390, llDumpList2String(["TOP", "BLACK", 6, <1.0, 0.0, 0.0>, 9, TRUE, 4, "ee509dfd-0974-6fb5-3eea-2504fa13ef4c"], "�"), "");
 // 建议使用常量，可写为
-llMessageLinked(LINK_SET, -643323392, llDumpList2String(["TOP", "BLACK", C, <1.0, 0.0, 0.0>, F, TRUE, S, "ee509dfd-0974-6fb5-3eea-2504fa13ef4c"], "�"), "");
+llMessageLinked(LINK_SET, -643323390, llDumpList2String(["TOP", "BLACK", C, <1.0, 0.0, 0.0>, F, TRUE, S, "ee509dfd-0974-6fb5-3eea-2504fa13ef4c"], "�"), "");
+```
+
+\* 批量模式
+
+```lsl
+llMessageLinked(LINK_SET, -643323390, "�{SET}", "");
+```
+
+- 如果不给予 PART，此时将触发全量匹配模式，自动查找出包含 SET 的所有 PART，并批量生效。
+- 此时再追加的 DATA，它们会应用在所有相关 PART。
+
+举例
+
+```lsl
+// 定义的 PART 中，比如有 TOP、MIDDLE、BOTTOM
+// 其中 TOP、MIDDLE 包含 BLACK，那么，将会自动查找出 TOP、MIDDLE，应用 BLACK
+// 相当于执行了 TOP�BLACK 和 MIDDLE�BLACK
+llMessageLinked(LINK_SET, -643323390, "�BLACK", "");
 ```
 
 **-643323392**
