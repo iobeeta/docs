@@ -522,4 +522,4 @@ KERNEL callback: **-643323411**
   llMessageLinked({SENDER}, -643323421, "{SET1}�{SET2}�....", id);
 ```
 
-*Special thanks to my darling [Amber0089](secondlife:///app/agent/e623be18-592f-4c5e-828d-25609bcd4cf8/about)
+*Special thanks to my darling **Amber0089**
