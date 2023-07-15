@@ -5,9 +5,9 @@
 ## 简介
 
 - 基于脚本配置而不是notecard。更快的加载/传输速度，更自由的书写。
-- 内核与产品功能分离，可以支持菜单、HUD，本地与远端消息。
+- 内核与产品功能是分离。可以支持菜单、HUD形式，本地与远端控制。
 - 容易扩展且没有硬性束缚。
-- 智能的匹配规则
+- 智能的匹配规则。
 
 Ps: 没有使用 Notecard 作为配置的载体，是因为丫加载实在是太慢了，太他妈的慢了，实在是太他妈的慢了。
 
@@ -18,7 +18,7 @@ Ps: 没有使用 Notecard 作为配置的载体，是因为丫加载实在是太
 | 脚本 | 说明 |
 |---|---|
 | SMC.KERNEL | 内核，材质管理器，存储器 |
-| .SMC | 用于KERNEL的配置，编写材质配色方案 |
+| .SMC | 用于KERNEL的配置 |
 
 ### 客户端（加载器）
 
@@ -49,16 +49,20 @@ Ps: 没有使用 Notecard 作为配置的载体，是因为丫加载实在是太
 
 ![local control](img/local-control.png)
 
-### 远端/本地 与 多重部署分区控制
+### 远端/本地
 
-- **同一个linkset中的不同prim中可以分别放置多个 SMC.Client，他们可以负责各自的部位，被一个或者多个 SMC.KERNEL 控制**
-- **同一个linkset中的不同prim中可以分别放置多组 SMC.KERNEL + SMC.Client，通过本地的方式分别控制多组规则**
+**多重部署分区控制**
+
+- **同一个 linkset 中的不同 prim 中可以分别放置多个 SMC.Client，他们可以负责各自的部位，被一个或者多个 SMC.KERNEL 控制**
+- **同一个 linkset 中的不同 prim 中可以分别放置多组 SMC.KERNEL + SMC.Client，通过本地的方式分别控制多组规则**
 
 ![remote/local control and multiple](img/remote-local-control-&-multiple.png)
 
-### 远端/本地 与 多重部署分区交叉控制
+### 远端/本地 交叉
 
-- **SMC.KERNEL 与 SMC.Client 之间，使用 REMOTE、LOCAL 进行配对，可以一对多、多对一、多对多**
+**多重部署分区交叉控制**
+
+- **SMC.KERNEL 与 SMC.Client 之间使用 REMOTE、LOCAL 进行配对，可以一对多、多对一、多对多**
 - **多个 KERNEL 的控制范围允许出现交集，比如分别控制贴图与颜色**
 
 ![remote/local control and multiple cross control](img/remote-local-multiple-cross-control.png)
@@ -167,7 +171,7 @@ Ps: 没有使用 Notecard 作为配置的载体，是因为丫加载实在是太
 - 房子里的 SMC.Client、SMC.KERNEL 定义相同的 LOCAL。
 - 分体的和您兜里的 SMC.KERNEL 定义与房子里 SMC.Client 相同的 REMOTE。
 
-注意！ SMC.HUD.TRIGGER 只能用于包含独立PRIM按钮的HUD，它依赖于不同的名称或者备注。如果只有一个PRIM，是不行的，它无法对面甚至面的触摸位置(ST/UV)进行识别。如果需要，您可以自行撰写。
+*注意！ **SMC.HUD.TRIGGER** 只能用于包含独立 **PRIM** 按钮的 **HUD**，它依赖于不同的名称或者备注。如果只有一个 **PRIM**，是不行的，它**无法**对面甚至面的触摸位置 **(ST/UV)** 进行识别。如果需要，您可以自行撰写。*
 
 ## 配置
 
@@ -395,6 +399,12 @@ list SETS_LIST = [
 ```
 
 ## 核心 KERNEL 本地接口
+
+消息字符串分隔符是 **"�"**
+
+```lsl
+llDumpList2String([...], "�")
+```
 
 ### 提交
 
