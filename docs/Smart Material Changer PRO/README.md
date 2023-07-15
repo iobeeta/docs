@@ -398,7 +398,7 @@ list SETS_LIST = [
 ];
 ```
 
-## Core KERNEL Local Interface
+## SMC.KERNEL Local Interface
 
 The message string separator is **"�"**
 
