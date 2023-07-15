@@ -522,4 +522,4 @@ KERNEL callback: **-643323411**
   llMessageLinked({SENDER}, -643323421, "{SET1}�{SET2}�....", id);
 ```
 
-*Special thanks to my darling **Amber0089**
+\* Special thanks to my darling **Amber0089**
