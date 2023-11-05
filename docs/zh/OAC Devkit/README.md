@@ -1,6 +1,6 @@
 # OAC Devkit
 
-Version: 3.3
+Version: 3.4
 
 [PDF Document](https://iobeeta.github.io/prod/zh/OAC%20Devkit/OAC%20Devkit%20(zh-CN).pdf)
 
@@ -124,7 +124,7 @@ Version: 3.3
 
 比如正向是 ease-in，那么反向自动切换为 ease-out。
 
-| 102: ease-in 缓入(反向自动翻转) | 103: ease-out 缓入(反向自动翻转) |
+| 102: ease-in 缓入(反向自动翻转为 ease-out 缓出) | 103: ease-out 缓出(反向自动翻转为 ease-in 缓入) |
 |:-:|:-:|
 | `.OAC TIMING_FUNC 102` | `.OAC TIMING_FUNC 103` |
 
@@ -235,3 +235,20 @@ TRANSFORM_PROCESS|{方向}|{队列编号}|{有效性}
 
 - 0: 如果 DISTANCE、ROTATION、SCALE 均无变化
 - 1: 如果 DISTANCE、ROTATION、SCALE 任意一项有变化
+
+### 本地 LinksetData 触发器
+
+OAC.KERNEL 会监听 ```LINKSETDATA_UPDATE```
+
+name: (string)llGetLinkKey(LINK_ROOT) + "-oac-stat"
+
+- 当 value 为 **偶数** (**0 [2 4 6...]**) 时触发 **CLOSE**
+- 当 value 为 **奇数** (**1 [3 5 7...]**) 时触发 **OPEN**
+
+```lsl
+llLinksetDataWrite((string)llGetLinkKey(LINK_ROOT) + "-oac-stat", "1"); // OPEN
+llLinksetDataWrite((string)llGetLinkKey(LINK_ROOT) + "-oac-stat", "0"); // CLOSE
+
+llLinksetDataWrite((string)llGetLinkKey(LINK_ROOT) + "-oac-stat", "2"); // CLOSE
+llLinksetDataWrite((string)llGetLinkKey(LINK_ROOT) + "-oac-stat", "3"); // OPEN
+```

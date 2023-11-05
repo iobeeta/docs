@@ -124,7 +124,7 @@ Two special values, forward movement and negative movement are symmetrical.
 
 For example, if the forward direction is ease-in, then the reverse direction will automatically switch to ease-out.
 
-| 102: ease-in (auto reverse) | 103: ease-out (auto reverse) |
+| 102: ease-in (ease-out when reversed) | 103: ease-out (ease-in when reversed) |
 |:-:|:-:|
 | `.OAC TIMING_FUNC 102` | `.OAC TIMING_FUNC 103` |
 
@@ -235,3 +235,20 @@ effective:
 
 - 0: if no change in DISTANCE, ROTATION, SCALE
 - 1: If any of DISTANCE, ROTATION, SCALE changes
+
+### LinksetData Trigger
+
+OAC.KERNEL will listen for ```LINKSETDATA_UPDATE```
+
+name: (string)llGetLinkKey(LINK_ROOT) + "-oac-stat"
+
+- Triggers **CLOSE** when value is an **even number** (**0 [2 4 6...]**)
+- Triggers **OPEN** when value is an **odd number** (**1 [3 5 7...]**)
+
+```lsl
+llLinksetDataWrite((string)llGetLinkKey(LINK_ROOT) + "-oac-stat", "1"); // OPEN
+llLinksetDataWrite((string)llGetLinkKey(LINK_ROOT) + "-oac-stat", "0"); // CLOSE
+
+llLinksetDataWrite((string)llGetLinkKey(LINK_ROOT) + "-oac-stat", "2"); // CLOSE
+llLinksetDataWrite((string)llGetLinkKey(LINK_ROOT) + "-oac-stat", "3"); // OPEN
+```
