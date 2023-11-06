@@ -119,6 +119,12 @@ llMessageLinked(LINK_SET, 860300, "Notecard name", "1");
 
 单曲循环开关。取值 0: 关闭（默认）, 1: 开启
 
+**860500 提交播放源**
+
+支持 ```llLinkPlaySound```
+
+设置由哪个prim播放, 取值: ```LINK_THIS```(默认), ```LINK_SET```, ```LINK_ROOT```, ```LINK_ALL_OTHERS```, ```LINK_ALL_CHILDREN```.
+
 ### 本地下行广播
 
 广播范围 ```LINK_SET```

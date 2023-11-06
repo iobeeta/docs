@@ -119,6 +119,12 @@ llMessageLinked(LINK_SET, 860300, "Notecard name", "1");
 
 Single cycle, value. 0: off (default), 1: on
 
+**860500 Submit source**
+
+Support ```llLinkPlaySound```
+
+Set which prim to play, value: ```LINK_THIS```(default), ```LINK_SET```, ```LINK_ROOT```, ```LINK_ALL_OTHERS```, ```LINK_ALL_CHILDREN```.
+
 ### Link Message to Receive
 
 Broadcast to ```LINK_SET```
