@@ -1,7 +1,5 @@
 # \[Beeta\] 产品文档目录
 
-材质替换器 [Smart Material Changer](Smart%20Material%20Changer/)
-
 变换动画开发工具 [OAC Devkit](OAC%20Devkit/)
 
 Notecard 音乐播放器内核 [NCMusicPlayer.KERNEL](NCMusicPlayer.KERNEL/)

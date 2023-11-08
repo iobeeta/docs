@@ -1,7 +1,5 @@
 # Productions
 
-[Smart Material Changer](Smart%20Material%20Changer/)
-
 [OAC Devkit](OAC%20Devkit/)
 
 [NCMusicPlayer.KERNEL](NCMusicPlayer.KERNEL/)
