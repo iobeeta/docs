@@ -1,6 +1,6 @@
 # OAC Devkit
 
-Version: 3.4
+Version: 3.5
 
 [PDF Document](https://iobeeta.github.io/prod/zh/OAC%20Devkit/OAC%20Devkit%20(zh-CN).pdf)
 
