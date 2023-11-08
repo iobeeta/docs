@@ -1,6 +1,8 @@
-# Smart Material Changer PRO
+# Smart Material Changer
 
-Version: 1.8
+```'Amber```
+
+Version: 1.9
 
 ## Introduction
 

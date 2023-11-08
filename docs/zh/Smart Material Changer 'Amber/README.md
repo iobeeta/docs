@@ -1,6 +1,8 @@
-# Smart Material Changer PRO
+# Smart Material Changer
 
-版本: 1.8
+```'Amber```
+
+版本: 1.9
 
 ## 简介
 
