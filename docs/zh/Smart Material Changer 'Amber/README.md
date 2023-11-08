@@ -1,6 +1,6 @@
 # Smart Material Changer
 
-```'Amber```
+**'Amber**
 
 版本: 1.9
 
