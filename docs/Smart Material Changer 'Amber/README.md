@@ -102,7 +102,7 @@ Material change via HUD communication with target object, remote control.
   - SMC.KERNEL
     - .SMC
   - (options) **SMC.HUD.TRIGGER**，A sample HUD Button Click Trigger.
-    - Write the defined PART and SET in the description of the HUD's buttons. Separated each by ".", such as **PartA.Style1**. The SET must be set, and the PART can be omitted. If without PART, such as：**.Style1**,the script will replace all the PART with**Style1**.
+    - Write the defined PART and SET in the description of the HUD's buttons. Separated each by ".", such as **PartA.Style1**. The SET must be set, and the PART can be omitted. If without PART, such as：**.Style1**,the script will replace all the PART with **Style1**.
     - You can develop the trigger script for HUD, for more functions, such as slider and color picker.
 - Edit configuration information in **.SMC**
 - (Recommended) input **/finalise** in local chat, fix the KERNEL configuration, then you can delet **.SMC**.
@@ -183,7 +183,7 @@ Another type of remote control, base on menus instead of HUDs.
 |---|---|---|---|---|
 | LOCAL | integer | -2147483648 ~ 2147483647 (0 无效) | 0 | Local communication channels, mostly used in menu format |
 | REMOTE | integer | -10000 ~ 10000 | 0 | Remote Communication Channel Offset（Note: This is private channel offset, not the exact channel），mostly used in HUD format |
-| CACHE | integer | 0/1 | 0 | Resource buffer(UUID).If there are a lot of reused images in the configuration, we recommend turnning this. It could save much RAM 
+| CACHE | integer | 0/1 | 0 | Resource buffer(UUID).If there are a lot of reused images in the configuration, we recommend turnning this. It could save much RAM |
 | RANGE | integer | 0/1/2/3 | 0 | Control distance，0:10m, 1:20m, 2:100m, 3:all region |
 | LINES | list |  |  | Detailed writing rules will be described below |
 

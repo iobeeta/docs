@@ -133,7 +133,7 @@ For example, if the forward direction is ease-in, then the reverse direction wil
 The Queue mode is added in version 3.0, which can continuously perform multiple change processes (forward and reverse), and continues the feature of switching directions at any point in time.
 
 ```text
-.OAC QUEUE {Number}/{DURATION}/{RETION}/{TIMING_FUNC}/{DISTANCE}/{ROTATION}/{SCALE}
+.OAC QUEUE {Number}/{DURATION}/{ORIGIN}/{TIMING_FUNC}/{DISTANCE}/{ROTATION}/{SCALE}
 ```
 
 Yes, it writes the previously supported parameters in one line and assigns them to QUEUE, and then you can add multiple QUEUEs.
