@@ -1,6 +1,6 @@
 # OAC Devkit
 
-Version: 3.5
+Version: 3.6
 
 [PDF Document](https://iobeeta.github.io/prod/zh/OAC%20Devkit/OAC%20Devkit%20(zh-CN).pdf)
 
@@ -176,6 +176,19 @@ llMessageLinked(..., 802840, "CLOSE", "");
 
 ```lsl
 llMessageLinked(..., 802840, "TOGGLE", "");
+```
+
+#### 设置方向值
+
+手动提交并改变当前所处运行方向状态
+
+值:
+大于 0: 设置为打开（待关闭）状态，此时可以执行关闭（逆向变换）
+小于等于 0： 设置为关闭（待打开）状态，此时可以执行打开（正向变换）
+
+```lsl
+llMessageLinked(..., 802840, "DIRECTION|1", "");
+llMessageLinked(..., 802840, "DIRECTION|-1", "");
 ```
 
 #### 设置全局缩放

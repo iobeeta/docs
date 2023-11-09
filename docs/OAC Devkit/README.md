@@ -1,6 +1,6 @@
 # OAC Devkit
 
-Version: 3.5
+Version: 3.6
 
 [PDF Document](https://iobeeta.github.io/prod/OAC%20Devkit/OAC%20Devkit.pdf)
 
@@ -176,6 +176,19 @@ Switch the current direction of movement
 
 ```lsl
 llMessageLinked(..., 802840, "TOGGLE", "");
+```
+
+#### Set Direction
+
+Manually submit and change the current running direction status
+
+value:
+Greater than 0: Set to opened (to be closed) state, and can be closed at this time (reverse transformation)
+Less than or equal to 0: Set to closed (to be opened) state, and can be opened at this time (forward transformation)
+
+```lsl
+llMessageLinked(..., 802840, "DIRECTION|1", "");
+llMessageLinked(..., 802840, "DIRECTION|-1", "");
 ```
 
 #### Submit global scale
