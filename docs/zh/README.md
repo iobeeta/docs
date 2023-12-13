@@ -1,6 +1,6 @@
 # \[Beeta\] 产品文档目录
 
-材质替换器 <sup>'PanGu</sup>[Smart Material Changer 'PanGu](Smart%20Material%20Changer%20'PanGu/)
+材质替换器 <sup>'PanGu</sup> [Smart Material Changer 'PanGu](Smart%20Material%20Changer%20'PanGu/)
 
 材质替换器 <sup>'Amber</sup> [Smart Material Changer 'Amber](Smart%20Material%20Changer%20'Amber/)
 

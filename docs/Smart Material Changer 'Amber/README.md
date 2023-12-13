@@ -4,6 +4,8 @@
 
 Version: 1.9
 
+[PDF Document](Smart%20Material%20Changer%20'Amber.pdf)
+
 ## Introduction
 
 - It's based on script configuration instead of notecard. Faster loading/transfer speed, edits freely.

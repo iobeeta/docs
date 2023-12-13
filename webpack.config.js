@@ -4,7 +4,7 @@ module.exports = {
     mode: 'production',
     entry: './src/js/app.js',
     output: {
-        path: path.resolve(__dirname, 'docs/assets'),
+        path: path.resolve(__dirname, 'prod/assets'),
         filename: 'app.js',
     },
     module: {
