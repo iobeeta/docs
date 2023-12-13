@@ -2,7 +2,7 @@
 
 Version: 3.6
 
-[PDF Document](https://iobeeta.github.io/prod/zh/OAC%20Devkit/OAC%20Devkit%20(zh-CN).pdf)
+[PDF Document](https://iobeeta.github.io/docs/zh/OAC%20Devkit/OAC%20Devkit%20(zh-CN).pdf)
 
 ## 功能
 

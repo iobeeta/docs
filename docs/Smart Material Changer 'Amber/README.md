@@ -4,7 +4,7 @@
 
 Version: 1.9
 
-[PDF Document](Smart%20Material%20Changer%20'Amber.pdf)
+[PDF Document](https://iobeeta.github.io/docs/Smart%20Material%20Changer%20'Amber/Smart%20Material%20Changer%20'Amber.pdf)
 
 ## Introduction
 

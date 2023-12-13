@@ -2,7 +2,7 @@
 
 Version: 3.6
 
-[PDF Document](https://iobeeta.github.io/prod/OAC%20Devkit/OAC%20Devkit.pdf)
+[PDF Document](https://iobeeta.github.io/docs/OAC%20Devkit/OAC%20Devkit.pdf)
 
 ## Features
 
