@@ -1,14 +1,17 @@
+import URLToolkit from "url-toolkit"
+
 export default {
     // Plugin name
     name: 'imgURL',
     // Extend core features
     extend(api) {
-        api.processMarkdown(text => {
-            let prodName = api.router.app.$route.path.split(/\//)
-            prodName = prodName.filter(item => item !== '')
-            let path = encodeURI('/prod/' + decodeURI(prodName[prodName.length - 1]) + '/')
-            // text = text.replaceAll(/\!\[([^\]]*)\]\(([^\)]*)\)/g, '\![' + path + '$1](' + path + '$2)');
-            return text.replaceAll(/\!\[([^\]]*)\]\(([^\)]*)\)/g, (src, title, url) => `![${title}](${path}${url})`);
-        })
+        // text = text.replaceAll(/\!\[([^\]]*)\]\(([^\)]*)\)/g, '\![' + p + '$1](' + path + '$2)');
+        api.processMarkdown(text => text.replaceAll(/\!\[([^\]]*)\]\(([^\)]*)\)/g, (src, title, url) => {
+                let parsed = URLToolkit.parseURL(url)
+                return url[0] == '/' || parsed.scheme == 'http:' || parsed.scheme == 'https:' ?
+                    `![${title}](${url})` :
+                    `![${title}](${URLToolkit.normalizePath(document.location.origin + encodeURI('/docs/' + decodeURI(api.router.app.$route.path.split(/\//).filter(item => item !== '').slice(-1).toString() + '/') + url))})`
+            })
+        )
     }
 }
