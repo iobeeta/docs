@@ -1,6 +1,6 @@
 # OAC Devkit
 
-Version: 3.6
+Version: 3.8
 
 [PDF Document](https://iobeeta.github.io/docs/OAC%20Devkit/OAC%20Devkit.pdf)
 
