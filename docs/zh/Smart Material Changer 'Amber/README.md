@@ -2,7 +2,7 @@
 
 **'Amber**
 
-版本: 1.9
+版本: 1.12
 
 ## 简介
 
@@ -181,10 +181,11 @@ Ps: 没有使用 Notecard 作为配置的载体，是因为丫加载实在是太
 
 | 配置项 | 类型 | 取值 | 默认 | 说明 |
 |---|---|---|---|---|
+| DEBUG | integer | 0 / 1 | 0 | 排障模式，开启时会输出较多信息 |
 | LOCAL | integer | -2147483648 ~ 2147483647 (0 无效) | 0 | 本地通信频道，多用于菜单形式 |
 | REMOTE | integer | -10000 ~ 10000 | 0 | 远程通信频道偏移量（注意: 这是私有频道偏移量，并不是确切的频道），一般用于HUD。 |
 | CACHE | integer | 0/1 | 0 | 资源缓冲(UUID)，如果配置中使用的图片出现大量重用的情况，建议开启，可以节省大量内存。 |
-| RANGE | integer | 0/1/2/3 | 0 | 控制距离，0:10m, 1:20m, 2:100m, 3:all region |
+| RANGE | integer | 0/1/2/3 | 0 | 控制距离，0:10米, 1:20米, 2:100米, 3:整个地区 |
 | LINES | list |  |  | 详细书写规则会在下文中介绍 |
 
 #### LINES
@@ -335,6 +336,7 @@ list LINES = [
 
 | 配置项 | 类型 | 取值 | 默认 | 说明 |
 |---|---|---|---|---|
+| DEBUG | integer | 0 / 1 | 0 | 排障模式，开启时会输出较多信息 |
 | LOCAL | integer | -2147483648 ~ 2147483647 (0 无效) | 0 | 本地通信频道，多用于菜单形式 |
 | REMOTE | integer | -10000 ~ 10000 | 0 | 远程通信频道偏移量（注意: 这是私有频道偏移量，并不是确切的频道），一般用于HUD。 |
 | DEBOUNCE | float | ≥ 0.0 | 0.0 | 防抖时长，在这个时间内的变化均会累计，直到没有更换材质的操作并在本时长后开始生效，避免频繁切换带来的效率瓶颈。 |
@@ -344,13 +346,17 @@ list LINES = [
 
 | 配置项 | 类型 | 取值 | 默认 | 说明 |
 |---|---|---|---|---|
-| TOUCH | integer | 0 / 1 | 0 | 是否可通过点击触发弹出菜单 |
+| DEBUG | integer | 0 / 1 | 0 | 排障模式，开启时会输出较多信息 |
+| TOUCH | integer | 0 / 1 | 0 | 菜单可否由点击弹出 |
 | OWNER_ONLY | integer | 0 / 1 | 0 | 点击着是否必须为所有者 |
-| MENU_POPUP_CHANNEL_LOCAL | integer | -2147483648 ~ 2147483647 (0 无效) | 0 | 触发菜单弹出的本地 num |
-| MENU_BACK_TRIGGER_CHANNEL_LOCAL | integer | -2147483648 ~ 2147483647 (0 无效) | 0 | 返回上一层菜单的回调 |
-| SETS | integer | 0 / 1 | 0 | 套装选项，在 PART 列表中增加一项"\[SETS\]"，进入套装列表菜单 |
-| SETS_ON_TOP | integer | 0 / 1 | 0 | 顶级菜单 PART列表 被替换为 套装列表 |
-| PARTS | integer | 0 / 1 | 0 | 如果 SETS_ON_TOP 开启，在 套装 菜单中增加一项 "\[PART\]"，依然允许通过部位来进行更换 |
+| SETS | integer | 0 / 1 | 0 | 套装选项，在部位（PART）列表中增加"\[SETS\]"选项，进入套装（SETS）列表菜单 |
+| SETS_ON_TOP | integer | 0 / 1 | 0 | 顶级菜单 部位（PART）列表 被替换为 套装（SETS）列表 |
+| PARTS | integer | 0 / 1 | 0 | 如果 SETS_ON_TOP 开启，在 套装（SETS）菜单中增加一项 "\[PART\]"，作为部位（PART）菜单的入口 |
+| MENU_OPEN_LOCAL_NUM | integer | -2147483648 ~ 2147483647 (0 无效) | 0 | 触发菜单弹出的本地 num |
+| MENU_BACK_LOCAL_NUM | integer | -2147483648 ~ 2147483647 (0 无效) | 0 | 返回上一层菜单的回调 |
+| MENU_BACK_OVERWRITE | string | 任意 | 空字符串 | 替换返回选项文案 |
+| MENU_PREV_OVERWRITE | string | 任意 | 空字符串 | 替换前一页选项文案 |
+| MENU_NEXT_OVERWRITE | string | 任意 | 空字符串 | 替换后一页选项文案 |
 | SETS_LIST | integer | 0 / 1 | 0 | 见下文样例 |
 
 #### SETS_LIST
