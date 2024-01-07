@@ -2,7 +2,7 @@
 
 **'Amber**
 
-Version: 1.9
+Version: 1.12
 
 [PDF Document](https://iobeeta.github.io/docs/Smart%20Material%20Changer%20'Amber/Smart%20Material%20Changer%20'Amber.pdf)
 
@@ -183,6 +183,7 @@ Another type of remote control, base on menus instead of HUDs.
 
 | Configuration | Type | Value | Default | description |
 |---|---|---|---|---|
+| DEBUG | integer | 0 / 1 | 0 | Debug mode, when enabled, outputs more information |
 | LOCAL | integer | -2147483648 ~ 2147483647 (0 无效) | 0 | Local communication channels, mostly used in menu format |
 | REMOTE | integer | -10000 ~ 10000 | 0 | Remote Communication Channel Offset（Note: This is private channel offset, not the exact channel），mostly used in HUD format |
 | CACHE | integer | 0/1 | 0 | Resource buffer(UUID).If there are a lot of reused images in the configuration, we recommend turnning this. It could save much RAM |
@@ -337,6 +338,7 @@ list LINES = [
 
 | Configurations | Type | Values | Default | Description |
 |---|---|---|---|---|
+| DEBUG | integer | 0 / 1 | 0 | Debug mode, when enabled, outputs more information |
 | LOCAL | integer | -2147483648 ~ 2147483647 (0 not valid) | 0 | Local communication channels, mostly used in menu format |
 | REMOTE | integer | -10000 ~ 10000 | 0 | Remote communication channel offset (Note: This is private channel offset, not the exact channel), mostly used in HUD format |
 | DEBOUNCE | float | ≥ 0.0 | 0.0 | Anti-shake period, any changes in this period will be accumulated until there is no operation to change the material and start to work after this period, to avoid the efficiency bottleneck caused by frequent switching |
@@ -344,15 +346,19 @@ list LINES = [
 
 ### .SMC.Menu
 
-| Configurations | Type | Values | Default | Description |
+| Configuration Item | Type | Values | Default | Description |
 |---|---|---|---|---|
-| TOUCH | integer | 0 / 1 | 0 | Whether the popup menu can be triggered by clicking on it |
-| OWNER_ONLY | integer | 0 / 1 | 0 | Whether the user must be the owner |
-| MENU_POPUP_CHANNEL_LOCAL | integer | -2147483648 ~ 2147483647 (0 not valid) | 0 | Trigger menu popups locally |
-| MENU_BACK_TRIGGER_CHANNEL_LOCAL | integer | -2147483648 ~ 2147483647 (0 无效) | 0 | Callbacks to return to the previous menu level |
-| SETS | integer | 0 / 1 | 0 | Set options, add an item "\[SETS\]" to the PART list and enter the Set List menu |
-| SETS_ON_TOP | integer | 0 / 1 | 0 | The top menu PART list has been replaced with a set list |
-| PARTS | integer | 0 / 1 | 0 | If the SETS_ON_TOP is turned on, Add an item "\[PART\]" to the Set menu to still allow changing by parts |
+| DEBUG | integer | 0 / 1 | 0 | Debug mode, when enabled, outputs more information |
+| TOUCH | integer | 0 / 1 | 0 | Whether the menu can be triggered by touching |
+| OWNER_ONLY | integer | 0 / 1 | 0 | Whether the toucher must be the owner |
+| SETS | integer | 0 / 1 | 0 | "SETS" options, adds "\[SETS\]" option in the PART list, entering the SETS list menu |
+| SETS_ON_TOP | integer | 0 / 1 | 0 | Top-level menu, replaces the PART list with the SETS list |
+| PARTS | integer | 0 / 1 | 0 | If SETS_ON_TOP is enabled, adds "\[PART\]" in the SETS menu as an entry to the PART menu |
+| MENU_OPEN_LOCAL_NUM | integer | -2147483648 ~ 2147483647 (0 invalid) | 0 | Local num triggering menu pop-up |
+| MENU_BACK_LOCAL_NUM | integer | -2147483648 ~ 2147483647 (0 invalid) | 0 | Callback to return to the parent menu |
+| MENU_BACK_OVERWRITE | string | Any | Empty string | Replace the return option text |
+| MENU_PREV_OVERWRITE | string | Any | Empty string | Replace the previous page option text |
+| MENU_NEXT_OVERWRITE | string | Any | Empty string | Replace the next page option text |
 | SETS_LIST | integer | 0 / 1 | 0 | See below |
 
 #### SETS_LIST
