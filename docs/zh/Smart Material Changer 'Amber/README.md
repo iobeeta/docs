@@ -4,6 +4,8 @@
 
 版本: 1.12
 
+[PDF 文档](https://iobeeta.github.io/docs/zh/Smart%20Material%20Changer%20'Amber/Smart%20Material%20Changer%20'Amber.pdf)
+
 ## 简介
 
 - 基于脚本配置而不是notecard。更快的加载/传输速度，更自由的书写。
