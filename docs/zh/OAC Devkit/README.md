@@ -1,6 +1,6 @@
 # OAC Devkit
 
-Version: 3.8
+Version: 4.0
 
 [PDF Document](https://iobeeta.github.io/docs/zh/OAC%20Devkit/OAC%20Devkit%20(zh-CN).pdf)
 
@@ -61,12 +61,37 @@ Version: 3.8
 |---|---|---|---|---|---|
 | BROADCAST2 | integer | 大于 -5 且不为 0 | -4 | 广播发送范围，-4:`LINK_THIS`, -3:`LINK_ALL_CHILDREN`, -2:`LINK_ALL_OTHERS`, -1:`LINK_SET`, 1:`LINK_ROOT`, 和其它 | 3.3 |
 | DURATION | float | 任何 | 0.0 | 时长，如果小于0.1，则视为0.0，<br/>0.0表示没有运动过程，瞬间完成 | 1.7 |
-| DISTANCE | vector | 任何 | <0.0,0.0,0.0> | 距离，移动变化 | 1.7 |
+| DISTANCE | vector | 任何 | <0.0,0.0,0.0> | 距离，移动变化 | 4.0 |
 | ROTATION | vector | 任何 | <0.0,0.0,0.0> | 旋转，旋转变化，这个向量的含义是<ROLL, PITCH, YAW>。 <br/>* 旋转总是相对于prim的局部(local)方向向量。 | 1.8 |
 | SCALE | vector | 大于 <0.0,0.0,0.0> | <1.0,1.0,1.0> | 缩放，缩放变化，不可出现负值，如果等于ZERO_VECTOR（<0.0,0.0,0.0>），则视为无效的 | 3.0 |
 | ORIGIN | integer | 0/1/2 | 0 | 参照物，见下方特别说明 | 2.0 |
 | TIMING_FUNC | integer | 0/1/2/3 | 0 | 过渡效果，见下方特别说明 | 2.0 |
 | QUEUE | string | | | Queue模式，详见下文 | 3.0 |
+
+### DISTANCE 特殊用法
+
+4.0版本之后 DISTANCE 的取值添加了相对于物体尺寸的选项，支持后缀 x,y,z,X,Y,Z。
+
+- x, y, z: 本prim的尺寸
+- X, Y, Z: root prim的尺寸
+
+```lsl
+DISTANCE <1.2x,2X,0.5z> // 沿 x 方向运动 1.2 倍的 当前 prim 尺寸 x，沿 y 方向运动 2 倍 root prim 尺寸 x, 沿 z 方向运动 0.5 倍 当前 prim 的 尺寸 z。
+```
+
+**用例子来说明**
+
+1. 有一扇滑动开关的门，它的宽度是 x，高度是 z，厚度是 y。开启这扇门需要沿着 x 轴移动 0.8 倍门的宽度，如以下写法：
+
+```lsl
+DISTANCE <0.8x,0,0>
+```
+
+2. 一个可以缩放的滑块，我们无法确定它的尺寸，所以更没法确定它移动的具体的距离，只知道它会沿着 z 轴升起 root prim 尺寸 y 2 倍的高度。如以下写法：
+
+```lsl
+DISTANCE <0,0,2Y>
+```
 
 ### 关于 参照物 ORIGIN
 

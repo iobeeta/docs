@@ -1,6 +1,6 @@
 # OAC Devkit
 
-Version: 3.8
+Version: 4.0
 
 [PDF Document](https://iobeeta.github.io/docs/OAC%20Devkit/OAC%20Devkit.pdf)
 
@@ -61,12 +61,37 @@ Format: .OAC {key} {value}
 |---|---|---|---|---|---|
 | BROADCAST2 | integer | > -5 && != 0 | -4 | Broadcast sending range, -4:`LINK_THIS`, -3:`LINK_ALL_CHILDREN`, -2:`LINK_ALL_OTHERS`, -1:`LINK_SET`, 1:`LINK_ROOT`, and others | 3.3 |
 | DURATION | float | Any | 0.0 | If less than 0.1, it is treated as 0.0,<br/>0.0 means no transformation process | 1.7 |
-| DISTANCE | vector | Any | <0.0,0.0,0.0> | Transform distance | 1.7 |
+| DISTANCE | vector | Any | <0.0,0.0,0.0> | Transform distance | 4.0 |
 | ROTATION | vector | Any | <0.0,0.0,0.0> | Transform rotation, The meaning of this vector is <ROLL, PITCH, YAW>. <br/>* The rotation is always relative to the prim's local directional vector. | 1.8 |
 | SCALE | vector | Greater than <0.0,0.0,0.0> | <1.0,1.0,1.0> | Scale, scale change, no negative value, if equal to ZERO_VECTOR (<0.0,0.0,0.0>), it is considered invalid | 3.0 |
 | ORIGIN | integer | 0/1/2 | 0 | see special note below | 2.0 |
 | TIMING_FUNC | integer | 0/1/2/3 | 0 | see special note below | 2.0 |
 | QUEUE | string | | | Queue mode, see below | 3.0 |
+
+### DISTANCE special usage
+
+After version 4.0, the value of DISTANCE adds an option relative to the object size, supporting the suffix x, y, z, X, Y, Z.
+
+- x, y, z: the size of this prim
+- X, Y, Z: size of root prim
+
+```lsl
+DISTANCE <1.2x,2X,0.5z> //Move 1.2 times the current prim size x in the x direction, 2 times the root prim size x in the y direction, and 0.5 times the current prim size z in the z direction.
+```
+
+**examples**
+
+1. There is a sliding door with width x, height z, and thickness y. Opening the door requires moving 0.8 times the width of the door along the x-axis, as written below:
+
+```lsl
+DISTANCE <0.8x,0,0>
+```
+
+2. For a scalable slider, we cannot determine its size, so we cannot determine the specific distance it moves. We only know that it will rise along the z-axis by a height 2 times the root prim size y. It is written as follows:
+
+```lsl
+DISTANCE <0,0,2Y>
+```
 
 ### About ORIGIN
 
