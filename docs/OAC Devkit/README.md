@@ -1,6 +1,6 @@
 # OAC Devkit
 
-Version: 4.0
+Version: 4.1
 
 [PDF Document](https://iobeeta.github.io/docs/OAC%20Devkit/OAC%20Devkit.pdf)
 
@@ -214,6 +214,14 @@ Less than or equal to 0: Set to closed (to be opened) state, and can be opened a
 ```lsl
 llMessageLinked(..., 802840, "DIRECTION|1", "");
 llMessageLinked(..., 802840, "DIRECTION|-1", "");
+```
+
+#### Reload
+
+Manual reset script. (Reload all parameter from Notecard)
+
+```lsl
+llMessageLinked(..., 802840, "RELOAD", "");
 ```
 
 #### Submit global scale

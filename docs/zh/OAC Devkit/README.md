@@ -1,6 +1,6 @@
 # OAC Devkit
 
-Version: 4.0
+Version: 4.1
 
 [PDF Document](https://iobeeta.github.io/docs/zh/OAC%20Devkit/OAC%20Devkit%20(zh-CN).pdf)
 
@@ -224,6 +224,14 @@ llMessageLinked(..., 802840, "DIRECTION|-1", "");
 
 ```lsl
 llMessageLinked(..., 802840, "SCALE|1.0", "");
+```
+
+#### 重载
+
+手动提交以重载脚本（重新读取所有配置参数）
+
+```lsl
+llMessageLinked(..., 802840, "RELOAD", "");
 ```
 
 ### 本地事件广播
