@@ -359,7 +359,10 @@ list LINES = [
 | MENU_BACK_OVERWRITE | string | 任意 | 空字符串 | 替换返回选项文案 |
 | MENU_PREV_OVERWRITE | string | 任意 | 空字符串 | 替换前一页选项文案 |
 | MENU_NEXT_OVERWRITE | string | 任意 | 空字符串 | 替换后一页选项文案 |
-| SETS_LIST | integer | 0 / 1 | 0 | 见下文样例 |
+| DIALOG_SETS | string | 任意 | 空字符串 | 设置套装(SETS)菜单提示信息，换行请使用"\n" |
+| DIALOG_SET | string | 任意 | 空字符串 | 设置配色(SET)菜单提示信息，换行请使用"\n"  |
+| DIALOG_PART | string | 任意 | 空字符串 | 设置部位(PART)菜单提示信息，换行请使用"\n"  |
+| SETS_LIST | list | 键/值对 | 空数组 | 见下文样例 |
 
 #### SETS_LIST
 

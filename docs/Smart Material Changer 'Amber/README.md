@@ -359,7 +359,10 @@ list LINES = [
 | MENU_BACK_OVERWRITE | string | Any | Empty string | Replace the return option text |
 | MENU_PREV_OVERWRITE | string | Any | Empty string | Replace the previous page option text |
 | MENU_NEXT_OVERWRITE | string | Any | Empty string | Replace the next page option text |
-| SETS_LIST | integer | 0 / 1 | 0 | See below |
+| DIALOG_SETS | string | Any | Empty string | Set the menu content of SETS. Please use "\n" for line breaks. |
+| DIALOG_SET | string | Any | Empty string | Set the menu content of SET. Please use "\n" for line breaks.  |
+| DIALOG_PART | string | Any | Empty string | Set the menu content of PART. Please use "\n" for line breaks.  |
+| SETS_LIST | list | key/value pairs | Empty list | See below |
 
 #### SETS_LIST
 
