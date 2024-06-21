@@ -18,3 +18,8 @@
 .Wrap {
     max-width: 1600px;
 }
+
+table > thead {
+    position: sticky;
+    top: 50px;
+}

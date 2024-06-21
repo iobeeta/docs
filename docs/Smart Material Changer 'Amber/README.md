@@ -209,8 +209,8 @@ list LINES = [
 |---|---|---|---|
 | name | string | any | In a set of LINES configurations, it's not repeatable. This is one of the keys to change material. It will also work as option in local menu format |
 | matching type | integer | table below | Describe the type of match |
-| matching text | string/integer | Name or description for matching, to define with parameter 2 |
-| face(es) | string/integer | Which face of the target PRIM. Then number of PRIM(0-7).<br>It could transfer string such as "0267". It will match mutiple face. And no need to follow the order, but can not be repetitive.<br>You can also use ALL_SIDES(-1),and no more face then, since ALL_SIDES include every face
+| matching text | string/integer | any | Name or description for matching, to define with parameter 2 |
+| face(es) | string/integer | -1~7/"01234567"/ALL_SIDES | Which face of the target PRIM. Then number of PRIM(0-7).<br>It could transfer string such as "0267". It will match mutiple face. And no need to follow the order, but can not be repetitive.<br>You can also use ALL_SIDES(-1),and no more face then, since ALL_SIDES include every face |
 
 **Matching type**
 
