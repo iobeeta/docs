@@ -289,19 +289,32 @@ Refer to [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PR
 
 | Properties | Number | Corresponding Properties | Descriptions | Number of parameters | Value | Remark |
 |---|---|---|---|---|---|---|
-| D | 0 | [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXTURE) | Diffuse reflection mapping | 1 | "{UUID}" | Only change the map, others are inherited |
-| DP | 1 | [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXTURE) | Diffuse reflection mapping (detail) | 4 | "{UUID}", {repeats}, {position}, {rotation} | Set all properties related to diffuse reflection |
-| N | 2 | [PRIM_NORMAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_NORMAL) | Normal mapping | 1 | "{UUID}" | Only change the map, others are inherited |
-| NP | 3 | [PRIM_NORMAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_NORMAL) |  Normal mapping (detail) | 4 | "{UUID}", {repeats}, {position}, {rotation} | Set all properties related to normal mapping |
-| S | 4 | [PRIM_SPECULAR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_SPECULAR) | Specular mapping | 1 | "{UUID}" | Only change the map, others are inherited |
-| SP | 5 | [PRIM_SPECULAR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_SPECULAR) |Specular mapping (detail) | 7 | "{UUID}", {repeats}, {position}, {rotation}, {reflective color}, {glossiness}, {environment} | Set all properties related to gloss |
-| C | 6 | [PRIM_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_COLOR) | Color | 1 | {Color} | Color and alpha can be set separately
-| A | 7 | [PRIM_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_COLOR) | Alpha | 1 | {Alpha} | Color and alpha can be set separately
-| G | 8 | [PRIM_GLOW](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLOW) | Glow | 1 | {Glow} | Light like a bulb |
-| F | 9 | [PRIM_FULLBRIGHT](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_FULLBRIGHT) | Full bright | 1 | {TRUE/FALSE} | Turn on or off |
-| B | 10 | [PRIM_BUMP_SHINY](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_BUMP_SHINY) | Normal and specular | 2 | {Level}, {Mode} | SL basic normal and specular |
-| T | 11 | [PRIM_TEXGEN](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXGEN) | Mapping mode | 1 | {Mode} | Default/Plane |
-| M | 12 | [PRIM_ALPHA_MODE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_ALPHA_MODE) | Alpha mode | 2 | {Mode}, {Mask cutoff} | The 2nd parameter can not be omit, whether or not with the mask  |
+| D | 0 | [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXTURE) | Diffuse texture | 1 | {texture} | Only change the texture, others are inherited |
+| DP | 1 | [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXTURE) | Diffuse(detail) | 4 | {texture}, {repeats}, {offsets}, {rotation_in_radians} | Set all properties related to diffuse reflection |
+| N | 2 | [PRIM_NORMAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_NORMAL) | Normal texture | 1 | {texture} | Only change the texture, others are inherited |
+| NP | 3 | [PRIM_NORMAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_NORMAL) |  Normal(detail) | 4 | {texture}, {repeats}, {offsets}, {rotation_in_radians} | Set all properties related to normal mapping |
+| S | 4 | [PRIM_SPECULAR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_SPECULAR) | Specular texture | 1 | {texture} | Only change the texture, others are inherited |
+| SP | 5 | [PRIM_SPECULAR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_SPECULAR) |Specular(detail) | 7 | {texture}, {repeats}, {offsets}, {rotation_in_radians}, {color}, {glossiness}, {environment} | Set all properties related to gloss |
+| C | 6 | [PRIM_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_COLOR) | Color | 1 | {color} | Color and alpha can be set separately |
+| A | 7 | [PRIM_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_COLOR) | Alpha | 1 | {alpha} | Color and alpha can be set separately |
+| G | 8 | [PRIM_GLOW](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLOW) | Glow | 1 | {glow} | Light like a bulb |
+| F | 9 | [PRIM_FULLBRIGHT](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_FULLBRIGHT) | Full bright | 1 | {boolean} | Turn on or off |
+| B | 10 | [PRIM_BUMP_SHINY](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_BUMP_SHINY) | Normal and specular | 2 | {shiny}, {bump} | SL basic normal and specular |
+| T | 11 | [PRIM_TEXGEN](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXGEN) | Mapping mode | 1 | {mode} | Default/Plane |
+| M | 12 | [PRIM_ALPHA_MODE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_ALPHA_MODE) | Alpha mode | 2 | {alpha_mode}, {mask_cutoff} | The 2nd parameter can not be omit, whether or not with the mask |
+| GR | 13 | [PRIM_RENDER_MATERIAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_RENDER_MATERIAL) | Material settings | 1 | {render_material} | A material in the inventory of the prim this script is in or a UUID of a material |
+| GB | 14 | [PRIM_GLTF_BASE_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_BASE_COLOR) | GLTF Base texture | 1 | {texture} | Only change the texture, others are inherited |
+| GBT | 15 | [PRIM_GLTF_BASE_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_BASE_COLOR) | Color | 1 | {color} | Only change the color, others are inherited |
+| GBP | 16 | [PRIM_GLTF_BASE_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_BASE_COLOR) | GLTF Base(detail) | 9 | {texture}, {repeats}, {offsets}, {rotation_in_radians}, {color}, {alpha}, {gltf_alpha_mode}, {alpha_mask_cutoff}, {double_sided} | Set all properties related to GLTF Base |
+| GN | 17 | [PRIM_GLTF_NORMAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_NORMAL) | GLTF Normal texture | 1 | {texture} | Only change the texture, others are inherited |
+| GNP | 18 | [PRIM_GLTF_NORMAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_NORMAL) | GLTF Normal(detail) | 4 | {texture}, {repeats}, {offsets}, {rotation_in_radians} | Set all properties related to GLTF Normal |
+| GM | 19 | [PRIM_GLTF_METALLIC_ROUGHNESS](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_METALLIC_ROUGHNESS) | GLTF Metallic & Roughness texture | 1 | {texture} | Only change the texture, others are inherited |
+| GMM | 20 | [PRIM_GLTF_METALLIC_ROUGHNESS](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_METALLIC_ROUGHNESS) | Metallic | 1 | {metallic_factor} | Only change the metallic, others are inherited |
+| GMR | 21 | [PRIM_GLTF_METALLIC_ROUGHNESS](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_METALLIC_ROUGHNESS) | Roughness | 1 | {roughness_factor} | Only change the roughness, others are inherited |
+| GMP | 22 | [PRIM_GLTF_METALLIC_ROUGHNESS](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_METALLIC_ROUGHNESS) | GLTF Metallic & Roughness(detail) | 6 | {texture}, {repeats}, {offsets}, {rotation_in_radians}, {metallic_factor}, {roughness_factor} | Set all properties related to GLTF Metallic & Roughness |
+| GE | 23 | [PRIM_GLTF_EMISSIVE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_EMISSIVE) | GLTF Emissive texture | 1 | {texture} | Only change the texture, others are inherited |
+| GET | 24 | [PRIM_GLTF_EMISSIVE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_EMISSIVE) | GLTF Emissive tint | 1 | {color} | Only change the tint, others are inherited |
+| GEP | 25 | [PRIM_GLTF_EMISSIVE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_EMISSIVE) | GLTF Emissive(detail) | 5 | {texture}, {repeats}, {offsets}, {rotation_in_radians}, {emissive_tint} | Set all properties related to GLTF Emissive |
 
 **If the value is given as an empty string, it means no replacement (use the current value)**
 
