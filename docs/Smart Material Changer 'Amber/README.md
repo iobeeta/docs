@@ -2,7 +2,7 @@
 
 **'Amber**
 
-Version: 1.12
+Version: 2.0 PBR
 
 [PDF Document](https://iobeeta.github.io/docs/Smart%20Material%20Changer%20'Amber/Smart%20Material%20Changer%20'Amber.pdf)
 
