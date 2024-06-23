@@ -283,7 +283,7 @@ list LINES = [
 ];
 ```
 
-#### Properties
+**属性**
 
 Refer to [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXTURE)
 
