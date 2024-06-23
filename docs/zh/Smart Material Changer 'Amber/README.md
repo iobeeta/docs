@@ -2,9 +2,9 @@
 
 **'Amber**
 
-版本: 1.12
+版本: 2.0 PBR
 
-[PDF 文档](https://iobeeta.github.io/docs/zh/Smart%20Material%20Changer%20'Amber/Smart%20Material%20Changer%20'Amber.pdf)
+[PDF 文档](https://iobeeta.github.io/docs/zh/Smart%20Material%20Changer%20'Amber/Smart%20Material%20Changer%20%27Amber.pdf)
 
 ## 简介
 
@@ -192,7 +192,7 @@ Ps: 没有使用 Notecard 作为配置的载体，是因为丫加载实在是太
 
 #### LINES
 
-**PART**
+##### PART
 
 部位/目标/选择器
 
@@ -209,8 +209,8 @@ list LINES = [
 |---|---|---|---|
 | 名称 | string | 任意 | 一组LINES的配置中，不可重复，这是用来换材质的依据之一，在本地菜单模式中也会作为选项来使用 |
 | 匹配类型 | integer | 见下表 | 用于描述匹配的类型 |
-| 匹配文本 | string/integer | 用于匹配的名称或者描述，与参数2配合进行定义 |
-| 面 | string/integer | 目标PRIM的哪个(些)面，PRIM的面编号(0~7)。<br>可以传递字符串比如“0267”，将会匹配多个面，不必按顺序，但不可重复。<br>也可以写 ALL_SIDES(-1)，此时不可再写其它面，因为ALL_SIDES代表所有面。|
+| 匹配文本 | string/integer | 任何 | 用于匹配的名称或者描述，与参数2配合进行定义 |
+| 面 | string/integer | -1~7/"01234567"/ALL_SIDES | 目标PRIM的哪个(些)面，PRIM的面编号(0~7)。<br>可以传递字符串比如“0267”，将会匹配多个面，不必按顺序，但不可重复。<br>也可以写 ALL_SIDES(-1)，此时不可再写其它面，因为ALL_SIDES代表所有面。|
 
 **匹配类型**
 
@@ -268,7 +268,7 @@ list LINES = [
 ];
 ```
 
-**SET**
+##### SET
 
 配色/主题/材质方案
 
@@ -289,19 +289,35 @@ list LINES = [
 
 | 属性 | 对应值 | 对应属性 | 描述 | 参数数量 | 值 | 说明 |
 |---|---|---|---|---|---|---|
-| D | 0 | [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXTURE) | 漫反射贴图 | 1 | "{UUID}" | 仅换图，其它属性继承 |
-| DP | 1 | [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXTURE) | 漫反射(详细) | 4 | "{UUID}", {重复}, {位置}, {旋转} | 设置漫反射相关的所有属性 |
-| N | 2 | [PRIM_NORMAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_NORMAL) | 硬表面贴图 | 1 | "{UUID}" | 仅换图，其它属性继承 |
-| NP | 3 | [PRIM_NORMAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_NORMAL) | 硬表面(详细) | 4 | "{UUID}", {重复}, {位置}, {旋转} | 设置硬表面相关的所有属性 |
-| S | 4 | [PRIM_SPECULAR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_SPECULAR) | 光泽贴图 | 1 | "{UUID}" | 仅换图，其它属性继承 |
-| SP | 5 | [PRIM_SPECULAR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_SPECULAR) | 光泽(详细) | 7 | "{UUID}", {重复}, {位置}, {旋转}, {反光颜色}, {反光度}, {环境光强度} | 设置光泽相关的所有属性 |
-| C | 6 | [PRIM_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_COLOR) | 颜色 | 1 | {颜色} | color 与 alpha 可以分开设置
-| A | 7 | [PRIM_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_COLOR) | 透明度 | 1 | {透明度} | color 与 alpha 可以分开设置
+| D | 0 | [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXTURE) | 漫反射贴图 | 1 | {贴图} | 仅换图，其它参数继承 |
+| DP | 1 | [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXTURE) | 漫反射(详细) | 4 | {贴图}, {重复}, {位置}, {旋转} | 设置漫反射相关的所有属性 |
+| N | 2 | [PRIM_NORMAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_NORMAL) | 硬表面贴图 | 1 | {贴图} | 仅换图，其它参数继承 |
+| NP | 3 | [PRIM_NORMAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_NORMAL) | 硬表面(详细) | 4 | {贴图}, {重复}, {位置}, {旋转} | 设置硬表面相关的所有属性 |
+| S | 4 | [PRIM_SPECULAR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_SPECULAR) | 光泽贴图 | 1 | {贴图} | 仅换图，其它参数继承 |
+| SP | 5 | [PRIM_SPECULAR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_SPECULAR) | 光泽(详细) | 7 | {贴图}, {重复}, {位置}, {旋转}, {反光颜色}, {反光度}, {环境光强度} | 设置光泽相关的所有属性 |
+| C | 6 | [PRIM_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_COLOR) | 颜色 | 1 | {颜色} | color 与 alpha 可以分开设置 |
+| A | 7 | [PRIM_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_COLOR) | 透明度 | 1 | {透明度} | color 与 alpha 可以分开设置 |
 | G | 8 | [PRIM_GLOW](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLOW) | 发光 | 1 | {强度} | 灯泡一样的光 |
-| F | 9 | [PRIM_FULLBRIGHT](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_FULLBRIGHT) | 全亮模式 | 1 | {TRUE/FALSE} | 开启或者关闭 |
+| F | 9 | [PRIM_FULLBRIGHT](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_FULLBRIGHT) | 全亮模式 | 1 | {布尔} | 开启或者关闭 |
 | B | 10 | [PRIM_BUMP_SHINY](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_BUMP_SHINY) | 硬表面和反光 | 2 | {强度}, {模式} | 系统自带的那个 |
 | T | 11 | [PRIM_TEXGEN](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXGEN) | 贴图模式 | 1 | {模式} | 默认/平面 |
-| M | 12 | [PRIM_ALPHA_MODE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_ALPHA_MODE) | 透明模式 | 2 | {模式}, {遮罩屏蔽} | 不管用不用 alpha masking，第二个参数都不能少 |
+| M | 12 | [PRIM_ALPHA_MODE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_ALPHA_MODE) | 透明模式 | 2 | {模式}, {遮罩屏蔽} | 不管用不用 遮罩屏蔽，第二个参数都不能少 |
+| GR | 13 | [PRIM_RENDER_MATERIAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_RENDER_MATERIAL) | 材质设定 | 1 | {render_material} | 目录中的材质或者它们的UUID，通常用来开启或关闭PBR模式 |
+| GB | 14 | [PRIM_GLTF_BASE_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_BASE_COLOR) | GLTF 漫反射贴图 | 1 | {贴图} | 仅换图，其他参数继承 |
+| GBC | 15 | [PRIM_GLTF_BASE_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_BASE_COLOR) | GLTF 漫反射颜色 | 1 | {颜色} | 仅换颜色，其他参数继承 |
+| GBA | 16 | [PRIM_GLTF_BASE_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_BASE_COLOR) | GLTF 漫反射透明度 | 1 | {透明度} | 仅换透明度，其他参数继承 |
+| GBM | 17 | [PRIM_GLTF_BASE_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_BASE_COLOR) | GLTF 漫反射透明模式 | 2 | {模式}, {遮罩屏蔽} | 不管用不用 遮罩屏蔽，第二个参数都不能少 |
+| GBD | 18 | [PRIM_GLTF_BASE_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_BASE_COLOR) | GLTF 漫反射双面模式 | 1 | {布尔} | 仅换此项，其他参数继承。是否显示一个单面的背面。 |
+| GBP | 19 | [PRIM_GLTF_BASE_COLOR](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_BASE_COLOR) | GLTF 漫反射(详细) | 9 | {贴图}, {重复}, {位置}, {旋转}, {颜色}, {透明度}, {透明模式}, {遮罩屏蔽}, {双面} | 设定漫反射全部参数 |
+| GN | 20 | [PRIM_GLTF_NORMAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_NORMAL) | GLTF 硬表面贴图 | 1 | {贴图} | 仅换图，其他参数继承 |
+| GNP | 21 | [PRIM_GLTF_NORMAL](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_NORMAL) | GLTF 硬表面(详细) | 4 | {贴图}, {重复}, {位置}, {旋转} | 设定硬表面全部参数 |
+| GM | 22 | [PRIM_GLTF_METALLIC_ROUGHNESS](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_METALLIC_ROUGHNESS) | GLTF 金属度和粗糙度贴图 | 1 | {贴图} | 仅换贴图，其他参数继承 |
+| GMM | 23 | [PRIM_GLTF_METALLIC_ROUGHNESS](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_METALLIC_ROUGHNESS) | GLTF 金属度 | 1 | {金属度} | 仅变更金属度，其他参数继承。取值 0.0~1.0 |
+| GMR | 24 | [PRIM_GLTF_METALLIC_ROUGHNESS](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_METALLIC_ROUGHNESS) | GLTF 粗糙度 | 1 | {粗糙度} | 仅变更粗糙度，其他参数继承。取值 0.0~1.0 |
+| GMP | 25 | [PRIM_GLTF_METALLIC_ROUGHNESS](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_METALLIC_ROUGHNESS) | GLTF 金属度和粗糙度(详细) | 6 | {贴图}, {重复}, {位置}, {旋转}, {金属度}, {粗糙度} | 设置金属度和粗糙度的全部参数 |
+| GE | 26 | [PRIM_GLTF_EMISSIVE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_EMISSIVE) | GLTF 自发光贴图 | 1 | {贴图} | 仅换贴图，其他参数继承 |
+| GET | 27 | [PRIM_GLTF_EMISSIVE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_EMISSIVE) | GLTF 自发光颜色 | 1 | {颜色} | 仅换颜色，其他参数继承 |
+| GEP | 28 | [PRIM_GLTF_EMISSIVE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_GLTF_EMISSIVE) | GLTF 自发光(详细) | 5 | {贴图}, {重复}, {位置}, {旋转}, {颜色} | 设置自发光全部参数 |
 
 **如果值给予空字符串，表示不替换（继承当前的值）**
 
@@ -534,3 +550,5 @@ KERNEL 回调: **-643323411**
 ```lsl
   llMessageLinked({SENDER}, -643323421, "{SET1}�{SET2}�....", id);
 ```
+
+\* 感谢亲爱的 **Amber0089**

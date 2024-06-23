@@ -4,7 +4,7 @@
 
 Version: 2.0 PBR
 
-[PDF Document](https://iobeeta.github.io/docs/Smart%20Material%20Changer%20'Amber/Smart%20Material%20Changer%20'Amber.pdf)
+[PDF Document](https://iobeeta.github.io/docs/Smart%20Material%20Changer%20'Amber/Smart%20Material%20Changer%20%27Amber.pdf)
 
 ## Introduction
 
@@ -192,7 +192,7 @@ Another type of remote control, base on menus instead of HUDs.
 
 #### LINES
 
-**PART**
+##### PART
 
 Part/Target/Picker
 
@@ -268,7 +268,7 @@ list LINES = [
 ];
 ```
 
-**SET**
+##### SET
 
 Color/Theme/Material scheme
 
