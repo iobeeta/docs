@@ -1,8 +1,8 @@
 # \[Beeta\] 产品文档目录
 
-材质替换器 <sup>'PanGu</sup> [Smart Material Changer 'PanGu](Smart%20Material%20Changer%20'PanGu/)
+材质替换器 <sup>'PanGu</sup> [Smart Material Changer 'PanGu](Smart%20Material%20Changer%20%27PanGu/)
 
-材质替换器 <sup>'Amber</sup> [Smart Material Changer 'Amber](Smart%20Material%20Changer%20'Amber/)
+材质替换器 <sup>'Amber</sup> [Smart Material Changer 'Amber](Smart%20Material%20Changer%20%27Amber/)
 
 变换动画开发工具 [OAC Devkit](OAC%20Devkit/)
 
