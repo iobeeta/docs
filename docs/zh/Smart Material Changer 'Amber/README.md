@@ -4,7 +4,7 @@
 
 版本: 2.0 PBR
 
-[PDF 文档](https://iobeeta.github.io/docs/zh/Smart%20Material%20Changer%20'Amber/Smart%20Material%20Changer%20%27Amber.pdf)
+[PDF 文档](https://iobeeta.github.io/docs/zh/Smart%20Material%20Changer%20%27Amber/Smart%20Material%20Changer%20%27Amber%20(zh-CN).pdf)
 
 ## 简介
 
