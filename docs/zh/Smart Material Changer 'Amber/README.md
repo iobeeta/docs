@@ -39,30 +39,54 @@ Ps: 没有使用 Notecard 作为配置的载体，是因为丫加载实在是太
 | SMC.Menu | 通过点击弹出菜单，选择PART与SET，实现材质的替换 |
 | .SMC.Menu | 用于SMC.Menu的配置 |
 
-## 示意图
+## 脚本文件关系
 
-### 脚本关系
+**必须将 .SMC 与 SMC.KERNEL 放在一起**
 
-![script relationship](img/script-relationship.png)
+![Server/KERNEL](img/server.png)
 
-### 远端
+**必须将 .SMC.Client 与 SMC.Client 放在一起**
+
+![Client](img/client.png)
+
+**必须将 .SMC 与 SMC.KERNEL 放在一起, 而且它们必须伴随 KERNEL**
+
+![Menu](img/remote-menu.png)
+
+## 配置文件
+
+在红框内的部分都是可被修改的的配置项
+
+**.SMC**
+
+![.SMC](img/SMC-config.png)
+
+**.SMC.Client**
+
+![.SMC.Client](img/SMC-Client-config.png)
+
+**.SMC.Menu**
+
+![.SMC.Menu](img/SMC-Menu-config.png)
+
+## 脚本部署
+
+### 远端控制
 
 ![remote control](img/remote-control.png)
 
-### 本地
+### 本地控制
 
 ![local control](img/local-control.png)
 
-### 远端/本地
-
-**多重部署分区控制**
+### 多重部署
 
 - **同一个 linkset 中的不同 prim 中可以分别放置多个 SMC.Client，他们可以负责各自的部位，被一个或者多个 SMC.KERNEL 控制**
 - **同一个 linkset 中的不同 prim 中可以分别放置多组 SMC.KERNEL + SMC.Client，通过本地的方式分别控制多组规则**
 
 ![remote/local control and multiple](img/remote-local-control-&-multiple.png)
 
-### 远端/本地 交叉
+### 远端/本地 多重部署
 
 **多重部署分区交叉控制**
 

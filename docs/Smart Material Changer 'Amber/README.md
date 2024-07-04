@@ -39,30 +39,54 @@ Ps: Notecard is not used for configuration because it loads too slow, so fucking
 | SMC.Menu | Replace material by clicking on the pop-up menu and selecting PART and SET. |
 | .SMC.Menu | Configuration for SMC.Menu |
 
-## Schema
+## Scripting relationships
 
-### Scripting relationships
+**Put .SMC and SMC.KERNEL together**
 
-![script relationship](img/script-relationship.png)
+![Server/KERNEL](img/server.png)
 
-### Remote
+**Put .SMC.Client and SMC.Client together**
+
+![Client](img/client.png)
+
+**Put .SMC and SMC.KERNEL together, and they must be accompanied by KERNEL**
+
+![Menu](img/remote-menu.png)
+
+## Configuration files
+
+All parts in the red box can be edited.
+
+**.SMC**
+
+![.SMC](img/SMC-config.png)
+
+**.SMC.Client**
+
+![.SMC.Client](img/SMC-Client-config.png)
+
+**.SMC.Menu**
+
+![.SMC.Menu](img/SMC-Menu-config.png)
+
+## Deployment
+
+### Remote control
 
 ![remote control](img/remote-control.png)
 
-### Local
+### Local control
 
 ![local control](img/local-control.png)
 
-### Remote/Local
-
-**Multiple deployment**
+### Multiple
 
 - **Multiple SMC.Clients can be placed in different prims in the same linkset, and they can work for their own parts, controlled by one or more SMC.KERNELs.**
 - **Multiple sets of SMC.KERNEL + SMC.Client can be placed in different prims in the same linkset to control multiple sets of rules with by local.**
 
 ![remote/local control and multiple](img/remote-local-control-&-multiple.png)
 
-### Remote/Local cross
+### Remote/Local Multiple Cross
 
 **Multiple deployment and cross control**
 
@@ -184,7 +208,7 @@ Another type of remote control, base on menus instead of HUDs.
 | Configuration | Type | Value | Default | description |
 |---|---|---|---|---|
 | DEBUG | integer | 0 / 1 | 0 | Debug mode, when enabled, outputs more information |
-| LOCAL | integer | -2147483648 ~ 2147483647 (0 无效) | 0 | Local communication channels, mostly used in menu format |
+| LOCAL | integer | -2147483648 ~ 2147483647 (0 invalid) | 0 | Local communication channels, mostly used in menu format |
 | REMOTE | integer | -10000 ~ 10000 | 0 | Remote Communication Channel Offset（Note: This is private channel offset, not the exact channel），mostly used in HUD format |
 | CACHE | integer | 0/1 | 0 | Resource buffer(UUID).If there are a lot of reused images in the configuration, we recommend turnning this. It could save much RAM |
 | RANGE | integer | 0/1/2/3 | 0 | Control distance，0:10m, 1:20m, 2:100m, 3:all region |
@@ -355,7 +379,7 @@ list LINES = [
 | Configurations | Type | Values | Default | Description |
 |---|---|---|---|---|
 | DEBUG | integer | 0 / 1 | 0 | Debug mode, when enabled, outputs more information |
-| LOCAL | integer | -2147483648 ~ 2147483647 (0 not valid) | 0 | Local communication channels, mostly used in menu format |
+| LOCAL | integer | -2147483648 ~ 2147483647 (0 invalid) | 0 | Local communication channels, mostly used in menu format |
 | REMOTE | integer | -10000 ~ 10000 | 0 | Remote communication channel offset (Note: This is private channel offset, not the exact channel), mostly used in HUD format |
 | DEBOUNCE | float | ≥ 0.0 | 0.0 | Anti-shake period, any changes in this period will be accumulated until there is no operation to change the material and start to work after this period, to avoid the efficiency bottleneck caused by frequent switching |
 | CACHE | integer | 0 / 1 | 0 | Selector caching, use cache for more efficient matching speed. Note: when this option is turned on, you can't do link and unlink operation on the object, or it will be error |
