@@ -40,7 +40,7 @@ export default ({ initOpts, evaluateOnly = false } = {}) => ({
               <div class="toc">
                 <template v-for="(item, index) in storage.toc">
                   <div :class="['toc-level-' + item.level]">
-                    <a :href="'#' + ${encodeURIComponent(store.state.route.path)} + '#' + item.href">{{ item.content }}</a>
+                    <a :href="'#' + ${encodeURIComponent($store.state.route.path)} + '#' + item.href">{{ item.content }}</a>
                   </div>
                 </template>
               </div>
