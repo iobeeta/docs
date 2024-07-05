@@ -107,7 +107,7 @@ Implement material replacement directly on the object through a menu.
 | ![prepare object](img/prepare-object.png) | ![prepare textures](img/prepare-texture.png) |
 | Prepare a linkset containing three 6-sided boxes. | Prepare three textures to be used for changing the diffuse. |
 
-I want to replace all faces of the box within the red outline, the faces of the box within the green outline, and the faces of the box within the yellow outline.
+Planning to replace all faces of the box within the red outline, the faces of the box within the green outline, and the faces of the box within the yellow outline. Let them to switch between **red**, **green**, and **blue** diffuse textures.
 
 **In edit mode, use the face selector to view the face numbers.**
 
@@ -116,8 +116,11 @@ I want to replace all faces of the box within the red outline, the faces of the 
 | ![rename red](img/prepare-named-1.png) | ![rename green](img/prepare-named-2.png) | ![rename yellow](img/prepare-named-3.png) |
 | Rename the prim to "ONE" | Rename the prim to "TWO" | Rename the prim to "THREE" |
 
-**All faces of ONE**, **face 0 of TWO**, **face 4 of THREE**. Let them to switch between **red**, **green**, and **blue** diffuse textures.
+Now, there are faces that can be precisely located:
 
+- **All faces** of the prim named **"ONE"**
+- Face **0** of the prim named **"TWO"**
+- Face **4** of the prim named **"THREE"**
 
 | Place the script |
 |---|
