@@ -41,15 +41,15 @@ Ps: Notecard is not used for configuration because it loads too slow, so fucking
 
 ## Scripting relationships
 
-**Put .SMC and SMC.KERNEL together**
+**Put ".SMC" and "SMC.KERNEL" together.**
 
 ![Server/KERNEL](img/server.png)
 
-**Put .SMC.Client and SMC.Client together**
+**Put ".SMC.Client" and "SMC.Client" together.**
 
 ![Client](img/client.png)
 
-**Put .SMC and SMC.KERNEL together, and they must be accompanied by KERNEL**
+**Put ".SMC.Menu" and "SMC.Menu" together, and they must be accompanied by KERNEL.**
 
 ![Menu](img/remote-menu.png)
 
@@ -94,6 +94,55 @@ All parts in the red box can be edited.
 - **Multiple KERNEL control ranges are allowed to intersect, e.g., controlling mapping and color.**
 
 ![remote/local control and multiple cross control](img/remote-local-multiple-cross-control.png)
+
+
+## Quick Start
+
+### Menu application
+
+Implement material replacement directly on the object through a menu.
+
+| Perpare ||
+|---|---|
+| ![alt text](img/prepare-object.png) | ![alt text](img/prepare-texture.png) |
+| Prepare a linkset containing three 6-sided boxes. | Prepare three textures to be used for changing the diffuse. |
+
+I want to replace all faces of the box within the red outline, the faces of the box within the green outline, and the faces of the box within the yellow outline.
+
+**In edit mode, use the face selector to view the face numbers.**
+
+| Rename prims |||
+|---|---|---|
+| ![alt text](img/prepare-named-1.png) | ![alt text](img/prepare-named-2.png) | ![alt text](img/prepare-named-3.png) |
+| Rename the prim to "ONE" | Rename the prim to "TWO" | Rename the prim to "THREE" |
+
+**All faces of ONE**, **face 0 of TWO**, **face 4 of THREE**. Let them to switch between **red**, **green**, and **blue** diffuse textures.
+
+
+| Place the script |
+|---|
+| ![alt text](img/prepare-script.png) |
+| Drag and drop the required script. |
+
+Due to using the menu mode, KERNEL, Client, Menu, and their configuration files will all be placed into the "Contents" of the object.
+
+| Edit .SMC |
+|---|
+| ![alt text](img/config-part.png) |
+| Define all the parts and give them names. <br>The definition of **PART** is similar to a **selector** or **locator**, describing how to find the target face. |
+| ![alt text](img/config-set.png) |
+| Define three textures for different colors and give them names.<br>Each PART will switch between three styles, so all three variations need to be fully specified. |
+
+| Edit .SMC and .SMC.Client |
+|---|
+| ![alt text](img/config-local.png) |
+| Adjust LOCAL to the same non-zero value. |
+
+| Edit .SMC.Menu |
+|---|
+| ![alt text](img/config-menu.png) |
+| Set TOUCH = 1, Enable touch. |
+
 
 ## User guide
 
@@ -238,17 +287,17 @@ list LINES = [
 
 **Matching type**
 
-| Constant | Value | description |
+| Constant | Value | Description |
 |---|---|---|
-| FULL | 0 | Match full text of the PRIM name|
-| PREFIX | 1 | Match the prefix of the PRIM name|
-| SUFFIX | 2 | Match the suffix of the PRIM name|
-| SMART | 3 | Intelligent matching of PRIM names (temporarily unavailable) |
+| FULL | 0 | Match full text of the PRIM name |
+| PREFIX | 1 | Match the prefix of the PRIM name |
+| SUFFIX | 2 | Match the suffix of the PRIM name |
+| SMART | 3 | (temporarily unavailable) Intelligent matching of PRIM names |
 | CONST | 4 | In the manner of constants in SL. The matching text could be: LINK_SET, LINK_ALL_CHILDREN, LINK_ALL_OTHERS, LINK_ROOT, LINK_THIS |
 | DFULL | 10 | Match full text of the PRIM description |
 | DPREFIX | 11 | Match the prefix of the PRIM description |
 | DSUFFIX | 12 | Match the suffix of the PRIM description |
-| DSMART | 13 | Intelligent matching of PRIM description (temporarily unavailable) |
+| DSMART | 13 | (temporarily unavailable) Intelligent matching of PRIM description |
 
 **Examples**
 
@@ -303,15 +352,15 @@ Color/Theme/Material scheme
 ```lsl
 list LINES = [
   PART, ...,
-  SET, {property}, ..., {property}, ..., {property}, ...
+  SET, "{name}", {property}, {values...}, {property}, {values...}
 ];
 ```
 
-**属性**
+**Property**
 
 Refer to [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXTURE)
 
-| Properties | Number | Corresponding Properties | Descriptions | Number of parameters | Value | Remark |
+| Property | Number | Corresponding Property | Description | Number of parameters | Value | Remark |
 |---|---|---|---|---|---|---|
 | D | 0 | [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXTURE) | Diffuse texture | 1 | {texture} | Only change the texture, others are inherited |
 | DP | 1 | [PRIM_TEXTURE](https://wiki.secondlife.com/wiki/LlSetPrimitiveParams#PRIM_TEXTURE) | Diffuse(detail) | 4 | {texture}, {repeats}, {offsets}, {rotation_in_radians} | Set all properties related to diffuse reflection |
