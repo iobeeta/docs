@@ -95,7 +95,6 @@ All parts in the red box can be edited.
 
 ![remote/local control and multiple cross control](img/remote-local-multiple-cross-control.png)
 
-
 ## Quick Start
 
 ### Menu application
@@ -150,7 +149,7 @@ Due to using the menu mode, KERNEL, Client, Menu, and their configuration files 
 |---|---|
 | ![menu pop-up](img/menu-default.png) | ![apply](img/menu-default-2.png) |
 
-## User guide
+<!-- ## User guide
 
 Common applications
 
@@ -218,7 +217,7 @@ Another type of remote control, base on menus instead of HUDs.
 - Rename the prim of linkset.
 - Click the HUD to use.
 
-**The "REMOTE" in .SMC and .SMC.Client must be the same.**
+**The "REMOTE" in .SMC and .SMC.Client must be the same.** -->
 
 ## Scenario example
 
