@@ -104,7 +104,7 @@ Implement material replacement directly on the object through a menu.
 
 | Perpare ||
 |---|---|
-| ![alt text](img/prepare-object.png) | ![alt text](img/prepare-texture.png) |
+| ![prepare object](img/prepare-object.png) | ![prepare textures](img/prepare-texture.png) |
 | Prepare a linkset containing three 6-sided boxes. | Prepare three textures to be used for changing the diffuse. |
 
 I want to replace all faces of the box within the red outline, the faces of the box within the green outline, and the faces of the box within the yellow outline.
@@ -113,7 +113,7 @@ I want to replace all faces of the box within the red outline, the faces of the 
 
 | Rename prims |||
 |---|---|---|
-| ![alt text](img/prepare-named-1.png) | ![alt text](img/prepare-named-2.png) | ![alt text](img/prepare-named-3.png) |
+| ![rename red](img/prepare-named-1.png) | ![rename green](img/prepare-named-2.png) | ![rename yellow](img/prepare-named-3.png) |
 | Rename the prim to "ONE" | Rename the prim to "TWO" | Rename the prim to "THREE" |
 
 **All faces of ONE**, **face 0 of TWO**, **face 4 of THREE**. Let them to switch between **red**, **green**, and **blue** diffuse textures.
@@ -121,28 +121,31 @@ I want to replace all faces of the box within the red outline, the faces of the 
 
 | Place the script |
 |---|
-| ![alt text](img/prepare-script.png) |
+| ![prepare scripts](img/prepare-script.png) |
 | Drag and drop the required script. |
 
 Due to using the menu mode, KERNEL, Client, Menu, and their configuration files will all be placed into the "Contents" of the object.
 
 | Edit .SMC |
 |---|
-| ![alt text](img/config-part.png) |
+| ![config part](img/config-part.png) |
 | Define all the parts and give them names. <br>The definition of **PART** is similar to a **selector** or **locator**, describing how to find the target face. |
-| ![alt text](img/config-set.png) |
+| ![config set](img/config-set.png) |
 | Define three textures for different colors and give them names.<br>Each PART will switch between three styles, so all three variations need to be fully specified. |
 
 | Edit .SMC and .SMC.Client |
 |---|
-| ![alt text](img/config-local.png) |
+| ![config local](img/config-local.png) |
 | Adjust LOCAL to the same non-zero value. |
 
 | Edit .SMC.Menu |
 |---|
-| ![alt text](img/config-menu.png) |
+| ![config menu](img/config-menu.png) |
 | Set TOUCH = 1, Enable touch. |
 
+| Try ||
+|---|---|
+| ![menu pop-up](img/menu-default.png) | ![apply](img/menu-default-2.png) |
 
 ## User guide
 
