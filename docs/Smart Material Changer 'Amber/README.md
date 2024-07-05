@@ -131,9 +131,9 @@ Due to using the menu mode, KERNEL, Client, Menu, and their configuration files 
 | Edit .SMC |
 |---|
 | ![config part](img/config-part.png) |
-| Define all the parts and give them names. <br>The definition of **PART** is similar to a **selector** or **locator**, describing how to find the target face. |
+| Define all parts with **unique** names, specify matching patterns and content, and faces.<br>**PART**'s definition resembles that of a **selector** or **locator**, detailing how to find the target face. |
 | ![config set](img/config-set.png) |
-| Define three textures for different colors and give them names.<br>Each PART will switch between three styles, so all three variations need to be fully specified. |
+| Define three textures for different colors and give them names.<br>Each PART will switch between three styles, so all three variations need to be fully specified.<br>**Note: The name of SET must be unique within the same PART.** |
 
 | Edit .SMC and .SMC.Client |
 |---|
