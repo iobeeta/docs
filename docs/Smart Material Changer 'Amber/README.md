@@ -138,30 +138,6 @@ You can enable the "SETS" functionality in the .SMC.Menu settings. Here are the 
 | PARTS = 1 | Add the option **\[PARTS\]** to the set list to enable and perform partial actions. |
 | ![config sets on top part](img/config-menu-setsontop-part.png) | ![sets on top part](img/menu-sets-4.png) |
 
-## Deployment
-
-Smart Material Changer (SMC) operates by pairing through REMOTE or LOCAL, matching values are sufficient, with "0" considered invalid.
-
-### Remote control
-
-Remote material change refers to one object(linkset) controlling another object(linkset), requiring that the **REMOTE** in the controlling(kernel) **.SMC** file matches the **REMOTE** in the controlled(client) **.SMC.Client** file.
-
-![remote control](img/remote-control.png)
-
-### Local control
-
-Local material change refers to a single object(linkset), placing the controlling(kernel) and controlled(client) together. requiring that the **LOCAL** in the **.SMC** file matches the **LOCAL** in the **.SMC.Client** file.
-
-![local control](img/local-control.png)
-
-### Multiple
-
-In the same linkset, they can function as long as their LOCAL is the same, regardless of which prim they are placed in. Of course, each prim can have at most one kernel and one client.
-
-Kernel and Client can be 1v1, 1vN, Nv1, or NvN.
-
-![remote/local control and multiple cross control](img/remote-local-multiple-cross-control.png)
-
 <!-- ## User guide
 
 Common applications
@@ -267,6 +243,30 @@ Another type of remote control, base on menus instead of HUDs.
 - Make sure the same REMOTE in all the SMC.KERNEL and SMC.Client.
 
 *Attention! **SMC.HUD.TRIGGER** only works with independent **PRIM** buttons **HUD**. It depends on different name and description. It will not work with only one **PRIM**, since it **can not** recognize the touch position **(ST/UV)**. If need such function, you could write your own script.*
+
+## Deployment
+
+Smart Material Changer (SMC) operates by pairing through REMOTE or LOCAL, matching values are sufficient, with "0" considered invalid.
+
+### Remote control
+
+Remote material change refers to one object(linkset) controlling another object(linkset), requiring that the **REMOTE** in the controlling(kernel) **.SMC** file matches the **REMOTE** in the controlled(client) **.SMC.Client** file.
+
+![remote control](img/remote-control.png)
+
+### Local control
+
+Local material change refers to a single object(linkset), placing the controlling(kernel) and controlled(client) together. requiring that the **LOCAL** in the **.SMC** file matches the **LOCAL** in the **.SMC.Client** file.
+
+![local control](img/local-control.png)
+
+### Multiple
+
+In the same linkset, they can function as long as their LOCAL is the same, regardless of which prim they are placed in. Of course, each prim can have at most one kernel and one client.
+
+Kernel and Client can be 1v1, 1vN, Nv1, or NvN.
+
+![remote/local control and multiple cross control](img/remote-local-multiple-cross-control.png)
 
 ## Configure
 
