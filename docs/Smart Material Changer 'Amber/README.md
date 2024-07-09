@@ -69,32 +69,6 @@ All parts in the red box can be edited.
 
 ![.SMC.Menu](img/SMC-Menu-config.png)
 
-## Deployment
-
-### Remote control
-
-![remote control](img/remote-control.png)
-
-### Local control
-
-![local control](img/local-control.png)
-
-### Multiple
-
-- **Multiple SMC.Clients can be placed in different prims in the same linkset, and they can work for their own parts, controlled by one or more SMC.KERNELs.**
-- **Multiple sets of SMC.KERNEL + SMC.Client can be placed in different prims in the same linkset to control multiple sets of rules with by local.**
-
-![remote/local control and multiple](img/remote-local-control-&-multiple.png)
-
-### Remote/Local Multiple Cross
-
-**Multiple deployment and cross control**
-
-- **Use REMOTE, LOCAL for pairing between SMC.KERNEL and SMC.Client, Allow one-to-many, many-to-one, many-to-many.**
-- **Multiple KERNEL control ranges are allowed to intersect, e.g., controlling mapping and color.**
-
-![remote/local control and multiple cross control](img/remote-local-multiple-cross-control.png)
-
 ## Quick Start
 
 ### Menu application
@@ -103,8 +77,8 @@ Implement material replacement directly on the object through a menu.
 
 | Perpare ||
 |---|---|
-| ![prepare object](img/prepare-object.png) | ![prepare textures](img/prepare-texture.png) |
 | Prepare a linkset containing three 6-sided boxes. | Prepare three textures to be used for changing the diffuse. |
+| ![prepare object](img/prepare-object.png) | ![prepare textures](img/prepare-texture.png) |
 
 Planning to replace all faces of the box within the red outline, the faces of the box within the green outline, and the faces of the box within the yellow outline. Let them to switch between **red**, **green**, and **blue** diffuse textures.
 
@@ -112,8 +86,8 @@ Planning to replace all faces of the box within the red outline, the faces of th
 
 | Rename prims |||
 |---|---|---|
-| ![rename red](img/prepare-named-1.png) | ![rename green](img/prepare-named-2.png) | ![rename yellow](img/prepare-named-3.png) |
 | Rename the prim to "ONE" | Rename the prim to "TWO" | Rename the prim to "THREE" |
+| ![rename red](img/prepare-named-1.png) | ![rename green](img/prepare-named-2.png) | ![rename yellow](img/prepare-named-3.png) |
 
 Now, there are faces that can be precisely located:
 
@@ -123,31 +97,70 @@ Now, there are faces that can be precisely located:
 
 | Place the script |
 |---|
+| Drag and drop the required script. Due to using the menu mode, KERNEL, Client, Menu, and their configuration files will all be placed into the "Contents" of the object.|
 | ![prepare scripts](img/prepare-script.png) |
-| Drag and drop the required script. |
-
-Due to using the menu mode, KERNEL, Client, Menu, and their configuration files will all be placed into the "Contents" of the object.
 
 | Edit .SMC |
 |---|
-| ![config part](img/config-part.png) |
 | Define all parts with **unique** names, specify matching patterns and content, and faces.<br>**PART**'s definition resembles that of a **selector** or **locator**, detailing how to find the target face. |
-| ![config set](img/config-set.png) |
+| ![config part](img/config-part.png) |
 | Define three textures for different colors and give them names.<br>Each PART will switch between three styles, so all three variations need to be fully specified.<br>**Note: The name of SET must be unique within one PART.** |
+| ![config set](img/config-set.png) |
 
 | Edit .SMC and .SMC.Client |
 |---|
-| ![config local](img/config-local.png) |
 | Adjust LOCAL to the same non-zero value. |
+| ![config local](img/config-local.png) |
 
 | Edit .SMC.Menu |
 |---|
-| ![config menu](img/config-menu.png) |
 | Set TOUCH = 1, Enable touch. |
+| ![config menu](img/config-menu.png) |
 
-| Try ||
+| Try it ||
 |---|---|
 | ![menu pop-up](img/menu-default.png) | ![apply](img/menu-default-2.png) |
+
+**About SETS**
+
+SETS allows you to conveniently batch execute replacements for multiple PARTs.
+
+You can enable the "SETS" functionality in the .SMC.Menu settings. Here are the details below.
+
+| CODE | PREVIEW |
+|---|---|
+| SETS = 1 | The menu will include an option labeled **\[SETS\]**. |
+| ![config sets](img/config-menu-sets.png) | ![sets](img/menu-sets.png) |
+| Write SETS_LIST | Click **\[SETS\]** to display all sets. |
+| ![config sets list](img/config-menu-setslist.png) | ![sets list](img/menu-sets-2.png) |
+| SETS_ON_TOP = 1 | Display the set list in the top-level menu (partial change not available). |
+| ![config sets on top](img/config-menu-setsontop.png) | ![sets on top](img/menu-sets-3.png) |
+| PARTS = 1 | Add the option **\[PARTS\]** to the set list to enable and perform partial actions. |
+| ![config sets on top part](img/config-menu-setsontop-part.png) | ![sets on top part](img/menu-sets-4.png) |
+
+## Deployment
+
+Smart Material Changer (SMC) operates by pairing through REMOTE or LOCAL, matching values are sufficient, with "0" considered invalid.
+
+### Remote control
+
+Remote material change refers to one object(linkset) controlling another object(linkset), requiring that the **REMOTE** in the controlling(kernel) **.SMC** file matches the **REMOTE** in the controlled(client) **.SMC.Client** file.
+
+![remote control](img/remote-control.png)
+
+### Local control
+
+Local material change refers to a single object(linkset), placing the controlling(kernel) and controlled(client) together. requiring that the **LOCAL** in the **.SMC** file matches the **LOCAL** in the **.SMC.Client** file.
+
+![local control](img/local-control.png)
+
+### Multiple
+
+In the same linkset, they can function as long as their LOCAL is the same, regardless of which prim they are placed in. Of course, each prim can have at most one kernel and one client.
+
+Kernel and Client can be 1v1, 1vN, Nv1, or NvN.
+
+![remote/local control and multiple cross control](img/remote-local-multiple-cross-control.png)
 
 <!-- ## User guide
 
