@@ -102,7 +102,7 @@ Ps: 没有使用 Notecard 作为配置的载体，是因为丫加载实在是太
 
 | 编辑 .SMC |
 |---|
-| 使用**唯一**名称来命名部件，指定匹配的模式和内容以及面。<br>**PART**的含义就类似于**选择器**或**定位器**，详细描述了如何找到目标面。|
+| 使用 **唯一** 名称来命名部件，指定匹配的模式和内容以及面。<br>**PART** 的含义就类似于 **选择器** 或 **定位器**，详细描述了如何找到目标面。|
 | ![config part](img/config-part.png) |
 | 定义三种不同颜色的纹理并为其命名。<br>每个 PART 将在三种样式之间切换，因此需要完全指定所有三种变化。<br>**注意：SET 的名称在一个 PART 内必须是唯一的。** |
 | ![config set](img/config-set.png) |
@@ -123,11 +123,11 @@ Ps: 没有使用 Notecard 作为配置的载体，是因为丫加载实在是太
 
 **OWNER_ONLY = 1** 将菜单限制为仅所有者触发。
 
-**About SETS**
+**关于 SETS**
 
-SETS allows you to conveniently batch execute replacements for multiple PARTs.
+SETS 可让您方便地批量执行多个 PART 的替换。
 
-You can enable the "SETS" functionality in the .SMC.Menu settings. Here are the details below.
+您可以在 .SMC.Menu 设置中启用 "SETS" 功能。以下是详细信息。
 
 | 代码 | 预览 |
 |---|---|
