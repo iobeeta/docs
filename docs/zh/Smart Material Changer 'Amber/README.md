@@ -37,19 +37,19 @@ Ps: 没有使用 Notecard 作为配置的载体，是因为丫加载实在是太
 |---|---|
 | SMC.HUD.TRIGGER | HUD专用，将Linkset中，Prim的描述以 PART.SET 的格式来发起材质替换 |
 | SMC.Menu | 通过点击弹出菜单，选择PART与SET，实现材质的替换 |
-| .SMC.Menu | 用于SMC.Menu的配置 |
+| .SMC.Menu | 用于 SMC.Menu 的配置 |
 
 ## 脚本文件关系
 
-**必须将 .SMC 与 SMC.KERNEL 放在一起**
+**必须将 ".SMC" 与 "SMC.KERNEL" 放在一起**
 
 ![Server/KERNEL](img/server.png)
 
-**必须将 .SMC.Client 与 SMC.Client 放在一起**
+**必须将 ".SMC.Client" 与 "SMC.Client" 放在一起**
 
 ![Client](img/client.png)
 
-**必须将 .SMC 与 SMC.KERNEL 放在一起, 而且它们必须伴随 KERNEL**
+**必须将 ".SMC.Menu" 与 "SMC.Menu" 放在一起, 而且它们必须伴随 KERNEL**
 
 ![Menu](img/remote-menu.png)
 
@@ -69,101 +69,128 @@ Ps: 没有使用 Notecard 作为配置的载体，是因为丫加载实在是太
 
 ![.SMC.Menu](img/SMC-Menu-config.png)
 
-## 脚本部署
+## 快速开始
 
-### 远端控制
+### 菜单型
 
-![remote control](img/remote-control.png)
+通过点击物品弹出的菜单控制替换材质
 
-### 本地控制
+| 准备 ||
+|---|---|
+| 准备三个连接在一起的盒子 | 准备三张图，得到它们的UUID |
+| ![准备对象](img/prepare-object.png) | ![准备纹理](img/prepare-texture.png) |
 
-![local control](img/local-control.png)
+替换红色轮廓内的方框的所有面、绿色轮廓内的方框的所有面以及黄色轮廓内的方框的所有面。让它们在**红色**、**绿色**和**蓝色**漫反射纹理之间切换。
 
-### 多重部署
+**在编辑模式下，使用面选择器查看面编号。**
 
-- **同一个 linkset 中的不同 prim 中可以分别放置多个 SMC.Client，他们可以负责各自的部位，被一个或者多个 SMC.KERNEL 控制**
-- **同一个 linkset 中的不同 prim 中可以分别放置多组 SMC.KERNEL + SMC.Client，通过本地的方式分别控制多组规则**
+| 重命名原始元素 |||
+|---|---|---|
+| 将原始元素重命名为“ONE” | 将原始元素重命名为“TWO” | 将原始元素重命名为“THREE” |
+| ![重命名红色](img/prepare-named-1.png) | ![重命名绿色](img/prepare-named-2.png) | ![重命名黄色](img/prepare-named-3.png) |
 
-![remote/local control and multiple](img/remote-local-control-&-multiple.png)
+现在，得到了可以精确定位的面：
 
-### 远端/本地 多重部署
+- 名为 **"ONE"** 的 prim 的 **所有面**
+- 名为 **"TWO"** 的 prim 的 **0** 面
+- 名为 **"THREE"** 的 prim 的 **4** 面
 
-**多重部署分区交叉控制**
+| 放置脚本 |
+|---|
+| 拖放所需脚本。由于使用菜单模式，KERNEL、Client、Menu 及其配置文件都将放置在物体的“contents”中。|
+| ![准备脚本](img/prepare-script.png) |
 
-- **SMC.KERNEL 与 SMC.Client 之间使用 REMOTE、LOCAL 进行配对，可以一对多、多对一、多对多**
-- **多个 KERNEL 的控制范围允许出现交集，比如分别控制贴图与颜色**
+| 编辑 .SMC |
+|---|
+| 使用**唯一**名称来命名部件，指定匹配的模式和内容以及面。<br>**PART**的含义就类似于**选择器**或**定位器**，详细描述了如何找到目标面。|
+| ![config part](img/config-part.png) |
+| 定义三种不同颜色的纹理并为其命名。<br>每个 PART 将在三种样式之间切换，因此需要完全指定所有三种变化。<br>**注意：SET 的名称在一个 PART 内必须是唯一的。** |
+| ![config set](img/config-set.png) |
 
-![remote/local control and multiple cross control](img/remote-local-multiple-cross-control.png)
+| 编辑 .SMC 和 .SMC.Client |
+|---|
+| 将 LOCAL 调整为相同的非零值。|
+| ![config local](img/config-local.png) |
 
-## 用户导引
+| 编辑 .SMC.Menu |
+|---|
+| 设置 TOUCH = 1，启用触摸。|
+| ![配置菜单](img/config-menu.png) |
 
-比较常用的应用
+| 试试看 ||
+|---|---|
+| ![菜单弹出](img/menu-default.png) | ![应用](img/menu-default-2.png) |
 
-### 菜单形式
+**OWNER_ONLY = 1** 将菜单限制为仅所有者触发。
 
-通过点击物体本体、linkmessage、gesture来唤起菜单，选择进行材质替换。
+**About SETS**
 
-- 准备一个需要更换材质的目标物体，可以是perm、mesh、linkset
-- 放入脚本
-  - SMC.KERNEL
-    - .SMC
-  - SMC.Client
-    - .SMC.Client
-  - SMC.Menu
-    - .SMC.Menu
-- 撰写配置信息在 .SMC、.SMC.Client、.SMC.Menu
-- 更改PRIM名称或备注
-- (建议) **.SMC.Client**、**.SMC.Menu** 保存或者放入物体生效之后就可以删掉。
-- (建议) 公频输入 **/finalise**，固化KERNEL的配置，此时可以删除 **.SMC**
-- 点击物体开始使用
+SETS allows you to conveniently batch execute replacements for multiple PARTs.
 
-**.SMC 与 .SMC.Client 中的 "LOCAL" 必须相同**
+You can enable the "SETS" functionality in the .SMC.Menu settings. Here are the details below.
 
-### HUD形式的应用
+| 代码 | 预览 |
+|---|---|
+| SETS = 1 | 菜单将包含一个标记为 **\[SETS\]** 的选项。|
+| ![config sets](img/config-menu-sets.png) | ![sets](img/menu-sets.png) |
+| 定义 SETS_LIST | 单击 **\[SETS\]** 显示所有集合。|
+| ![config sets list](img/config-menu-setslist.png) | ![sets list](img/menu-sets-2.png) |
+| SETS_ON_TOP = 1 | 在顶级菜单中显示集合列表（局部替换将不可用）。|
+| ![config sets on top](img/config-menu-setsontop.png) | ![sets on top](img/menu-sets-3.png) |
+| PARTS = 1 | 将选项 **\[PARTS\]** 添加到设置列表以启用并执行局部替换操作。|
+| ![config sets on top part](img/config-menu-setsontop-part.png) | ![sets on top part](img/menu-sets-4.png) |
 
-通过HUD与目标物体通信进行材质更换，远端控制。
+### HUD 型
 
-- 准备一个物体，作为HUD
-- 放入脚本
-  - SMC.KERNEL
-    - .SMC
-  - (可选) **SMC.HUD.TRIGGER**，比较简单的HUD按钮点击触发器
-    - 在HUD的按钮的备注中写入定义好的PART和SET，中间用 "." 分隔，比如 **PartA.Style1**。SET 必须设置，PART 可以省略，如果不给予 PART 如：**.Style1**，将会替换包含SET为 **Style1** 的所有 PART。
-    - 您可以行开发HUD的触发脚本以实现更加丰富的操作，比如滑块、拾色器等。
-- 撰写配置在 **.SMC**
-- (建议) 公频输入 **/finalise**，固化KERNEL的配置，此时可以删除 **.SMC**
-- 准备另一个需要更换材质的目标物体，可以是perm、mesh、linkset
-- 放入脚本
-  - SMC.Client
-    - .SMC.Client
-- (建议) 撰写配置在 **.SMC.Client**，这个文件保存或者放入物体之后就可以删掉了
-- 重命名linkset中的prim
-- 开始使用
+| 产品 ||
+|---|---|
+| 准备产品 | 规划并命名其包含的子原件。 |
+| ![产品](img/product.png) | ![原件命名](img/product-named.png) |
 
-**.SMC 与 .SMC.Client 中的 "REMOTE" 必须相同**
+此外，顶部的第 **2** 个面将由玻璃制成。零件的规划如下：
 
-### 远端的菜单形式
+- PART Top: Top, 01345
+- PART Body: Body, ALL_SIDES
+- PART Axis: Axis, ALL_SIDES
+- PART Wheel: Wheel, ALL_SIDES
+- PART Glass: Top, 2
 
-也属于远端控制的一种，只是换成了菜单而不是去操作HUD。
+| 纹理 |
+|---|
+| 使用 3 个纹理 |
+| ![准备纹理](img/prepare-texture.png) |
 
-- 准备好可触发菜单的物体
-- 放入脚本
-  - SMC.KERNEL
-    - .SMC
-  - SMC.Menu
-    - .SMC.Menu
-- 撰写配置信息在 .SMC、.SMC.Menu
-- (建议) **.SMC.Menu** 保存或者放入物体生效之后就可以删掉。
-- (建议) 公频输入 **/finalise**，固化KERNEL的配置，此时可以删除 **.SMC**
-- 准备另一个需要更换材质的目标物体，可以是perm、mesh、linkset
-- 放入脚本
-  - SMC.Client
-    - .SMC.Client
-- (建议) 撰写配置在 **.SMC.Client**，这个文件保存或者放入物体之后就可以删掉了
-- 重命名linkset中的prim
-- 开始使用
+**Body**、**Top**、**Axis**、**Wheel** 分别具有 **Red**、**Green**、**Blue**。**Glass** 准备使用 **TEXTURE_BLANK** 并同时进行着色。让它具有 2 种样式，**Cool** 和 **Warm**。
 
-**.SMC 与 .SMC.Client 中的 "REMOTE" 必须相同**
+| 准备 HUD |
+|---|
+| 创建 HUD，添加所需按钮并链接它们。|
+| ![HUD](img/HUD.png) |
+
+| 编辑子元素的 description | |
+|---|---|
+| **Main** 这组按钮将同时控制 **Top** 和 **Body** 部分。**Red** 中的 Main 包括 **Top.Red** 和 **Body.Red**。| **Wheel.Blue**。其他按钮类似。|
+| ![Hud desc](img/HUD-desc-1.png) | ![Hud desc](img/HUD-desc-2.png) |
+
+单个按钮可以执行批量操作，类似于菜单模式下的**SETS**。您也可以省略**PART**部分，只写**.SET**即可实现完全替换。
+
+| 放置脚本 ||
+|---|---|
+| 放置HUD脚本。 | 放置产品脚本。 |
+| ![HUD脚本](img/HUD-place-script.png) | ![产品脚本](img/product-place-script.png) |
+
+| 编辑HUD中的**.SMC** |
+|---|
+| ![配置HUD SMC集](img/config-HUD-SMC-Sets.png) |
+
+|编辑 HUD 中的 **.SMC** 和产品中的 **.SMC.Client** |
+|---|
+| ![配置 HUD 和产品远程](img/config-HUD-SMC-Remote.png) |
+
+| 试试看 |
+|---|
+| 点击按钮 |
+| ![HUD 默认](img/HUD-default.png) |
 
 ## 场景示例
 
@@ -200,6 +227,30 @@ Ps: 没有使用 Notecard 作为配置的载体，是因为丫加载实在是太
 - 分体的和您兜里的 SMC.KERNEL 定义与房子里 SMC.Client 相同的 REMOTE。
 
 *注意！ **SMC.HUD.TRIGGER** 只能用于包含独立 **PRIM** 按钮的 **HUD**，它依赖于不同的名称或者备注。如果只有一个 **PRIM**，是不行的，它**无法**对面甚至面的触摸位置 **(ST/UV)** 进行识别。如果需要，您可以自行撰写。*
+
+## 部署
+
+Smart Material Changer (SMC) 通过 REMOTE 或 LOCAL 配对操作，相同即可，"0"视为无效。
+
+### 远端控制
+
+远程控制是指一个object（linkset）控制另一个object（linkset），要求控制端（kernel） **.SMC** 文件中的 **REMOTE** 和受控端（client） **.SMC.Client** 文件中的 **REMOTE** 相匹配。
+
+![远程控制](img/remote-control.png)
+
+### 本地控制
+
+本地控制是指单个object（linkset），将控制端（kernel）和受控端（client）放在一起，要求 **.SMC** 文件中的 **LOCAL** 和 **.SMC.Client** 文件中的 **LOCAL** 相匹配。
+
+![本地控制](img/local-control.png)
+
+### 多重部署
+
+在同一个linkset中，无论放在哪个prim里，只要它们的LOCAL相同，都可以发挥作用。当然，每个prim最多只能有一个kernel和一个client。
+
+内核和客户端的关系可以是 1v1、1vN、Nv1 或 NvN。
+
+![远程/本地控制和多个交叉控制](img/remote-local-multiple-cross-control.png)
 
 ## 配置
 

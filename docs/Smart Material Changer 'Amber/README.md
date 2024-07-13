@@ -147,7 +147,7 @@ You can enable the "SETS" functionality in the .SMC.Menu settings. Here are the 
 | Prepare the product | Plan and name the sub-prims it contains. |
 | ![Product](img/product.png) | ![Prim named](img/product-named.png) |
 
-Furthermore, face 2 on the top will be made of glass. The plan for the PARTs are as follows:
+Furthermore, face **2** on the top will be made of glass. The plan for the PARTs are as follows:
 
 - PART Top: Top, 01345
 - PART Body: Body, ALL_SIDES
@@ -172,7 +172,7 @@ Furthermore, face 2 on the top will be made of glass. The plan for the PARTs are
 | The **Main** set of buttons will control the **Top** and **Body** sections. Main in **Red** includes **Top.Red** and **Body.Red**.| **Wheel.Blue**. The other buttons similarly. |
 | ![Hud desc](img/HUD-desc-1.png) | ![Hud desc](img/HUD-desc-2.png) |
 
-A single button can perform batch operations, similar to SETS in Menu mode. You can also omit the **PART** section and simply write **.SET** to achieve full replacement.
+A single button can perform batch operations, similar to **SETS** in Menu mode. You can also omit the **PART** section and simply write **.SET** to achieve full replacement.
 
 | Place scripts ||
 |---|---|
