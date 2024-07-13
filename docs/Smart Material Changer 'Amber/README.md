@@ -117,9 +117,11 @@ Now, there are faces that can be precisely located:
 | Set TOUCH = 1, Enable touch. |
 | ![config menu](img/config-menu.png) |
 
-| Try it ||
+| Try ||
 |---|---|
 | ![menu pop-up](img/menu-default.png) | ![apply](img/menu-default-2.png) |
+
+**OWNER_ONLY = 1** restricts menu to owner-only trigger.
 
 **About SETS**
 
@@ -138,75 +140,57 @@ You can enable the "SETS" functionality in the .SMC.Menu settings. Here are the 
 | PARTS = 1 | Add the option **\[PARTS\]** to the set list to enable and perform partial actions. |
 | ![config sets on top part](img/config-menu-setsontop-part.png) | ![sets on top part](img/menu-sets-4.png) |
 
-<!-- ## User guide
+### HUD Application
 
-Common applications
+| Product ||
+|---|---|
+| Prepare the product | Plan and name the sub-prims it contains. |
+| ![Product](img/product.png) | ![Prim named](img/product-named.png) |
 
-### Menu application
+Furthermore, face 2 on the top will be made of glass. The plan for the PARTs are as follows:
 
-Click on the object, linkmessage, or gesture to bring up the menu and choose to replace the material.
+- PART Top: Top, 01345
+- PART Body: Body, ALL_SIDES
+- PART Axis: Axis, ALL_SIDES
+- PART Wheel: Wheel, ALL_SIDES
+- PART Glass: Top, 2
 
-- Prepare a target object to be replaced material, such as perm, mesh, or linkset.
-- Put in scripts
-  - SMC.KERNEL
-    - .SMC
-  - SMC.Client
-    - .SMC.Client
-  - SMC.Menu
-    - .SMC.Menu
-- Edit configuration information in .SMC, .SMC.Client, .SMC.Menu.
-- Change the name or descrition of the Prim.
-- (Recommended) **.SMC.Client**、**.SMC.Menu** You can delete it after saving it, or putting it into an object.
-- (Recommended) input **/finalise** in local chat, fix the KERNEL configuration, then you can delet **.SMC**.
-- Click the object to use.
+| Textures |
+|---|
+| Using 3 textures |
+| ![prepare textures](img/prepare-texture.png) |
 
-**The"LOCAL" in .SMC and .SMC.Client must be the same.**
+**Body**, **Top**, **Axis**, **Wheel** each have **Red**, **Green**, **Blue**. The plan for **Glass** in development involves using **TEXTURE_BLANK** for simultaneous coloring. Let it have 2 styles, **Cool** and **Warm**.
 
-### HUD application
+| Prepare HUD |
+|---|
+| Create a HUD, add the required buttons, and link them. |
+| ![HUD](img/HUD.png) |
 
-Material change via HUD communication with target object, remote control.
+| Edit the descriptions for the sub-prims. | |
+|---|---|
+| The **Main** set of buttons will control the **Top** and **Body** sections. Main in **Red** includes **Top.Red** and **Body.Red**.| **Wheel.Blue**. The other buttons similarly. |
+| ![Hud desc](img/HUD-desc-1.png) | ![Hud desc](img/HUD-desc-2.png) |
 
-- Prepare an object as the HUD.
-- Put in script
-  - SMC.KERNEL
-    - .SMC
-  - (options) **SMC.HUD.TRIGGER**，A sample HUD Button Click Trigger.
-    - Write the defined PART and SET in the description of the HUD's buttons. Separated each by ".", such as **PartA.Style1**. The SET must be set, and the PART can be omitted. If without PART, such as：**.Style1**,the script will replace all the PART with **Style1**.
-    - You can develop the trigger script for HUD, for more functions, such as slider and color picker.
-- Edit configuration information in **.SMC**
-- (Recommended) input **/finalise** in local chat, fix the KERNEL configuration, then you can delet **.SMC**.
-- Prepare another target object to be replaced material, such as perm, mesh, or linkset.
-- Put in script
-  - SMC.Client
-    - .SMC.Client
-- (Recommended) Edit configuration in **.SMC.Client**，you can delet it after saving or putting into object.
-- Rename the prim of linkset.
-- Click the HUD to use.
+A single button can perform batch operations, similar to SETS in Menu mode. You can also omit the **PART** section and simply write **.SET** to achieve full replacement.
 
-**The "REMOTE" in .SMC and .SMC.Client must be the same.**
+| Place scripts ||
+|---|---|
+| Placing scripts for HUD. | Placing scripts for product. |
+| ![HUD script](img/HUD-place-script.png) | ![Product script](img/product-place-script.png) |
 
-### Remote Menu
+| Edit **.SMC** in the HUD |
+|---|
+| ![Config HUD SMC Sets](img/config-HUD-SMC-Sets.png) |
 
-Another type of remote control, base on menus instead of HUDs.
+| Edit **.SMC** in the HUD and **.SMC.Client** in the product |
+|---|
+| ![Config HUD and Product REMOTE](img/config-HUD-SMC-Remote.png) |
 
-- Prepare an object that can trigger the menu
-- put in scripts
-  - SMC.KERNEL
-    - .SMC
-  - SMC.Menu
-    - .SMC.Menu
-- edit configuration in .SMC and .SMC.Menu
-- (Recommended) **.SMC.Menu** You can delete it after saving it, or putting it into an object.
-- (Recommended) input **/finalise**in local chat，fix the KERNEL configuration, then you can delet **.SMC**.
-- Prepare another target object to be replaced material, such as perm, mesh, or linkset.
-- Put in script
-  - SMC.Client
-    - .SMC.Client
-- (Recommended) Edit configuration in **.SMC.Client**，you can delet it after saving or putting into object.
-- Rename the prim of linkset.
-- Click the HUD to use.
-
-**The "REMOTE" in .SMC and .SMC.Client must be the same.** -->
+| Try |
+|---|
+| Touch buttons |
+| ![HUD Default](img/HUD-default.png) |
 
 ## Scenario example
 
