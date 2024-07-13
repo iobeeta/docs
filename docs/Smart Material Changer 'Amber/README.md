@@ -140,7 +140,7 @@ You can enable the "SETS" functionality in the .SMC.Menu settings. Here are the 
 | PARTS = 1 | Add the option **\[PARTS\]** to the set list to enable and perform partial actions. |
 | ![config sets on top part](img/config-menu-setsontop-part.png) | ![sets on top part](img/menu-sets-4.png) |
 
-### HUD Application
+### HUD application
 
 | Product ||
 |---|---|
