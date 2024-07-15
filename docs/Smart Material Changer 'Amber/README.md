@@ -1,8 +1,6 @@
-# Smart Material Changer
+# **Smart Material Changer** 'Amber
 
-**'Amber**
-
-Version: 2.0 PBR
+Version: 2.1 PBR
 
 [PDF Document](https://iobeeta.github.io/docs/Smart%20Material%20Changer%20'Amber/Smart%20Material%20Changer%20%27Amber.pdf)
 
