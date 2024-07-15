@@ -596,7 +596,7 @@ llMessageLinked(LINK_SET, -643323393, llDumpList2String([2, "top", "0123", 6, <1
 llMessageLinked(LINK_SET, -643323393, llDumpList2String([SUFFIX, "top", "0123", C, <1.0, 0.0, 0.0>, F, TRUE, S, "ee509dfd-0974-6fb5-3eea-2504fa13ef4c"], "�"), "");
 ```
 
-### Request(pull back)
+### Request(with callback)
 
 **-643323410**
 
@@ -609,7 +609,18 @@ llMessageLinked(LINK_SET, -643323410, "", id);
 KERNEL callback: **-643323411**
 
 ```lsl
-  llMessageLinked({SENDER}, -643323411, "{PART1}�{PART2}�....", id);
+llMessageLinked({SENDER}, -643323411, "{PART1}�{PART2}�....", id);
+```
+
+```lsl
+link_message(integer sender_num, integer num, string str, key id)
+{
+    if(num == -643323411) {
+        list parts = llParseString2List(str, ["�"], []);
+
+        // parts: ["PART1", "PART2", .....]
+    }
+}
 ```
 
 **-643323420**
@@ -623,7 +634,56 @@ llMessageLinked(LINK_SET, -643323420, "{SET}", id);
 KERNEL callback: **-643323411**
 
 ```lsl
-  llMessageLinked({SENDER}, -643323421, "{SET1}�{SET2}�....", id);
+llMessageLinked({SENDER}, -643323421, "{SET1}�{SET2}�....", id);
 ```
+
+```lsl
+link_message(integer sender_num, integer num, string str, key id)
+{
+    if(num == -643323421) {
+        list sets = llParseString2List(str, ["�"], []);
+
+        // sets: ["SET1", "SET2", .....]
+    }
+}
+```
+
+## SMC.Menu Local Interface
+
+**Parameter MENU_OPEN_LOCAL_NUM defined in .SMC.Menu**
+
+**Call up the menu**
+
+```lsl
+llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "", {USER});
+```
+
+**Call up the menu to PART list**
+
+```lsl
+llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "part", {USER});
+
+// Use button to override definition and provide callback, which is only valid for this menu, selecting an option or clicking the back button will send a local message.
+llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "part�{BackButton}�{LocalNum}", {USER});
+```
+
+**Call up the menu to SET list of specific PART**
+
+```lsl
+llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "set�{PART}", {USER});
+
+// Use button to override definition and provide callback, which is only valid for this menu, selecting an option or clicking the back button will send a local message.
+llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "set�{PART}�{BackButton}�{LocalNum}", {USER});
+```
+
+**Call up the menu to SETS list**
+
+```lsl
+llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "sets", {USER});
+
+// Use button to override definition and provide callback, which is only valid for this menu, selecting an option or clicking the back button will send a local message.
+llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "sets�{BackButton}�{LocalNum}", {USER});
+```
+
 
 \* Special thanks to my darling **Amber0089**
