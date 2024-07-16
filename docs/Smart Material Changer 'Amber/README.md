@@ -263,9 +263,13 @@ Kernel and Client can be 1v1, 1vN, Nv1, or NvN.
 | RANGE | integer | 0/1/2/3 | 0 | Control distance，0:10m, 1:20m, 2:100m, 3:all region |
 | LINES | list |  |  | Detailed writing rules will be described below |
 
-#### LINES
+**LINES**
 
-##### PART
+The writing rules for LINES are more complicated. You can use the constants provided in the table, or write the numbers directly.
+
+Also, pay attention to the number of parameters.
+
+#### PART
 
 Part/Target/Picker
 
@@ -341,7 +345,7 @@ list LINES = [
 ];
 ```
 
-##### SET
+#### SET
 
 Color/Theme/Material scheme
 
@@ -661,7 +665,8 @@ llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "", {USER});
 ```lsl
 llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "part", {USER});
 
-// Use button to override definition and provide callback, which is only valid for this menu, selecting an option or clicking the back button will send a local message.
+// Use button to override definition and provide callback, which is only valid for this menu.
+// Selecting an option or clicking the back button will send a local message.
 llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "part�{BackButton}�{LocalNum}", {USER});
 ```
 
@@ -670,7 +675,8 @@ llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "part�{BackButton}�{LocalNu
 ```lsl
 llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "set�{PART}", {USER});
 
-// Use button to override definition and provide callback, which is only valid for this menu, selecting an option or clicking the back button will send a local message.
+// Use button to override definition and provide callback, which is only valid for this menu.
+// Selecting an option or clicking the back button will send a local message.
 llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "set�{PART}�{BackButton}�{LocalNum}", {USER});
 ```
 
@@ -679,9 +685,9 @@ llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "set�{PART}�{BackButton}�
 ```lsl
 llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "sets", {USER});
 
-// Use button to override definition and provide callback, which is only valid for this menu, selecting an option or clicking the back button will send a local message.
+// Use button to override definition and provide callback, which is only valid for this menu.
+// Selecting an option or clicking the back button will send a local message.
 llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "sets�{BackButton}�{LocalNum}", {USER});
 ```
-
 
 \* Special thanks to my darling **Amber0089**

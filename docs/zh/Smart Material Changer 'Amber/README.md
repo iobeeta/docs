@@ -1,8 +1,6 @@
-# Smart Material Changer
+# **Smart Material Changer** 'Amber
 
-**'Amber**
-
-版本: 2.0 PBR
+版本: 2.1 PBR
 
 [PDF 文档](https://iobeeta.github.io/docs/zh/Smart%20Material%20Changer%20%27Amber/Smart%20Material%20Changer%20%27Amber%20(zh-CN).pdf)
 
@@ -265,9 +263,13 @@ Smart Material Changer (SMC) 通过 REMOTE 或 LOCAL 配对操作，相同即可
 | RANGE | integer | 0/1/2/3 | 0 | 控制距离，0:10米, 1:20米, 2:100米, 3:整个地区 |
 | LINES | list |  |  | 详细书写规则会在下文中介绍 |
 
-#### LINES
+**LINES**
 
-##### PART
+LINES 的书写规则较为复杂，您可以使用表格里为您提供的常量，也可以直接书写编号。
+
+另外请注意参数的数量。
+
+#### PART
 
 部位/目标/选择器
 
@@ -343,7 +345,7 @@ list LINES = [
 ];
 ```
 
-##### SET
+#### SET
 
 配色/主题/材质方案
 
@@ -612,6 +614,17 @@ KERNEL 回调: **-643323411**
   llMessageLinked({SENDER}, -643323411, "{PART1}�{PART2}�....", id);
 ```
 
+```lsl
+link_message(integer sender_num, integer num, string str, key id)
+{
+    if(num == -643323411) {
+        list parts = llParseString2List(str, ["�"], []);
+
+        // parts: ["PART1", "PART2", .....]
+    }
+}
+```
+
 **-643323420**
 
 请求 SET 列表
@@ -624,6 +637,57 @@ KERNEL 回调: **-643323411**
 
 ```lsl
   llMessageLinked({SENDER}, -643323421, "{SET1}�{SET2}�....", id);
+```
+
+```lsl
+link_message(integer sender_num, integer num, string str, key id)
+{
+    if(num == -643323421) {
+        list sets = llParseString2List(str, ["�"], []);
+
+        // sets: ["SET1", "SET2", .....]
+    }
+}
+```
+
+## 菜单 SMC.Menu 的本地接口
+
+**.SMC.Menu 中定义的 MENU_OPEN_LOCAL_NUM 将用于通信**
+
+**唤起菜单**
+
+```lsl
+llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "", {USER});
+```
+
+**唤起菜单并展示 PART(部位) 列表**
+
+```lsl
+llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "part", {USER});
+
+// 使用按钮覆盖定义并提供回调，仅对此菜单有效。
+// 选择一个选项或者点击返回按钮会发送一个本地消息。
+llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "part�{BackButton}�{LocalNum}", {USER});
+```
+
+**唤起菜单并根据参数提供的 PART(部位名称) 展示 SET(样式) 列表**
+
+```lsl
+llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "set�{PART}", {USER});
+
+// 使用按钮覆盖定义并提供回调，仅对此菜单有效。
+// 选择一个选项或者点击返回按钮会发送一个本地消息。
+llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "set�{PART}�{BackButton}�{LocalNum}", {USER});
+```
+
+**唤起菜单并展示 SETS(套装) 列表**
+
+```lsl
+llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "sets", {USER});
+
+// 使用按钮覆盖定义并提供回调，仅对此菜单有效。
+// 选择一个选项或者点击返回按钮会发送一个本地消息。
+llMessageLinked(LINK_SET, {MENU_OPEN_LOCAL_NUM}, "sets�{BackButton}�{LocalNum}", {USER});
 ```
 
 \* 感谢亲爱的 **Amber0089**
