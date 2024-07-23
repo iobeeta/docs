@@ -630,7 +630,7 @@ link_message(integer sender_num, integer num, string str, key id)
 Request SET List
 
 ```lsl
-llMessageLinked(LINK_SET, -643323420, "{SET}", id);
+llMessageLinked(LINK_SET, -643323420, "{PART}", id);
 ```
 
 KERNEL callback: **-643323411**

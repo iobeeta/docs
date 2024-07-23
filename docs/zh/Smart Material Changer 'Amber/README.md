@@ -630,7 +630,7 @@ link_message(integer sender_num, integer num, string str, key id)
 请求 SET 列表
 
 ```lsl
-llMessageLinked(LINK_SET, -643323420, "{SET}", id);
+llMessageLinked(LINK_SET, -643323420, "{PART}", id);
 ```
 
 KERNEL 回调: **-643323411**
