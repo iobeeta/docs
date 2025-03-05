@@ -1,5 +1,7 @@
 # Internal Structure
 
+[PDF Document](https://iobeeta.github.io/docs/Internal%20Structure/Internal%20Structure.pdf)
+
 This is a body plugin designed to showcase internal structures. Currently, it is only compatible with the eBody Reborn.
 
 ## Features
@@ -65,7 +67,7 @@ The state machine is entirely managed by linkset data. Modify or listen to them 
 | LSD Variable | Type | Values | Default | Description |
 |---|---|---|---|---|
 | \_\_STAT__ | integer | 0~7 | 7 | See below |
-| \_\_LEVEL__ | integer | 0~6 | 2 | 0~7 gradually increases heart rate, 0 is default |
+| \_\_LEVEL__ | integer | 0~6 | 2 | 0~6 gradually increases heart rate, 0 is not beating |
 | \_\_VOLUME__ | integer | 0~100 | 0 | 0~100 gradually increases volume. Default is muted to avoid disturbing others, can be set in the HUD. |
 
 ### About \_\_STAT__
