@@ -7,3 +7,5 @@
 [OAC Devkit](OAC%20Devkit/)
 
 [NCMusicPlayer.KERNEL](NCMusicPlayer.KERNEL/)
+
+[Internal Structure](Internal%20Structure/)
