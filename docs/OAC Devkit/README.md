@@ -1,6 +1,6 @@
 # OAC Devkit
 
-Version: 4.1
+Version: 4.3
 
 [PDF Document](https://iobeeta.github.io/docs/OAC%20Devkit/OAC%20Devkit.pdf)
 
@@ -216,12 +216,15 @@ llMessageLinked(..., 802840, "DIRECTION|1", "");
 llMessageLinked(..., 802840, "DIRECTION|-1", "");
 ```
 
-#### Reload
+#### Reset/Reload
 
 Manual reset script. (Reload all parameter from Notecard)
+Alias ​​reload
 
 ```lsl
 llMessageLinked(..., 802840, "RELOAD", "");
+// same
+llMessageLinked(..., 802840, "RESET", "");
 ```
 
 #### Submit global scale
