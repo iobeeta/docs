@@ -1,5 +1,6 @@
 # NCMusicPlayer.KERNEL
 
+Version: 2.17
 基于 notecard 的音乐播放器
 
 ## 包含文件
@@ -52,8 +53,14 @@
 
 开始播放已加载曲目，前置：860400。如果没有提交曲目，本指令将不会生效。
 
+第二个参数传递开始时间; 如果值小于当前时间或者给予 空字符串 或 "0"，则立即开始播放。
+
 ```lsl
-llMessageLinked(LINK_SET, 860000, "","");
+// llMessageLinked(LINK_SET/THIS, 860000, "", "{StartAt(UnixTimestamp)}");
+
+llMessageLinked(LINK_SET, 860000, "", "");
+// 或
+llMessageLinked(LINK_SET, 860000, "", (string)(llGetUnixTime() + 5));
 ```
 
 **860001 暂停**
@@ -76,35 +83,36 @@ llMessageLinked(LINK_SET, 860003, "","");
 
 提交将要播放的乐曲名称（notecard名称）。
 
-```lsl
-llMessageLinked(LINK_SET, 860200, "Notecard name", "");
-```
+第二个参数传递开始时间; 如果值小于当前时间或者给予"0"，则立即开始播放。**如果给予空字符串，则不会自动开始**。
 
-如果在提交时给予第四个参数并赋值 ```1```，将会在加载完成后自动开始播放。
-
-*这里做了优化！如果设置了自动播放，会在短暂的加载后立即开始，并不会由于过多的片段而等待很长时间。*
+*如果设置了自动播放，会在短暂的加载后立即开始，并不会由于过多的片段而等待很长时间。*
 
 ```lsl
-llMessageLinked(LINK_SET, 860200, "Notecard name", "1");
+// llMessageLinked(LINK_SET/THIS, 860200, "{NotecardName}", "{StartAt(UnixTimestamp)}");
 
-// 类似于
-llMessageLinked(LINK_SET, 860200, "Notecard name", "");
-llSleep(1.0); // 注意！这里必须添加一个预估的加载时间
+llMessageLinked(LINK_SET, 860200, "Track_1", "0");
+
+// 类似于（不严谨）
+llMessageLinked(LINK_SET, 860200, "Track_1", "");
+llSleep(1.0); // 注意！这里必须添加一个预估的加载时间，这个时间如果比较短，请使参考下面的严谨写法
 llMessageLinked(LINK_SET, 860000, "","");
 
-// 完全等价的形式
+// 完全等价的形式（严谨的）
 default
 {
     touch_start(integer num_detected) {
-        llMessageLinked(LINK_SET, 860200, "Notecard name", "");
+        llMessageLinked(LINK_SET, 860200, "Track_1", "");
     }
 
     link_message(integer sender, integer num, string str, key id) {
-        if(num == 861002) {
+        if(num == 861002) { // 已加载
             llMessageLinked(LINK_SET, 860000, "","");
         }
     }
 }
+
+// 提供开始时间
+llMessageLinked(LINK_SET, 860200, "Track_1", (string)(llGetUnixTime() + 10));
 ```
 
 **860300 提交音量**
@@ -112,18 +120,38 @@ default
 音量取值范围 0.0 ~ 1.0
 
 ```lsl
-llMessageLinked(LINK_SET, 860300, "Notecard name", "1");
+// llMessageLinked(LINK_SET/THIS, 860300, "{Volume}", "");
+llMessageLinked(LINK_SET, 860300, "1.0", "");
 ```
 
 **860400 提交播放模式**
 
 单曲循环开关。取值 0: 关闭（默认）, 1: 开启
 
+```lsl
+// llMessageLinked(LINK_SET/THIS, 860400, "{Mode}", "");
+llMessageLinked(LINK_SET, 860400, "1", "");
+```
+
 **860500 提交播放源**
 
 支持 ```llLinkPlaySound```
 
 设置由哪个prim播放, 取值: ```LINK_THIS```(默认), ```LINK_SET```, ```LINK_ROOT```, ```LINK_ALL_OTHERS```, ```LINK_ALL_CHILDREN```.
+
+```lsl
+// llMessageLinked(LINK_SET/THIS, 860500, "{Source}", "");
+llMessageLinked(LINK_SET, 860500, (string)LINK_SET, "");
+```
+
+**860600 提交声音范围**
+
+设置声音范围 (半径, float 类型, 0 表示无限制).
+
+```lsl
+// llMessageLinked(LINK_SET/THIS, 860600, "{Radius}", "");
+llMessageLinked(LINK_SET, 860600, (string)(12.5), "");
+```
 
 ### 本地下行广播
 

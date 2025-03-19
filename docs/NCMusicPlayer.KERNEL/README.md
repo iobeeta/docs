@@ -1,5 +1,7 @@
 # NCMusicPlayer.KERNEL
 
+Version: 2.17
+
 Notecard based music player
 
 ## Include scripts
@@ -52,8 +54,14 @@ Example:
 
 To start playing a loaded track, the track must first be submitted at 860400. If no tracks are submitted, this directive will have no effect.
 
+Pass a second optional parameter for start time; start immediately if timestamp is past, empty, or "0".
+
 ```lsl
-llMessageLinked(LINK_SET, 860000, "","");
+// llMessageLinked(LINK_SET/THIS, 860000, "", "{StartAt(UnixTimestamp)}");
+
+llMessageLinked(LINK_SET, 860000, "", "");
+// Or
+llMessageLinked(LINK_SET, 860000, "", (string)(llGetUnixTime() + 5));
 ```
 
 **860001 Pause**
@@ -76,35 +84,36 @@ llMessageLinked(LINK_SET, 860003, "","");
 
 Submit the track name (notecard name) to be played.
 
-```lsl
-llMessageLinked(LINK_SET, 860200, "Notecard name", "");
-```
+Pass a second optional parameter for start time; start immediately if timestamp is past or "0". **If empty string, do not start automatically**.
 
-If you give the fourth parameter and assign the value ```1``` when submitting, it will automatically start playing after loading is complete.
-
-*Here it is optimized! If it is set to start playing automatically, it will start playing before all the sound clips are loaded. It doesn't take long to wait due to too many clips.*
+*If it is set to start playing automatically, it will start playing before all the sound clips are loaded. It doesn't take long to wait due to too many clips.*
 
 ```lsl
-llMessageLinked(LINK_SET, 860200, "Notecard name", "1");
+// llMessageLinked(LINK_SET/THIS, 860200, "{NotecardName}", "{StartAt(UnixTimestamp)}");
 
-// similar to
-llMessageLinked(LINK_SET, 860200, "Notecard name", "");
+llMessageLinked(LINK_SET, 860200, "Track_1", "0");
+
+// Similar to (Not strict)
+llMessageLinked(LINK_SET, 860200, "Track_1", "");
 llSleep(1.0); // Notice! An estimated load time must be added here.
 llMessageLinked(LINK_SET, 860000, "","");
 
-// fully equivalent form
+// Fully equivalent form (Strict)
 default
 {
     touch_start(integer num_detected) {
-        llMessageLinked(LINK_SET, 860200, "Notecard name", "");
+        llMessageLinked(LINK_SET, 860200, "Track_1", "");
     }
 
     link_message(integer sender, integer num, string str, key id) {
-        if(num == 861002) {
+        if(num == 861002) { // Loaded
             llMessageLinked(LINK_SET, 860000, "","");
         }
     }
 }
+
+// Provide a start time.
+llMessageLinked(LINK_SET, 860200, "Track_1", (string)(llGetUnixTime() + 10));
 ```
 
 **860300 Submit the volume**
@@ -112,18 +121,38 @@ default
 Volume value range 0.0 ~ 1.0
 
 ```lsl
-llMessageLinked(LINK_SET, 860300, "Notecard name", "1");
+// llMessageLinked(LINK_SET/THIS, 860300, "{Volume}", "");
+llMessageLinked(LINK_SET, 860300, "1.0", "");
 ```
 
 **860400 Submit play mode**
 
 Single cycle, value. 0: off (default), 1: on
 
+```lsl
+// llMessageLinked(LINK_SET/THIS, 860400, "{Mode}", "");
+llMessageLinked(LINK_SET, 860400, "1", "");
+```
+
 **860500 Submit source**
 
 Support ```llLinkPlaySound```
 
 Set which prim to play, value: ```LINK_THIS```(default), ```LINK_SET```, ```LINK_ROOT```, ```LINK_ALL_OTHERS```, ```LINK_ALL_CHILDREN```.
+
+```lsl
+// llMessageLinked(LINK_SET/THIS, 860500, "{Source}", "");
+llMessageLinked(LINK_SET, 860500, (string)LINK_SET, "");
+```
+
+**860600 Submit range**
+
+Set the sound effect range (Radius, float type, 0 for unlimited).
+
+```lsl
+// llMessageLinked(LINK_SET/THIS, 860600, "{Radius}", "");
+llMessageLinked(LINK_SET, 860600, (string)(12.5), "");
+```
 
 ### Link Message to Receive
 
