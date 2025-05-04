@@ -1,6 +1,6 @@
 # OAC Devkit
 
-Version: 4.3
+Version: 4.4
 
 [PDF Document](https://iobeeta.github.io/docs/zh/OAC%20Devkit/OAC%20Devkit%20(zh-CN).pdf)
 
@@ -65,8 +65,8 @@ Version: 4.3
 | ROTATION | vector | 任何 | <0.0,0.0,0.0> | 旋转，旋转变化，这个向量的含义是<ROLL, PITCH, YAW>。 <br/>* 旋转总是相对于prim的局部(local)方向向量。 | 1.8 |
 | SCALE | vector | 大于 <0.0,0.0,0.0> | <1.0,1.0,1.0> | 缩放，缩放变化，不可出现负值，如果等于ZERO_VECTOR（<0.0,0.0,0.0>），则视为无效的 | 3.0 |
 | ORIGIN | integer | 0/1/2 | 0 | 参照物，见下方特别说明 | 2.0 |
-| TIMING_FUNC | integer | 0/1/2/3 | 0 | 过渡效果，见下方特别说明 | 2.0 |
-| QUEUE | string | | | Queue模式，详见下文 | 3.0 |
+| EASING | string | | | 过渡效果，见下方特别说明 | 4.4 |
+| Q | string | | | Queue模式，详见下文 | 3.0 |
 
 ### DISTANCE 特殊用法
 
@@ -81,19 +81,19 @@ DISTANCE <1.2x,2X,0.5z> // 沿 x 方向运动 1.2 倍的 当前 prim 尺寸 x，
 
 **用例子来说明**
 
-1. 有一扇滑动开关的门，它的宽度是 x，高度是 z，厚度是 y。开启这扇门需要沿着 x 轴移动 0.8 倍门的宽度，如以下写法：
+有一扇滑动开关的门，它的宽度是 x，高度是 z，厚度是 y。开启这扇门需要沿着 x 轴移动 0.8 倍门的宽度，如以下写法：
 
 ```lsl
 DISTANCE <0.8x,0,0>
 ```
 
-2. 一个可以缩放的滑块，我们无法确定它的尺寸，所以更没法确定它移动的具体的距离，只知道它会沿着 z 轴升起 root prim 尺寸 y 2 倍的高度。如以下写法：
+一个可以缩放的滑块，我们无法确定它的尺寸，所以更没法确定它移动的具体的距离，只知道它会沿着 z 轴升起 root prim 尺寸 y 2 倍的高度。如以下写法：
 
 ```lsl
 DISTANCE <0,0,2Y>
 ```
 
-### 关于 参照物 ORIGIN
+### 参照物 ORIGIN
 
 #### 局部(local) (0)
 
@@ -136,22 +136,52 @@ DISTANCE <0,0,2Y>
 
 ![img/region.png](img/region.png)
 
-### 关于 过度效果 TIMING_FUNC
+### EASING
 
-| 0: linear 线性 | 1: ease-in-out 缓入/出 | 2: ease-in 缓入 | 3: ease-out 缓出 |
-|:-:|:-:|:-:|:-:|
-| ![img/timing-func-0.png](img/timing-func-0.png) | ![img/timing-func-1.png](img/timing-func-1.png) | ![img/timing-func-2.png](img/timing-func-2.png) | ![img/timing-func-3.png](img/timing-func-3.png) |
-| `.OAC TIMING_FUNC 0` | `.OAC TIMING_FUNC 1` | `.OAC TIMING_FUNC 2` | `.OAC TIMING_FUNC 3` |
+```.OAC EASING {名称/缩写/编号}```
 
-**since 3.2**
+```lsl
+.OAC EASING easeOutSine
+// OR
+.OAC EASING OSI
+// OR
+.OAC EASING 01
+```
 
-两个特殊值，正向移动与反向移动是对称的。
+分别定义正向、反向变换时的效果
 
-比如正向是 ease-in，那么反向自动切换为 ease-out。
+```.OAC EASING {正向},{反向}```
 
-| 102: ease-in 缓入(反向自动翻转为 ease-out 缓出) | 103: ease-out 缓出(反向自动翻转为 ease-in 缓入) |
-|:-:|:-:|
-| `.OAC TIMING_FUNC 102` | `.OAC TIMING_FUNC 103` |
+```lsl
+.OAC EASING easeOutQuart,easeInQuart
+// OR
+.OAC EASING OQA,IQA
+// OR
+.OAC EASING 31,30
+```
+
+| ease-in | ease-out | ease-in-out |
+|:-:|:-:|:-:|
+| ![easeInSine](img/easeInSine.png) | ![easeOutSine](img/easeOutSine.png) | ![easeOutSine](img/easeInOutSine.png) |
+| easeInSine<br/>ISI<br/>00 | easeOutSine<br/>OSI<br/>01 | easeInOutSine<br/>IOSI<br/>02 |
+| ![easeInQuad](img/easeInQuad.png) | ![easeOutQuad](img/easeOutQuad.png) | ![easeOutQuad](img/easeInOutQuad.png) |
+| easeInQuad<br/>IQD<br/>10 | easeOutQuad<br/>OQD<br/>11 | easeInOutQuad<br/>IOQD<br/>12 |
+| ![easeInCubic](img/easeInCubic.png) | ![easeOutCubic](img/easeOutCubic.png) | ![easeOutCubic](img/easeInOutCubic.png) |
+| easeInCubic<br/>ICU<br/>20 | easeOutCubic<br/>OCU<br/>21 | easeInOutCubic<br/>IOCU<br/>22 |
+| ![easeInQuart](img/easeInQuart.png) | ![easeOutQuart](img/easeOutQuart.png) | ![easeOutQuart](img/easeInOutQuart.png) |
+| easeInQuart<br/>IQA<br/>30 | easeOutQuart<br/>OQA<br/>31 | easeInOutQuart<br/>IOQA<br/>32 |
+| ![easeInQuint](img/easeInQuint.png) | ![easeOutQuint](img/easeOutQuint.png) | ![easeOutQuint](img/easeInOutQuint.png) |
+| easeInQuint<br/>IQI<br/>40 | easeOutQuint<br/>OQI<br/>41 | easeInOutQuint<br/>IOQI<br/>42 |
+| ![easeInExpo](img/easeInExpo.png) | ![easeOutExpo](img/easeOutExpo.png) | ![easeOutExpo](img/easeInOutExpo.png) |
+| easeInExpo<br/>IEX<br/>50 | easeOutExpo<br/>OEX<br/>51 | easeInOutExpo<br/>IOEX<br/>52 |
+| ![easeInCirc](img/easeInCirc.png) | ![easeOutCirc](img/easeOutCirc.png) | ![easeOutCirc](img/easeInOutCirc.png) |
+| easeInCirc<br/>ICI<br/>60 | easeOutCirc<br/>OCI<br/>61 | easeInOutCirc<br/>IOCI<br/>62 |
+| ![easeInBack](img/easeInBack.png) | ![easeOutBack](img/easeOutBack.png) | ![easeOutBack](img/easeInOutBack.png) |
+| easeInBack<br/>IBA<br/>70 | easeOutBack<br/>OBA<br/>71 | easeInOutBack<br/>IOBA<br/>72 |
+| ![easeInElastic](img/easeInElastic.png) | ![easeOutElastic](img/easeOutElastic.png) | ![easeOutElastic](img/easeInOutElastic.png) |
+| easeInElastic<br/>IEL<br/>80 | easeOutElastic<br/>OEL<br/>81 | easeInOutElastic<br/>IOEL<br/>82 |
+| ![easeInBounce](img/easeInBounce.png) | ![easeOutBounce](img/easeOutBounce.png) | ![easeOutBounce](img/easeInOutBounce.png) |
+| easeInBounce<br/>IBO<br/>90 | easeOutBounce<br/>OBO<br/>91 | easeInOutBounce<br/>IOBO<br/>92 |
 
 ### Queue 模式
 
@@ -168,9 +198,9 @@ DISTANCE <0,0,2Y>
 如果两个QUEUE中需要等待，可以加入一个只带有时长的QUEUE，像下面这样：
 
 ```text
-.OAC QUEUE 1/5.0///<10.0,0.0,0.0>//
-.OAC QUEUE 2/2.0/////
-.OAC QUEUE 3/5.0///<0.0,10.0,0.0>//
+.OAC Q 1/5.0///<10.0,0.0,0.0>//
+.OAC Q 2/2.0/////
+.OAC Q 3/5.0///<0.0,10.0,0.0>//
 ```
 
 ## 本地消息接口
@@ -216,16 +246,6 @@ llMessageLinked(..., 802840, "DIRECTION|1", "");
 llMessageLinked(..., 802840, "DIRECTION|-1", "");
 ```
 
-#### 设置全局缩放
-
-作用于 DISTANCE，子PRIM在有缩放状态下的移动距离倍率。
-
-默认: 1.0，如果给予的值 <0，则使用默认。
-
-```lsl
-llMessageLinked(..., 802840, "SCALE|1.0", "");
-```
-
 #### 重置/重载
 
 手动提交以重载脚本（重新读取所有配置参数）
@@ -234,6 +254,16 @@ llMessageLinked(..., 802840, "SCALE|1.0", "");
 llMessageLinked(..., 802840, "RELOAD", "");
 // 相同的功能
 llMessageLinked(..., 802840, "RESET", "");
+```
+
+#### 设置全局缩放
+
+作用于 DISTANCE，子PRIM在有缩放状态下的移动距离倍率。
+
+默认: 1.0，如果给予的值 <0，则使用默认。
+
+```lsl
+llMessageLinked(..., 802840, "SCALE|1.0", "");
 ```
 
 ### 本地事件广播
@@ -288,15 +318,15 @@ TRANSFORM_PROCESS|{方向}|{队列编号}|{有效性}
 
 OAC.KERNEL 会监听 ```LINKSETDATA_UPDATE```
 
-name: (string)llGetLinkKey(LINK_ROOT) + "-oac-stat"
+name: "link-" + {linkNumber} + "-oac-stat"
 
 - 当 value 为 **偶数** (**0 [2 4 6...]**) 时触发 **CLOSE**
 - 当 value 为 **奇数** (**1 [3 5 7...]**) 时触发 **OPEN**
 
 ```lsl
-llLinksetDataWrite((string)llGetLinkKey(LINK_ROOT) + "-oac-stat", "1"); // OPEN
-llLinksetDataWrite((string)llGetLinkKey(LINK_ROOT) + "-oac-stat", "0"); // CLOSE
+llLinksetDataWrite("link-" + (string)(1) + "-oac-stat", "1"); // OPEN
+llLinksetDataWrite("link-" + (string)(1) + "-oac-stat", "0"); // CLOSE
 
-llLinksetDataWrite((string)llGetLinkKey(LINK_ROOT) + "-oac-stat", "2"); // CLOSE
-llLinksetDataWrite((string)llGetLinkKey(LINK_ROOT) + "-oac-stat", "3"); // OPEN
+llLinksetDataWrite("link-" + (string)(2) + "-oac-stat", "3"); // OPEN
+llLinksetDataWrite("link-" + (string)(2) + "-oac-stat", "4"); // CLOSE
 ```
